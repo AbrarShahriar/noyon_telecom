@@ -1,0 +1,59 @@
+@import "../../../../styles/shared/variables";
+
+.deals {
+  background-color: white;
+  padding-top: 20px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  margin-bottom: 40px;
+  .react-tabs {
+    -webkit-tap-highlight-color: transparent;
+
+    &__tab-list {
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background-color: white;
+      z-index: 999;
+    }
+
+    &__tab {
+      width: 50%;
+      text-align: center;
+      font-size: 14px;
+      display: inline-block;
+      border-bottom: 2px solid gray;
+      position: relative;
+      list-style: none;
+      padding: 0px 12px;
+      cursor: pointer;
+      margin: 0 10px;
+
+      &:first-child {
+        margin-right: 0;
+      }
+
+      transition: all 100ms ease-in;
+
+      &--selected {
+        border-color: $pink700;
+        color: $pink700;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &__tab-panel {
+      display: none;
+      padding: 15px;
+
+      &--selected {
+        display: block;
+      }
+    }
+  }
+}

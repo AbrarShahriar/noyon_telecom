@@ -1,0 +1,43 @@
+@import "../../styles/shared/variables";
+
+.notifs {
+  //   height: calc(100vh - 55px);
+  padding: 30px 10px 15px 10px;
+  margin-bottom: 55px;
+
+  &__container {
+    .noti {
+      padding: 15px 10px;
+      border-radius: 5px;
+      background: white;
+      border-left: 3px solid $yellow600;
+      margin-bottom: 20px;
+
+      .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        color: $yellow600;
+
+        .time {
+          color: black;
+          margin-left: 10px;
+          font-size: 14px;
+          opacity: 0.6;
+        }
+      }
+
+      .content {
+        padding: 5px;
+        .title {
+          font-weight: 600;
+          margin-bottom: 5px;
+        }
+        .desc {
+          font-size: 14px;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}

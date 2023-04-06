@@ -1,0 +1,25 @@
+@import "../../styles/shared/variables";
+@import "../../styles/shared/mixins";
+
+.appbar {
+  @include add-shadow-light;
+  background: linear-gradient(90deg, $pink900 0%, $pink700 100%);
+  color: white;
+  padding: 15px 10px;
+  display: flex;
+  align-items: center;
+
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+
+  & > *:first-child {
+    cursor: pointer;
+  }
+
+  .title {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}

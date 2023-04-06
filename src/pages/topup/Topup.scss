@@ -1,0 +1,228 @@
+@import "../../styles/shared/variables";
+@import "../../styles/shared/mixins";
+.topup {
+  .container {
+    .offer__data {
+      @include add-shadow-lighter;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 15px;
+      background-color: white;
+
+      .offer__title {
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .expiry__amount {
+        width: 100%;
+
+        & > * {
+          display: flex;
+          align-items: center;
+        }
+
+        .offer__expiry {
+          font-size: 14px;
+          margin-bottom: 20px;
+          & > *:first-child {
+            margin-right: 5px;
+          }
+        }
+
+        .offer__amount {
+          font-weight: 600;
+          color: $red700;
+          & > *:first-child {
+            margin-right: -2px;
+          }
+        }
+      }
+    }
+
+    margin-top: 25px;
+    margin-bottom: 40px;
+    .payment__method {
+      margin-bottom: 30px;
+      &__title {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .methods {
+        display: flex;
+        align-items: center;
+        width: 90%;
+        margin: auto;
+
+        .method {
+          @include add-shadow-lighter;
+          cursor: pointer;
+          border-radius: 5px;
+          background-color: white;
+          padding-top: 15px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          transition: all 100ms ease;
+          outline: 2px dashed transparent;
+
+          &.nagad.--selected {
+            background-color: $nagad-bg;
+            outline-color: $nagad1;
+            .bg {
+              background-color: white;
+            }
+          }
+
+          &.bkash.--selected {
+            background-color: $bkash-bg;
+            outline-color: $bkash1;
+            .bg {
+              background-color: white;
+            }
+          }
+
+          &:first-child {
+            margin-right: 10px;
+          }
+          .bg {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+
+            img {
+              width: 32px;
+              height: 32px;
+              object-fit: contain;
+              position: relative;
+            }
+          }
+
+          &.bkash {
+            .bg {
+              background-color: $bkash-bg;
+            }
+          }
+          &.nagad {
+            .bg {
+              background-color: $nagad-bg;
+            }
+          }
+
+          .label {
+            margin: 10px 0;
+            font-size: 14px;
+            font-weight: 600;
+          }
+
+          .charge {
+            width: 100%;
+            text-align: center;
+            background-color: $green600;
+            color: white;
+            font-size: 14px;
+            padding: 3px 0;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+          }
+        }
+      }
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      background-color: $blue400;
+      color: $blue900;
+      padding: 10px 5px;
+      width: 90%;
+      margin: auto;
+      border-radius: 5px;
+      & > *:first-child {
+        width: 64px;
+      }
+      span {
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: 10px;
+      }
+    }
+
+    .inputs {
+      margin-top: 20px;
+      padding: 15px;
+
+      .input__container {
+        margin-bottom: 20px;
+        .label {
+          font-size: 14px;
+          font-weight: 600;
+          margin-bottom: 5px;
+        }
+
+        .warning {
+          border-radius: 5px;
+          background-color: #ffc53d;
+          color: #874d00;
+          padding: 10px 15px;
+          margin-bottom: 10px;
+          p {
+            font-size: 12px;
+            font-weight: 600;
+          }
+        }
+
+        input {
+          width: 100%;
+          border-radius: 5px;
+          padding: 10px 15px;
+          font-size: 18px;
+          border: 1px solid $pink700;
+          background-color: whitesmoke;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+
+    .btn__submit {
+      @include add-shadow-light;
+      border: none;
+      background: $pink700;
+      width: fit-content;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-top: 30px;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+
+      &.--disabled {
+        cursor: not-allowed;
+        &::after {
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: rgba($color: black, $alpha: 0.3);
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}

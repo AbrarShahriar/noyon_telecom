@@ -1,0 +1,73 @@
+@import "../../styles/shared/variables";
+
+.bottom-nav {
+  background-color: white;
+  height: 55px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  box-shadow: -5px 0 20px -12px rgba($color: #000000, $alpha: 0.7);
+
+  .bottom-nav__options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px 5px 10px;
+
+    .bottom-nav__option {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+      .icon {
+        color: black;
+        transition: all 100ms ease-in-out;
+        margin-bottom: -10px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &::after {
+          content: "";
+          width: 40px;
+          height: 40px;
+          background-color: $pink900;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: -1;
+          border-radius: 50%;
+          opacity: 0;
+          transition: all 100ms ease-in-out;
+        }
+      }
+
+      span {
+        opacity: 0;
+        transition: all 100ms ease-in-out;
+        font-weight: 600;
+        font-size: 10px;
+      }
+
+      &.--selected {
+        color: $pink900;
+        .icon {
+          color: $bg;
+          transform: translateY(-20px);
+
+          &::after {
+            opacity: 1;
+          }
+        }
+        span {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

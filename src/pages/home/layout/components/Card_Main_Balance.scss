@@ -1,0 +1,85 @@
+@import "../../../../styles/shared/variables";
+@import "../../../../styles/shared/mixins";
+
+.card__main__balance {
+  background-color: white;
+  width: 90%;
+  margin: auto;
+  margin-top: 30px;
+  border-radius: 10px;
+  padding: 15px;
+  position: relative;
+
+  .title {
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  .balance__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 15px;
+
+    .balance {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 32px;
+      margin-left: -8px;
+    }
+
+    .actions {
+      button {
+        @include add-shadow;
+        border: none;
+        background: linear-gradient(90deg, $pink900 0%, $pink700 100%);
+        color: white;
+        padding: 5px 15px;
+        font-size: 12px;
+        border-radius: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  hr {
+    opacity: 0.5;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+
+  .statistics {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    margin-bottom: 25px;
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      font-weight: 600;
+
+      .value {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+
+        & > *:first-child {
+          margin-right: -2px;
+        }
+      }
+
+      .label {
+        font-size: 12px;
+        opacity: 0.8;
+        font-weight: 400;
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+@import "../../styles/shared/variables";
+@import "../../styles/shared/mixins";
+
+.home__header {
+  @include add-shadow;
+  background: linear-gradient(90deg, $pink900 0%, $pink700 100%);
+  color: white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 20px 10px 10px;
+  position: relative;
+
+  .nav {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin-left: auto;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+
+    button {
+      background-color: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+
+      &:first-child {
+        margin-right: 5px;
+      }
+    }
+
+    &__notification {
+      position: relative;
+      &::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background: black;
+        position: absolute;
+        border-radius: 50%;
+        z-index: 20;
+        top: -1px;
+        right: 0;
+      }
+    }
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    .info {
+      line-height: 20px;
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+      font-size: 14px;
+
+      .greeting {
+        font-size: 12px;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .weather {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+
+    span {
+      opacity: 0.9;
+      margin-left: 10px;
+    }
+  }
+}

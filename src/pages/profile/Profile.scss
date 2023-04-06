@@ -1,0 +1,203 @@
+@import "../../styles/shared/variables";
+@import "../../styles/shared/mixins";
+
+.profile {
+  padding: 20px 0;
+  margin-bottom: 55px;
+  hr {
+    opacity: 0.3;
+    margin-bottom: 15px;
+  }
+
+  &__card__account {
+    margin-bottom: 30px;
+    &__title {
+      margin-bottom: 7px;
+      opacity: 0.6;
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    &__options {
+      padding: 15px;
+      background-color: white;
+    }
+
+    &__option {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .icon {
+        margin-right: 5px;
+      }
+
+      &.account__type {
+        .type {
+          span {
+            color: white;
+            padding: 2px 7px;
+            margin-left: 10px;
+            border-radius: 10px;
+            font-size: 12px;
+
+            &.premium {
+              background-color: $yellow600;
+            }
+
+            &.regular {
+              background-color: $green600;
+            }
+          }
+        }
+      }
+
+      &.account__name-edit {
+        .name-edit {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+
+          span {
+            font-size: 14px;
+          }
+
+          .btn__edit {
+            background-color: transparent;
+            margin-right: 5px;
+            border: none;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  &__card__membership-history {
+    padding: 0 10px;
+    margin-bottom: 30px;
+    &__options {
+      display: flex;
+      align-items: center;
+
+      & > * {
+        background-color: white;
+        border-radius: 5px;
+        width: 100%;
+        height: 150px;
+        position: relative;
+
+        .title {
+          margin: 15px 0 15px 10px;
+          font-size: 14px;
+          font-weight: 600;
+          opacity: 0.8;
+        }
+
+        .extra {
+          margin: 10px 0 10px 10px;
+          font-size: 14px;
+          line-height: 14px;
+          opacity: 0.7;
+        }
+
+        button {
+          position: absolute;
+          bottom: 0;
+          border: none;
+          background-color: $yellow600;
+          border-radius: 5px;
+          padding: 10px 20px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          color: white;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+
+          .icon {
+            margin-left: auto;
+          }
+
+          &.--disabled {
+            &::after {
+              content: "";
+              width: 100%;
+              height: 100%;
+              background-color: white;
+              opacity: 0.3;
+              pointer-events: none;
+              cursor: none;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+          }
+        }
+      }
+
+      .membership {
+        margin-right: 10px;
+      }
+
+      .history {
+        button {
+          background-color: $pink700;
+        }
+      }
+    }
+  }
+
+  &__card__customer-logout {
+    padding: 15px;
+    background-color: white;
+    &__options {
+      & > * {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+
+        span {
+          margin-right: auto;
+        }
+
+        .icon {
+          margin-right: 5px;
+        }
+      }
+
+      .customer-service {
+        cursor: pointer;
+      }
+
+      .logout {
+        margin-bottom: 0;
+
+        button {
+          border: none;
+          padding: 10px 15px;
+          width: 100%;
+          background-color: $red700;
+          color: white;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          border-radius: 10px;
+          cursor: pointer;
+
+          .icon__logout {
+            margin-left: auto;
+          }
+        }
+      }
+    }
+  }
+}

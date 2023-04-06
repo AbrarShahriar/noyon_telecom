@@ -1,0 +1,39 @@
+.options {
+  background-color: white;
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  padding-top: 30px;
+  margin-bottom: 40px;
+  position: relative;
+
+  .option {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    &:hover {
+      .logo {
+        transform: scale(1.15);
+      }
+    }
+
+    .logo {
+      transition: transform 150ms ease-in;
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      margin-bottom: 5px;
+    }
+    span {
+      font-size: 14px;
+    }
+  }
+}

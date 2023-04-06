@@ -1,0 +1,15 @@
+@mixin add-shadow {
+  box-shadow: 2px 2px 15px -2px rgba($color: #000000, $alpha: 0.5);
+}
+
+@mixin add-shadow-light {
+  box-shadow: 2px 2px 15px -7px rgba($color: #000000, $alpha: 0.7);
+}
+
+@mixin add-shadow-lighter {
+  box-shadow: 1px 1px 15px -12px rgba($color: #000000, $alpha: 0.5);
+}
+
+@mixin add-shadow-dark {
+  box-shadow: 1px 1px 10px -7px rgba($color: #000000, $alpha: 0.5);
+}

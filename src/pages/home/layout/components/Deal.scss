@@ -1,0 +1,100 @@
+@import "../../../../styles/shared/variables";
+@import "../../../../styles/shared/mixins";
+
+.deal {
+  @include add-shadow-lighter;
+  background-color: $bg;
+  // background: linear-gradient(90deg, $blue900 0%, $blue700 100%);
+  padding: 25px 10px 15px 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  position: relative;
+  margin: 25px 0;
+
+  &.--with-banner {
+    &::after {
+      background-color: $red700;
+      color: white;
+      position: absolute;
+      top: 0;
+      right: 10px;
+      font-size: 12px;
+      padding: 3px 20px;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+
+    &.limited {
+      &::after {
+        content: "Limited Time";
+      }
+    }
+    &.hot {
+      &::after {
+        content: "Hot Deal";
+      }
+    }
+    &.special {
+      &::after {
+        content: "Special Deal";
+      }
+    }
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
+  .description {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+    max-width: 70%;
+  }
+
+  .expiry {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    .expiry__value {
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 5px;
+      margin-right: auto;
+    }
+  }
+
+  hr {
+    opacity: 0.5;
+    margin-bottom: 20px;
+  }
+
+  .price-btn__buy {
+    display: flex;
+    align-items: center;
+
+    .price {
+      display: flex;
+      align-items: center;
+      color: $red700;
+      font-weight: 600;
+      margin-right: auto;
+    }
+
+    .btn__buy {
+      background-color: $red700;
+      color: white;
+      border: none;
+      padding: 7px 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      position: absolute;
+      bottom: -15px;
+      right: -10px;
+      border-bottom-right-radius: 10px;
+      border-top-left-radius: 10px;
+    }
+  }
+}

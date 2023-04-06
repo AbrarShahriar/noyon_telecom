@@ -4,12 +4,25 @@ import { FiChevronLeft } from "react-icons/fi";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
-const AppBar = ({ title = "" }) => {
+const AppBar = ({ title = "", page = "", showBackButton = true }) => {
   const navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    localStorage.removeItem("adminLoggedIn");
+    navigate("/admin-login");
+  };
   return (
     <div className="appbar">
-      <BiLeftArrowAlt size={24} onClick={() => navigate(-1)} />
+      {showBackButton && (
+        <BiLeftArrowAlt size={24} onClick={() => navigate(-1)} />
+      )}
       <span className="title">{title}</span>
+
+      {page == "admin" && (
+        <button onClick={handleLogoutClick} className="btn__admin__logout">
+          Logout
+        </button>
+      )}
     </div>
   );
 };

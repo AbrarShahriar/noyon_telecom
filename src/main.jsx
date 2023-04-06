@@ -21,6 +21,8 @@ const Notifs = React.lazy(() => import("./pages/notification/Notifs"));
 const Profile = React.lazy(() => import("./pages/profile/Profile"));
 const Topup = React.lazy(() => import("./pages/topup/Topup"));
 const History = React.lazy(() => import("./pages/history/History"));
+const Admin = React.lazy(() => import("./pages/admin/Admin"));
+const AdminLogin = React.lazy(() => import("./pages/auth/AdminLogin"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -79,6 +81,11 @@ const router = createBrowserRouter(
             element={<Topup type="membership" title="Membership" />}
           />
         }
+      />
+      <Route path="/admin" element={<SuspenseWrapper element={<Admin />} />} />
+      <Route
+        path="/admin-login"
+        element={<SuspenseWrapper element={<AdminLogin />} />}
       />
     </Route>
   )

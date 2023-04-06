@@ -9,6 +9,7 @@ import HistoryCard from "./components/HistoryCard";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../shared/StateProvider";
+import InOut from "../shared/stats/InOut";
 
 // topup history (in)
 // offer buy history - internet, bundle, minute (out)
@@ -77,30 +78,11 @@ const History = () => {
       {loggedIn ? (
         <>
           <h3 className="title">History</h3>
-          <div className="in-out">
-            <div className="in">
-              <div className="header">
-                <BiPlus />
-                <p>In</p>
-                <span>{selectedTabIndex == 0 && selectedMonth}</span>
-              </div>
-              <div className="content">
-                <TbCurrencyTaka strokeWidth={3} />
-                <span>24</span>
-              </div>
-            </div>
-            <div className="out">
-              <div className="header">
-                <BiMinus />
-                <p>Out</p>
-                <span>{selectedTabIndex == 0 && selectedMonth}</span>
-              </div>
-              <div className="content">
-                <TbCurrencyTaka strokeWidth={3} />
-                <span>13</span>
-              </div>
-            </div>
-          </div>
+          <InOut
+            tabbed
+            selectedMonth={selectedMonth}
+            selectedTabIndex={selectedTabIndex}
+          />
 
           <Tabs selectedIndex={selectedTabIndex} onSelect={handleTabClick}>
             <TabList>

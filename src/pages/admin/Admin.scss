@@ -1,0 +1,53 @@
+@import "../../styles/shared/mixins";
+@import "../../styles/shared/variables";
+
+.admin {
+  padding-bottom: 50px;
+  &__body {
+    padding: 10px;
+    margin-top: 20px;
+
+    .history {
+      button {
+        width: 100%;
+        cursor: pointer;
+        background-color: $pink700;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+        font-weight: 600;
+      }
+    }
+
+    .admin__card {
+      @include add-shadow-lighter;
+      background-color: white;
+      padding: 10px;
+      margin-bottom: 30px;
+      h3 {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.modal-title {
+  font-size: 22px;
+  color: $pink900;
+}
+
+.modal-input {
+  &:focus {
+    outline: none;
+  }
+
+  &:first-child {
+    margin-bottom: 15px;
+  }
+
+  border: 1px solid $pink900;
+  padding: 10px 15px;
+  font-size: 18px;
+  border-radius: 5px;
+}

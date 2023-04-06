@@ -22,4 +22,15 @@
     font-size: 14px;
     font-weight: 600;
   }
+
+  .btn__admin__logout {
+    cursor: pointer;
+    margin-left: auto;
+    background-color: transparent;
+    color: white;
+    font-weight: 600;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px 15px;
+  }
 }

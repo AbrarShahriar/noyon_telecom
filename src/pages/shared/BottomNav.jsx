@@ -39,6 +39,7 @@ const BottomNav = () => {
     !(
       p.pathname.includes("/topup") ||
       p.pathname.includes("/notifications") ||
+      p.pathname.includes("/admin") ||
       p.pathname.includes("/membership") ||
       p.pathname.includes("/buy")
     )
@@ -49,6 +50,7 @@ const BottomNav = () => {
       !(
         p.pathname.includes("/topup") ||
         p.pathname.includes("/notifications") ||
+        p.pathname.includes("/admin") ||
         p.pathname.includes("/membership") ||
         p.pathname.includes("/buy")
       )

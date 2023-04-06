@@ -15,6 +15,7 @@ const Header = () => {
       p.pathname.includes("/buy") ||
       p.pathname.includes("/topup") ||
       p.pathname.includes("/membership") ||
+      p.pathname.includes("/admin") ||
       p.pathname.includes("/notifications")
     )
   );
@@ -26,6 +27,7 @@ const Header = () => {
         p.pathname.includes("/login") ||
         p.pathname.includes("/buy") ||
         p.pathname.includes("/topup") ||
+        p.pathname.includes("/admin") ||
         p.pathname.includes("/membership") ||
         p.pathname.includes("/notifications")
       )

@@ -136,16 +136,28 @@ const Topup = ({ type = "topup", title = "" }) => {
           </div>
           <div className="input__container">
             <p className="label">Amount</p>
-            <IMaskInput
-              mask={Number}
-              value={type == "offer" ? `${offer.amount}` : ""}
-              signed={false}
-              min={10}
-              max={10000}
-              radix="."
-              disabled={type == "offer" || type == "recharge"}
-              onAccept={(value) => setamount(value)}
-            />
+            {type == "offer" ? (
+              <IMaskInput
+                mask={Number}
+                value={`${offer.amount}`}
+                signed={false}
+                min={10}
+                max={10000}
+                radix="."
+                disabled={type == "offer" || type == "recharge"}
+                onAccept={(value) => setamount(value)}
+              />
+            ) : (
+              <IMaskInput
+                mask={Number}
+                signed={false}
+                min={10}
+                max={10000}
+                radix="."
+                disabled={type == "offer" || type == "recharge"}
+                onAccept={(value) => setamount(value)}
+              />
+            )}
           </div>
           <div className="input__container">
             <p className="label">Transaction ID</p>

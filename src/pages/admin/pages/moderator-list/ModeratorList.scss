@@ -1,0 +1,32 @@
+@import "../../../../styles/shared/variables";
+@import "../../../../styles/shared/mixins";
+.admin__moderator-list {
+  .moderators {
+    padding: 15px;
+
+    .moderator {
+      @include add-shadow-dark;
+      background-color: white;
+      padding: 10px;
+      margin-bottom: 20px;
+
+      .content {
+        margin-bottom: 30px;
+      }
+
+      .actions {
+        button {
+          cursor: pointer;
+          border: none;
+          padding: 10px;
+          color: white;
+          background-color: $pink900;
+          border-radius: 5px;
+          width: 100%;
+          font-size: 16px;
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+}

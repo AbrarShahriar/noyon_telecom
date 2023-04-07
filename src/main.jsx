@@ -23,6 +23,12 @@ const Topup = React.lazy(() => import("./pages/topup/Topup"));
 const History = React.lazy(() => import("./pages/history/History"));
 const Admin = React.lazy(() => import("./pages/admin/Admin"));
 const AdminLogin = React.lazy(() => import("./pages/auth/AdminLogin"));
+const Requests = React.lazy(() =>
+  import("./pages/admin/pages/requests/Requests")
+);
+const ModeratorList = React.lazy(() =>
+  import("./pages/admin/pages/moderator-list/ModeratorList")
+);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -82,11 +88,39 @@ const router = createBrowserRouter(
           />
         }
       />
-      <Route path="/admin" element={<SuspenseWrapper element={<Admin />} />} />
+
+      {/* ------------ADMIN ROUTES---------------- */}
+
       <Route
         path="/admin-login"
         element={<SuspenseWrapper element={<AdminLogin />} />}
       />
+
+      <Route path="/admin">
+        <Route index element={<SuspenseWrapper element={<Admin />} />} />
+        <Route
+          path="/admin/membership-requests"
+          element={
+            <SuspenseWrapper element={<Requests type={"membership"} />} />
+          }
+        />
+        <Route
+          path="/admin/offer-buy-requests"
+          element={<SuspenseWrapper element={<Requests type={"offer"} />} />}
+        />
+        <Route
+          path="/admin/recharge-requests"
+          element={<SuspenseWrapper element={<Requests type={"recharge"} />} />}
+        />
+        <Route
+          path="/admin/topup-requests"
+          element={<SuspenseWrapper element={<Requests type={"topup"} />} />}
+        />
+        <Route
+          path="/admin/moderator-list"
+          element={<SuspenseWrapper element={<ModeratorList />} />}
+        />
+      </Route>
     </Route>
   )
 );

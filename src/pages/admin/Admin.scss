@@ -32,6 +32,22 @@
       }
     }
   }
+
+  &__requests,
+  &__moderator-list {
+    .data {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      .label {
+        margin-right: 5px;
+      }
+      .value {
+        font-weight: 600;
+      }
+    }
+  }
 }
 
 .modal-title {

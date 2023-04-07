@@ -1,0 +1,65 @@
+@import "../../../../../styles/shared/variables";
+@import "../../../../../styles/shared/mixins";
+
+.admin__requests__container__req {
+  @include add-shadow-dark;
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 20px;
+
+  .content {
+    font-size: 18px;
+    .title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .amount {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      margin-bottom: 5px;
+      & > *:first-child {
+        margin-right: -2px;
+      }
+    }
+
+    .account-phone {
+      margin-bottom: 5px;
+    }
+
+    hr {
+      opacity: 0.3;
+      margin-bottom: 10px;
+    }
+  }
+
+  .actions {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+
+    button {
+      width: 100%;
+      border: none;
+      padding: 15px;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      font-weight: bolder;
+    }
+
+    .btn__approve {
+      border-bottom-left-radius: 5px;
+      border-top-left-radius: 5px;
+      background-color: $green600;
+    }
+
+    .btn__reject {
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
+      background-color: $pink900;
+    }
+  }
+}

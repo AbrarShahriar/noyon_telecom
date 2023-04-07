@@ -14,7 +14,7 @@
     &__title {
       margin-bottom: 7px;
       opacity: 0.6;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 600;
       margin-left: 10px;
     }
@@ -24,7 +24,7 @@
     }
 
     &__option {
-      font-size: 14px;
+      font-size: 16px;
       display: flex;
       align-items: center;
       margin-bottom: 15px;
@@ -44,7 +44,7 @@
             padding: 2px 7px;
             margin-left: 10px;
             border-radius: 10px;
-            font-size: 12px;
+            font-size: 14px;
 
             &.premium {
               background-color: $yellow600;
@@ -65,7 +65,7 @@
           width: 100%;
 
           span {
-            font-size: 14px;
+            font-size: 16px;
           }
 
           .btn__edit {
@@ -80,7 +80,7 @@
   }
 
   &__card__membership-history {
-    padding: 0 10px;
+    padding: 0 15px;
     margin-bottom: 30px;
     &__options {
       display: flex;
@@ -94,15 +94,15 @@
         position: relative;
 
         .title {
-          margin: 15px 0 15px 10px;
-          font-size: 14px;
+          margin: 15px 0 10px 10px;
+          font-size: 16px;
           font-weight: 600;
           opacity: 0.8;
         }
 
         .extra {
           margin: 10px 0 10px 10px;
-          font-size: 14px;
+          font-size: 16px;
           line-height: 14px;
           opacity: 0.7;
         }
@@ -118,7 +118,7 @@
           display: flex;
           align-items: center;
           color: white;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 600;
           cursor: pointer;
 
@@ -146,24 +146,19 @@
       .membership {
         margin-right: 10px;
       }
-
-      .history {
-        button {
-          background-color: $pink700;
-        }
-      }
     }
   }
 
   &__card__customer-logout {
     padding: 15px;
+    margin-bottom: 15px;
     background-color: white;
     &__options {
       & > * {
         margin-bottom: 15px;
         display: flex;
         align-items: center;
-        font-size: 14px;
+        font-size: 16px;
 
         span {
           margin-right: auto;
@@ -187,7 +182,8 @@
           width: 100%;
           background-color: $red700;
           color: white;
-          font-weight: 600;
+          font-size: 16px;
+          font-weight: bolder;
           display: flex;
           align-items: center;
           border-radius: 10px;

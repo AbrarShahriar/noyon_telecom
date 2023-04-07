@@ -10,7 +10,7 @@
     -webkit-tap-highlight-color: transparent;
 
     &__tab-list {
-      padding: 10px 0;
+      padding: 5px;
       display: flex;
       align-items: center;
       position: sticky;
@@ -22,7 +22,7 @@
     &__tab {
       width: 50%;
       text-align: center;
-      font-size: 14px;
+      font-size: 16px;
       display: inline-block;
       border-bottom: 2px solid gray;
       position: relative;

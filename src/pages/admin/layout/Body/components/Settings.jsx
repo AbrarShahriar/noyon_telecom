@@ -13,6 +13,8 @@ const settings = {
   cashbackRate: 2.5,
 };
 
+const ICON_SIZE = 22;
+
 const Settings = () => {
   const handleSettingOptionClick = async (label) => {
     let modalTitle = "";
@@ -36,6 +38,7 @@ const Settings = () => {
       title: <p className="modal-title">{modalTitle}</p>,
       input: "number",
       showCancelButton: true,
+      // @ts-ignore
       inputValidator: (value) => {
         if (!value) {
           return "You need to write something!";
@@ -71,7 +74,7 @@ const Settings = () => {
           <p className="value">{settings.topupFeeRate}%</p>
           <FiEdit3
             className="icon"
-            size={18}
+            size={ICON_SIZE}
             onClick={() => handleSettingOptionClick("topup")}
           />
         </div>
@@ -83,7 +86,7 @@ const Settings = () => {
           </p>
           <FiEdit3
             className="icon"
-            size={18}
+            size={ICON_SIZE}
             onClick={() => handleSettingOptionClick("membership")}
           />
         </div>
@@ -92,7 +95,7 @@ const Settings = () => {
           <p className="value">{settings.cashbackRate}%</p>
           <FiEdit3
             className="icon"
-            size={18}
+            size={ICON_SIZE}
             onClick={() => handleSettingOptionClick("cashback")}
           />
         </div>

@@ -6,7 +6,7 @@ import { IoTicketOutline } from "react-icons/io5";
 import { IoIosLogIn } from "react-icons/io";
 import { BiBell, BiHomeAlt } from "react-icons/bi";
 
-const ICON_SZIE = 28;
+const ICON_SZIE = 30;
 
 const options = [
   {

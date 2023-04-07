@@ -4,7 +4,6 @@
 .deal {
   @include add-shadow-lighter;
   background-color: $bg;
-  // background: linear-gradient(90deg, $blue900 0%, $blue700 100%);
   padding: 25px 10px 15px 10px;
   display: flex;
   flex-direction: column;
@@ -19,7 +18,7 @@
       position: absolute;
       top: 0;
       right: 10px;
-      font-size: 12px;
+      font-size: 14px;
       padding: 3px 20px;
       border-bottom-left-radius: 15px;
       border-bottom-right-radius: 15px;
@@ -44,13 +43,15 @@
 
   .title {
     font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 5px;
   }
 
   .description {
-    font-size: 12px;
+    font-size: 14px;
     opacity: 0.8;
     margin-bottom: 20px;
-    max-width: 70%;
+    max-width: 90%;
   }
 
   .expiry {
@@ -77,6 +78,7 @@
     .price {
       display: flex;
       align-items: center;
+      font-size: 18px;
       color: $red700;
       font-weight: 600;
       margin-right: auto;
@@ -86,12 +88,14 @@
       background-color: $red700;
       color: white;
       border: none;
-      padding: 7px 20px;
+      padding: 10px 25px;
       display: flex;
       align-items: center;
       cursor: pointer;
       position: absolute;
       bottom: -15px;
+      font-weight: 600;
+      font-size: 14px;
       right: -10px;
       border-bottom-right-radius: 10px;
       border-top-left-radius: 10px;

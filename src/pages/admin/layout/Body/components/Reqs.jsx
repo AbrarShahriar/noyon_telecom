@@ -1,5 +1,4 @@
 import React from "react";
-import "./Reqs.scss";
 import ReqCardNavigator from "./ReqCardNavigator";
 
 const reqOptions = [

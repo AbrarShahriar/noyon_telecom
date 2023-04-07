@@ -20,9 +20,10 @@ import { ACTION_TYPES } from "../../reducer";
 // customer service
 // logout
 
-const ICON_SIZE = 20;
+const ICON_SIZE = 24;
 const type = "regular";
-const member = false;
+// @ts-ignore
+const member = type == "premium";
 
 const Profile = () => {
   // @ts-ignore
@@ -92,16 +93,10 @@ const Profile = () => {
                   disabled={member}
                   className={`btn__buy ${member && "--disabled"}`}
                 >
-                  Buy Now <RiVipCrown2Line className="icon" />
+                  Buy Now
+                  <RiVipCrown2Line className="icon" size={ICON_SIZE - 4} />
                 </button>
               </div>
-              {/* <div className="history">
-            <p className="title">History</p>
-            <div className="extra">See Your Past Transactions</div>
-            <button className="btn__history">
-              Tap to see <AiOutlineRight className="icon" />
-            </button>
-          </div> */}
             </div>
           </div>
 

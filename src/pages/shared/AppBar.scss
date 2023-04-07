@@ -5,7 +5,7 @@
   @include add-shadow-light;
   background: linear-gradient(90deg, $pink900 0%, $pink700 100%);
   color: white;
-  padding: 15px 10px;
+  padding: 18px 20px;
   display: flex;
   align-items: center;
 
@@ -19,7 +19,7 @@
 
   .title {
     margin-left: 10px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
   }
 
@@ -28,7 +28,8 @@
     margin-left: auto;
     background-color: transparent;
     color: white;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: bolder;
     border: 1px solid white;
     border-radius: 5px;
     padding: 5px 15px;

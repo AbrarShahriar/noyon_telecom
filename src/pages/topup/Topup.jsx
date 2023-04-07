@@ -36,23 +36,13 @@ const offer = {
 const recharge = {
   offerId: "wrgwrytry",
   title: "Recharge",
-  amount: 37,
+  amount: 100,
 };
 
-const validateButton = (transactionId, amount, phone, paymentMethod) => {
-  if (
-    transactionId == "" ||
-    amount == "" ||
-    phone == "" ||
-    paymentMethod == ""
-  ) {
-    return "--disabled";
-  }
-};
+const membershipFee = 150;
 
 const Topup = ({ type = "topup", title = "" }) => {
   const [paymentMethod, setpaymentMethod] = React.useState("");
-
   const [phone, setphone] = React.useState("");
   const [amount, setamount] = React.useState("");
   const [transactionId, settransactionId] = React.useState("");
@@ -62,7 +52,20 @@ const Topup = ({ type = "topup", title = "" }) => {
   React.useEffect(() => {
     console.log(params);
 
-    setamount(`${offer.amount}`);
+    switch (type) {
+      case "membership":
+        setamount(`${membershipFee}`);
+        break;
+      case "offer":
+        setamount(`${offer.amount}`);
+        break;
+      case "recharge":
+        setamount(`${recharge.amount}`);
+        break;
+
+      default:
+        break;
+    }
   }, [params.offerId]);
 
   const handlePaymentMethodClick = (label) => setpaymentMethod(label);
@@ -74,15 +77,17 @@ const Topup = ({ type = "topup", title = "" }) => {
       <AppBar title={title} />
 
       <div className="container">
-        {type == "offer" && (
+        {(type == "offer" || type == "recharge") && (
           <div className="offer__data">
             <p className="offer__title">{offer.title}</p>
 
             <div className="expiry__amount">
-              <p className="offer__expiry">
-                <MdDateRange size={16} />
-                {offer.expiry}
-              </p>
+              {type == "offer" && (
+                <p className="offer__expiry">
+                  <MdDateRange size={16} />
+                  {offer.expiry}
+                </p>
+              )}
               <p className="offer__amount">
                 <TbCurrencyTaka size={18} strokeWidth={3} />
                 {offer.amount}
@@ -112,12 +117,15 @@ const Topup = ({ type = "topup", title = "" }) => {
           </div>
         </div>
 
-        <div className="info">
-          <AiOutlineInfoCircle size={32} />
-          <span>
-            {charge}% gateway charge will be deducted from your inputted balance
-          </span>
-        </div>
+        {type == "topup" && (
+          <div className="info">
+            <AiOutlineInfoCircle size={32} />
+            <span>
+              {charge}% gateway charge will be deducted from your inputted
+              balance
+            </span>
+          </div>
+        )}
 
         <div className="inputs">
           <div className="input__container">
@@ -136,15 +144,15 @@ const Topup = ({ type = "topup", title = "" }) => {
           </div>
           <div className="input__container">
             <p className="label">Amount</p>
-            {type == "offer" ? (
+            {type == "offer" || type == "recharge" || type == "membership" ? (
               <IMaskInput
                 mask={Number}
-                value={`${offer.amount}`}
+                value={`${amount}`}
                 signed={false}
                 min={10}
                 max={10000}
                 radix="."
-                disabled={type == "offer" || type == "recharge"}
+                disabled
                 onAccept={(value) => setamount(value)}
               />
             ) : (
@@ -154,7 +162,6 @@ const Topup = ({ type = "topup", title = "" }) => {
                 min={10}
                 max={10000}
                 radix="."
-                disabled={type == "offer" || type == "recharge"}
                 onAccept={(value) => setamount(value)}
               />
             )}

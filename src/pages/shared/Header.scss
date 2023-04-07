@@ -7,7 +7,7 @@
   color: white;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  padding: 20px 10px 10px;
+  padding: 25px 10px 10px;
   position: relative;
 
   .nav {
@@ -17,8 +17,8 @@
     margin-left: auto;
 
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     z-index: 5;
 
     button {
@@ -28,7 +28,7 @@
       cursor: pointer;
 
       &:first-child {
-        margin-right: 5px;
+        margin-right: 10px;
       }
     }
 
@@ -54,11 +54,11 @@
     margin-bottom: 15px;
 
     .info {
-      line-height: 20px;
+      line-height: 24px;
       display: flex;
       flex-direction: column;
       margin-left: 10px;
-      font-size: 14px;
+      font-size: 16px;
 
       .greeting {
         font-size: 12px;
@@ -68,7 +68,7 @@
   }
 
   .weather {
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     margin-left: 10px;

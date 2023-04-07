@@ -31,7 +31,7 @@ const Login = () => {
         ) : (
           <>
             <div className="title">
-              <h3>{userMode == "login" ? "Login" : "Register"}</h3>
+              <h2>{userMode == "login" ? "Login" : "Register"}</h2>
               <p className="desc" onClick={handleUserModeClick}>
                 {userMode == "login"
                   ? "Don't have an account?"

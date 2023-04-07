@@ -11,7 +11,7 @@
   position: relative;
 
   .title {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     opacity: 0.8;
   }
@@ -29,15 +29,19 @@
       font-weight: 600;
       font-size: 32px;
       margin-left: -8px;
+
+      & > *:first-child {
+        margin-right: -5px;
+      }
     }
 
     .actions {
-      button {
-        @include add-shadow;
+      .btn__add-balance {
+        @include add-shadow-light;
         border: none;
         background: linear-gradient(90deg, $pink900 0%, $pink700 100%);
         color: white;
-        padding: 5px 15px;
+        padding: 10px 15px;
         font-size: 12px;
         border-radius: 15px;
         cursor: pointer;

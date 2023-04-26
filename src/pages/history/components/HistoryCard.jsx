@@ -8,32 +8,39 @@ import dayjs from "dayjs";
 const parseHistorytype = (type) => {
   switch (type) {
     case "topup":
-      return "in";
+      return { type: "in", showDesc: false, showTransactionId: true };
+
+    case "membership":
+      return { type: "out", showDesc: false, showTransactionId: true };
 
     case "internet":
-      return "out";
+      return { type: "out", showDesc: true, showTransactionId: false };
 
     case "minute":
-      return "out";
+      return { type: "out", showDesc: true, showTransactionId: false };
 
     case "bundle":
-      return "out";
+      return { type: "out", showDesc: true, showTransactionId: false };
 
     case "recharge":
-      return "out";
+      return { type: "out", showDesc: false, showTransactionId: false };
 
     default:
-      return "";
+      return { type: "", showDesc: false, showTransactionId: false };
   }
 };
 const HistoryCard = ({
   type = "p",
   className = "",
   amount = 0,
-  date = "2020",
+  date = "",
+  transactionId,
+  desc,
 }) => {
   return (
-    <div className={`history__card ${parseHistorytype(type)} ${className}`}>
+    <div
+      className={`history__card ${parseHistorytype(type).type} ${className}`}
+    >
       <div className="left">
         <FaMoneyBillWave />
       </div>
@@ -42,13 +49,15 @@ const HistoryCard = ({
           <span className="type">{formatLabel(type)}</span>
           <span className="date">{dayjs(date).format("DD/MM/YY")}</span>
         </div>
-        {type != "topup" && (
-          <p className="desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit
-          </p>
+        {desc && parseHistorytype(type).showDesc && (
+          <p className="desc">{desc}</p>
         )}
         <div className="content">
-          <span className="transaction-id">#{"uytgwydt665"}</span>
+          <span className="transaction-id">
+            {transactionId && parseHistorytype(type).showTransactionId
+              ? `#${"dfaetetae"}`
+              : "N/A"}
+          </span>
           <div className="amount">
             <TbCurrencyTaka strokeWidth={3} />
             <span>{amount}</span>

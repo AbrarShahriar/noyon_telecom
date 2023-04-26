@@ -13,3 +13,18 @@
 @mixin add-shadow-dark {
   box-shadow: 1px 1px 10px -7px rgba($color: #000000, $alpha: 0.5);
 }
+
+@mixin data-div-style {
+  .data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    .label {
+      margin-right: 5px;
+    }
+    .value {
+      font-weight: 600;
+    }
+  }
+}

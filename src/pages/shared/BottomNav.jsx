@@ -4,7 +4,8 @@ import "./BottomNav.scss";
 import { AiOutlineUser, AiOutlineHistory } from "react-icons/ai";
 import { IoTicketOutline } from "react-icons/io5";
 import { IoIosLogIn } from "react-icons/io";
-import { BiBell, BiHomeAlt } from "react-icons/bi";
+import { BiHomeAlt } from "react-icons/bi";
+import { useStateValue } from "../shared/StateProvider";
 
 const ICON_SZIE = 30;
 
@@ -35,13 +36,19 @@ const BottomNav = () => {
   const p = useLocation();
   const [selectedOption, setSelectedOption] = React.useState(p.pathname);
 
+  // @ts-ignore
+  const [{ loggedIn }] = useStateValue();
+
   const [showBottomNav, setShowBottomNav] = React.useState(
     !(
       p.pathname.includes("/topup") ||
       p.pathname.includes("/notifications") ||
       p.pathname.includes("/admin") ||
+      p.pathname.includes("/moderator") ||
       p.pathname.includes("/membership") ||
-      p.pathname.includes("/buy")
+      p.pathname.includes("/vip-offers") ||
+      p.pathname.includes("/offer-buy") ||
+      p.pathname.includes("/recharge")
     )
   );
 
@@ -51,8 +58,11 @@ const BottomNav = () => {
         p.pathname.includes("/topup") ||
         p.pathname.includes("/notifications") ||
         p.pathname.includes("/admin") ||
+        p.pathname.includes("/moderator") ||
         p.pathname.includes("/membership") ||
-        p.pathname.includes("/buy")
+        p.pathname.includes("/vip-offers") ||
+        p.pathname.includes("/offer-buy") ||
+        p.pathname.includes("/recharge")
       )
     );
     setSelectedOption(p.pathname);
@@ -92,18 +102,33 @@ const BottomNav = () => {
       {showBottomNav && (
         <div className="bottom-nav">
           <div className="bottom-nav__options">
-            {options.map((opt) => (
-              <div
-                className={`bottom-nav__option ${
-                  selectedOption == opt.path && "--selected"
-                }`}
-                onClick={() => handleOptionClick(opt.path)}
-                key={opt.path}
-              >
-                <div className="icon">{opt.icon}</div>
-                <span className="show">{`${formatLabel(opt.path)}`}</span>
-              </div>
-            ))}
+            {options.map((opt) =>
+              loggedIn ? (
+                opt.path != "/login" && (
+                  <div
+                    className={`bottom-nav__option ${
+                      selectedOption == opt.path && "--selected"
+                    }`}
+                    onClick={() => handleOptionClick(opt.path)}
+                    key={opt.path}
+                  >
+                    <div className="icon">{opt.icon}</div>
+                    <span className="show">{`${formatLabel(opt.path)}`}</span>
+                  </div>
+                )
+              ) : (
+                <div
+                  className={`bottom-nav__option ${
+                    selectedOption == opt.path && "--selected"
+                  }`}
+                  onClick={() => handleOptionClick(opt.path)}
+                  key={opt.path}
+                >
+                  <div className="icon">{opt.icon}</div>
+                  <span className="show">{`${formatLabel(opt.path)}`}</span>
+                </div>
+              )
+            )}
           </div>
         </div>
       )}

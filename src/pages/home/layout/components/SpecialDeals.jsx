@@ -1,18 +1,33 @@
 import React from "react";
 import Deal from "./Deal";
+import { PageLoader } from "../../../shared/SuspenseWrapper";
+import { getSpecialDeals } from "../../../../api/queries/home";
+import { useQuery } from "react-query";
 
 const SpecialDeals = () => {
+  const { isLoading, data: res } = useQuery(
+    ["offers", "special"],
+    getSpecialDeals
+  );
+
+  if (isLoading) {
+    <PageLoader />;
+  }
   return (
     <div>
-      <Deal type="special" />
-      <Deal type="special" />
-      <Deal type="special" />
-      <Deal type="special" />
-      <Deal type="special" />
-      <Deal type="special" />
-      <Deal type="special" />
-      <Deal type="special" />
-      <Deal type="special" />
+      {res?.data &&
+        res?.data.map((offer) => (
+          <Deal
+            key={offer.id}
+            type={offer.type}
+            id={offer.id}
+            title={offer.title}
+            desc={offer.desc}
+            expiry={offer.expiration}
+            regularPrice={offer.regularPrice}
+            discountPrice={offer.discountPrice}
+          />
+        ))}
     </div>
   );
 };

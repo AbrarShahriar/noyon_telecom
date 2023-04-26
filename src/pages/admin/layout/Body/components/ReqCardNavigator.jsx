@@ -8,11 +8,17 @@ const ReqCardNavigator = ({
   type = "membership",
   path = "/admin",
   count = 0,
+  isModerator,
 }) => {
   const navigate = useNavigate();
   return (
     <div className="req__card__navigator">
-      <div className="content" onClick={() => navigate(path)}>
+      <div
+        className="content"
+        onClick={() =>
+          navigate(`${isModerator ? "/moderator" : "/admin"}${path}`)
+        }
+      >
         <p>{title}</p>
 
         <div className="count__icon">

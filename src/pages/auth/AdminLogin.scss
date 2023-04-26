@@ -1,7 +1,8 @@
 @import "../../styles/shared/variables";
 @import "../../styles/shared/mixins";
 
-.admin__login {
+.admin__login,
+.moderator__login {
   width: 100%;
   height: 100vh;
   display: grid;

@@ -2,6 +2,9 @@ import React from "react";
 import "./Requests.scss";
 import AppBar from "../../../shared/AppBar";
 import Req from "./components/Req";
+import { useQuery } from "react-query";
+import { getReqsBasedOnType } from "../../../../api/queries/admin";
+import { PageLoader } from "../../../shared/SuspenseWrapper";
 
 const parseAppBarTitle = (type) => {
   switch (type) {
@@ -19,141 +22,33 @@ const parseAppBarTitle = (type) => {
   }
 };
 
-const reqs = {
-  offer: [
-    {
-      title: "wetwe tre t wr ytry rywryw!!",
-      amount: 37,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-    {
-      title: "wetwe er ytry rywryw!!",
-      amount: 78,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-    {
-      title: "wetwe ewerwr ytrywryw!!",
-      amount: 54,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-    {
-      title: "wetywryw!!",
-      amount: 98,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-  ],
-  recharge: [
-    {
-      amount: 100,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-    {
-      amount: 50,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-    {
-      amount: 300,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-  ],
-  membership: [
-    {
-      amount: 150,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-    {
-      amount: 150,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-    {
-      amount: 150,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-    {
-      amount: 150,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-  ],
-  topup: [
-    {
-      amount: 200,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-    {
-      amount: 200,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-    {
-      amount: 200,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-    {
-      amount: 200,
-      paymentPhone: "01841210657",
-      transactionId: "ewtretet",
-      paymentMethod: "bkash",
-      accountPhone: "01887764008",
-    },
-  ],
-};
-
 const Requests = ({ type }) => {
+  const { isLoading, data: res } = useQuery(
+    ["requests", type],
+    () => getReqsBasedOnType(type),
+    { staleTime: 1000 * 60 * 2 }
+  );
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
   return (
     <div className="admin__requests">
       <AppBar title={parseAppBarTitle(type)} />
 
       <div className="admin__requests__container">
-        {reqs[type].map((req, i) => (
+        {res?.data.map((req, i) => (
           <Req
+            key={i}
             type={type}
-            accountPhone={req.accountPhone}
+            id={req.id}
+            phone={req.phone}
             paymentMethod={req.paymentMethod}
             paymentPhone={req.paymentPhone}
             amount={req.amount}
             transactionId={req.transactionId}
-            title={req.title || ""}
+            title={req.title}
           />
         ))}
       </div>

@@ -8,6 +8,8 @@ const InOut = ({
   tabbed = false,
   selectedTabIndex = 0,
   selectedMonth = "",
+  inValue = 0,
+  outValue = 0,
 }) => {
   return (
     <div className="in-out">
@@ -19,7 +21,7 @@ const InOut = ({
         </div>
         <div className="content">
           <TbCurrencyTaka strokeWidth={3} />
-          <span>13460</span>
+          <span>{inValue}</span>
         </div>
       </div>
       <div className="out">
@@ -30,7 +32,7 @@ const InOut = ({
         </div>
         <div className="content">
           <TbCurrencyTaka strokeWidth={3} />
-          <span>1390</span>
+          <span>{outValue}</span>
         </div>
       </div>
     </div>

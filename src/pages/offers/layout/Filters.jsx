@@ -19,10 +19,6 @@ const expiries = [
     format: "all",
   },
   {
-    value: "Unlimited",
-    format: "unlimited",
-  },
-  {
     value: 1,
     format: "day",
   },
@@ -79,7 +75,7 @@ const Filters = () => {
     params.get("category") || "internet"
   );
   const [selectedExpiry, setselectedExpiry] = useState(
-    params.get("expiry") || "Allall"
+    params.get("expiry") || "All all"
   );
 
   const handleSimClick = (sim) => {
@@ -93,8 +89,12 @@ const Filters = () => {
     setfilterUpdated(true);
   };
   const handleExpiryClick = (expiry) => {
-    params.set("expiry", `${expiry.value}${expiry.format}`);
-    setselectedExpiry(`${expiry.value}${expiry.format}`);
+    if (expiry.value == "All") {
+      params.delete("expiry");
+    } else {
+      params.set("expiry", `${expiry.value} ${expiry.format}`);
+    }
+    setselectedExpiry(`${expiry.value} ${expiry.format}`);
     setfilterUpdated(true);
   };
 
@@ -175,7 +175,7 @@ const Filters = () => {
             {expiries.map((expiryObj) => (
               <div
                 className={`offers__filters__expiry__item ${
-                  selectedExpiry == `${expiryObj.value}${expiryObj.format}` &&
+                  selectedExpiry == `${expiryObj.value} ${expiryObj.format}` &&
                   "--selected"
                 }`}
                 key={expiryObj.value}

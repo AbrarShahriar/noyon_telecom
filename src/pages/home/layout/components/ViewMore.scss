@@ -8,14 +8,15 @@
   color: white;
   border: none;
   padding: 10px 15px;
-  border-radius: 15px;
+  border-radius: 20px;
   font-size: 12px;
+  font-weight: bolder;
   cursor: pointer;
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-between;
   & > *:last-child {
-    margin-left: 10px;
+    margin-left: 5px;
   }
 }

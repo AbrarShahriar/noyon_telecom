@@ -2,23 +2,40 @@ import React from "react";
 import "./AdminLogin.scss";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useMutation } from "react-query";
+import { adminLogin } from "../../api/auth/admin";
+import { PageLoader } from "../shared/SuspenseWrapper";
+import { setAdminKey } from "../../uitls";
 
 const AdminLogin = () => {
   const [username, setusername] = React.useState("");
   const [password, setpassword] = React.useState("");
   const navigate = useNavigate();
 
+  const { isLoading, mutate: login } = useMutation(adminLogin);
+
   const handleLoginClick = () => {
-    if (username === "admin" && password === "admin") {
-      localStorage.setItem("adminLoggedIn", "true");
-      navigate("/admin");
-    } else {
-      Swal.fire({
-        title: "Wrong Credentials!",
-        icon: "error",
-      });
-    }
+    login(
+      { username, password },
+      {
+        onSuccess: (res) => {
+          if (res.data.message) {
+            Swal.fire({
+              title: res.data.message,
+              icon: "error",
+            });
+          } else if (res.data.adminKey) {
+            setAdminKey(res.data.adminKey);
+            navigate("/admin");
+          }
+        },
+      }
+    );
   };
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
 
   return (
     <div className="admin__login">

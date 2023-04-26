@@ -1,0 +1,16 @@
+@import "../../styles/shared/variables";
+@import "../../styles/shared/mixins";
+
+.not-logged-in {
+  padding: 50px;
+  text-align: center;
+
+  p {
+    @include add-shadow-light;
+    background-color: $primary;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}

@@ -1,42 +1,85 @@
-import React from "react";
+// @ts-ignore
+import React, { useState } from "react";
 import ReqCardNavigator from "./ReqCardNavigator";
+import { useQuery } from "react-query";
+import { getReqCount } from "../../../../../api/queries/admin";
 
-const reqOptions = [
-  {
-    title: "Membership",
-    path: "/admin/membership-requests",
-    type: "membership",
-    count: 12,
-  },
-  {
-    title: "Offer Buy",
-    path: "/admin/offer-buy-requests",
-    type: "offer",
-    count: 7,
-  },
-  {
-    title: "Recharge",
-    path: "/admin/recharge-requests",
-    type: "recharge",
-    count: 0,
-  },
-  {
-    title: "Topup",
-    path: "/admin/topup-requests",
-    type: "topup",
-    count: 15,
-  },
-];
+const Reqs = ({ isModerator }) => {
+  const [data, setdata] = useState([]);
+  const { isLoading } = useQuery(["admin", "count"], getReqCount, {
+    retry: false,
+    staleTime: 1000 * 60 * 1,
+    onSuccess: (res) => {
+      let counts = res.data;
 
-const Reqs = () => {
+      let reqOptions = [];
+
+      if (isModerator) {
+        reqOptions = [
+          {
+            title: "Offer Buy",
+            path: "/offer-buy-requests",
+            type: "offer",
+            count: counts.offerReqCount,
+          },
+          {
+            title: "Recharge",
+            path: "/recharge-requests",
+            type: "recharge",
+            count: counts.rechargeReqCount,
+          },
+        ];
+      } else {
+        reqOptions = [
+          {
+            title: "Membership",
+            path: "/membership-requests",
+            type: "membership",
+            count: counts.membershipReqCount,
+          },
+          {
+            title: "Offer Buy",
+            path: "/offer-buy-requests",
+            type: "offer",
+            count: counts.offerReqCount,
+          },
+          {
+            title: "Recharge",
+            path: "/recharge-requests",
+            type: "recharge",
+            count: counts.rechargeReqCount,
+          },
+          {
+            title: "Topup",
+            path: "/topup-requests",
+            type: "topup",
+            count: counts.topupReqCount,
+          },
+        ];
+      }
+
+      // @ts-ignore
+      setdata(reqOptions);
+    },
+  });
+
+  if (isLoading) {
+    return <>Loading...</>;
+  }
+
   return (
     <div className="admin__reqs admin__card">
       <h3>Requests</h3>
-      {reqOptions.map((reqOption) => (
+      {data.map((reqOption) => (
         <ReqCardNavigator
+          isModerator={isModerator}
+          // @ts-ignore
           title={reqOption.title}
+          // @ts-ignore
           type={reqOption.path}
+          // @ts-ignore
           path={reqOption.path}
+          // @ts-ignore
           count={reqOption.count}
         />
       ))}

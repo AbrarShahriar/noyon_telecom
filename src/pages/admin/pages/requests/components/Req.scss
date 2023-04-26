@@ -1,6 +1,8 @@
 @import "../../../../../styles/shared/variables";
 @import "../../../../../styles/shared/mixins";
 
+@include data-div-style();
+
 .admin__requests__container__req {
   @include add-shadow-dark;
   border-radius: 5px;
@@ -51,6 +53,7 @@
     }
 
     .btn__approve {
+      // border-radius: 5px;
       border-bottom-left-radius: 5px;
       border-top-left-radius: 5px;
       background-color: $green600;

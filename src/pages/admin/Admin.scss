@@ -18,7 +18,8 @@
       }
     }
 
-    .history {
+    .history,
+    .create {
       button {
         width: 100%;
         cursor: pointer;
@@ -29,12 +30,15 @@
         color: white;
         font-size: 16px;
         font-weight: bolder;
+        margin-bottom: 20px;
       }
     }
   }
 
   &__requests,
-  &__moderator-list {
+  &__moderator-list,
+  &__user-list,
+  &__history {
     .data {
       display: flex;
       align-items: center;
@@ -45,6 +49,41 @@
       }
       .value {
         font-weight: 600;
+      }
+    }
+  }
+
+  &__moderator-list,
+  &__user-list {
+    .moderators,
+    .users {
+      padding: 15px;
+
+      .moderator,
+      .user {
+        @include add-shadow-dark;
+        background-color: white;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+
+        .content {
+          margin-bottom: 30px;
+        }
+
+        .actions {
+          button {
+            cursor: pointer;
+            border: none;
+            padding: 10px;
+            color: white;
+            background-color: $pink900;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bolder;
+          }
+        }
       }
     }
   }

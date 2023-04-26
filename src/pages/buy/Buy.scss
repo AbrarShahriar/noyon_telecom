@@ -1,0 +1,80 @@
+@import "../../styles/shared/variables";
+@import "../../styles/shared/mixins";
+
+.buy {
+  padding: 15px;
+  .offer__data {
+    @include add-shadow-lighter;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+
+    .offer__title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .expiry__amount {
+      width: 100%;
+
+      & > * {
+        display: flex;
+        align-items: center;
+      }
+
+      .offer__expiry {
+        font-size: 14px;
+        margin-bottom: 20px;
+        & > *:first-child {
+          margin-right: 5px;
+        }
+      }
+
+      .prices {
+        display: flex;
+        align-items: center;
+
+        .offer__amount {
+          font-weight: 600;
+          color: $red700;
+          display: flex;
+          align-items: center;
+          margin-right: 10px;
+
+          &.regular {
+            margin-right: 10px;
+            color: rgba($color: #000000, $alpha: 0.5);
+            &::after {
+              content: "";
+              width: 100%;
+              height: 2px;
+              background-color: rgba($color: #000000, $alpha: 0.5);
+              position: absolute;
+              z-index: 100;
+              top: 50%;
+              left: 55%;
+              transform: translate(-50%, -50%);
+            }
+          }
+
+          & > *:first-child {
+            margin-right: -2px;
+          }
+        }
+      }
+    }
+  }
+
+  .btn__buy {
+    cursor: pointer;
+    margin-top: 20px;
+    border: none;
+    color: white;
+    background-color: $green600;
+    font-size: 18px;
+    font-weight: bolder;
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 5px;
+  }
+}

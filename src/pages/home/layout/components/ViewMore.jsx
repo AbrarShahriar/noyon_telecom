@@ -5,7 +5,7 @@ import "./ViewMore.scss";
 const ViewMore = ({ styles }) => {
   return (
     <button className="btn__view-more" style={{ ...styles }}>
-      View More <MdKeyboardArrowDown />
+      View More <MdKeyboardArrowDown size={18} />
     </button>
   );
 };

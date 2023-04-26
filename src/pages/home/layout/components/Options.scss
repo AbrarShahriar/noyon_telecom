@@ -15,7 +15,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     cursor: pointer;
 
     &:hover {
@@ -32,7 +32,7 @@
       margin-bottom: 5px;
     }
     span {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 }

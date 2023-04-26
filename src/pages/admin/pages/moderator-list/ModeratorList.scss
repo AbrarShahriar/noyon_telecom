@@ -1,6 +1,8 @@
 @import "../../../../styles/shared/variables";
 @import "../../../../styles/shared/mixins";
 .admin__moderator-list {
+  @include data-div-style;
+
   .moderators {
     padding: 15px;
 

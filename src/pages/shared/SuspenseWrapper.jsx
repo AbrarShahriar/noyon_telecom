@@ -1,6 +1,7 @@
 import React from "react";
 import FadeLoader from "react-spinners/FadeLoader";
 import "./PageLoader.scss";
+import ScrollToTop from "./ScrollToTop";
 
 export const PageLoader = () => {
   return (
@@ -19,6 +20,12 @@ export const PageLoader = () => {
 };
 
 const SuspenseWrapper = ({ element }) => {
-  return <React.Suspense fallback={<PageLoader />}>{element}</React.Suspense>;
+  return (
+    <React.Suspense fallback={<PageLoader />}>
+      {/* <ScrollToTop>{element}</ScrollToTop>
+       */}
+      {element}
+    </React.Suspense>
+  );
 };
 export default SuspenseWrapper;

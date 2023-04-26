@@ -1,0 +1,44 @@
+@import "../../styles/shared/variables";
+@import "../../styles/shared/mixins";
+
+.recharge {
+  &__list {
+    padding: 15px;
+  }
+
+  &__item {
+    @include add-shadow-lighter;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+    .title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .amount {
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+
+      & > *:first-child {
+        margin-right: -2px;
+      }
+    }
+
+    .btn__buy {
+      cursor: pointer;
+      border: none;
+      background-color: $green600;
+      font-size: 16px;
+      font-weight: bolder;
+      padding: 12px;
+      color: white;
+      border-radius: 5px;
+      width: 100%;
+    }
+  }
+}

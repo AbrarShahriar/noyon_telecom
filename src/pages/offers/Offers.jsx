@@ -3,26 +3,44 @@ import { useSearchParams } from "react-router-dom";
 import Filters from "./layout/Filters";
 import "./Offers.scss";
 import Deal from "../home/layout/components/Deal";
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+import { useQuery } from "react-query";
+import { PageLoader } from "../shared/SuspenseWrapper";
+import { getOffersBasedOnFilter } from "../../api/queries/offers";
 
 const Offers = () => {
-  const [params, setParams] = useSearchParams();
-  console.log(params.get("sim"));
-  console.log(params.get("type"));
+  const [params] = useSearchParams();
+
+  const { isLoading, data: res } = useQuery(
+    ["offers", "query", "list", params.toString()],
+    () => getOffersBasedOnFilter(params.toString()),
+    {
+      staleTime: 1000 * 60 * 5,
+    }
+  );
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
   return (
     <div className="offers">
       <Filters />
 
       <div className="offers__deals">
-        <Deal type="hot" bgColor="white" />
-        <Deal type="cashback" bgColor="white" />
-        <Deal bgColor="white" />
-        <Deal bgColor="white" />
+        {res?.data &&
+          res?.data.map((offer) => (
+            <Deal
+              desc={offer.desc}
+              discountPrice={offer.discountPrice}
+              expiry={offer.expiration}
+              regularPrice={offer.regularPrice}
+              title={offer.title}
+              bgColor="white"
+              id={offer.id}
+              key={offer.id}
+              type={offer.type}
+            />
+          ))}
       </div>
     </div>
   );

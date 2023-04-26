@@ -3,6 +3,7 @@ import "./Admin.scss";
 
 import AppBar from "../shared/AppBar";
 import AdminBody from "./layout/Body/AdminBody";
+import { getAdminKey } from "../../uitls";
 /*
   > admin
     > admin stats
@@ -17,6 +18,9 @@ import AdminBody from "./layout/Body/AdminBody";
     > actions
       > moderator add
       > moderator remove
+
+    > users
+      > user list + remove
 
     > settings
       > topup percentage
@@ -40,15 +44,17 @@ import AdminBody from "./layout/Body/AdminBody";
 */
 
 const Admin = () => {
-  const [adminLoggedIn, setadminLoggedIn] = React.useState(
-    Boolean(localStorage.getItem("adminLoggedIn"))
-  );
+  const [adminKeyAvailable, setadminKeyAvailable] = React.useState(false);
 
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    if (getAdminKey()) {
+      setadminKeyAvailable(true);
+    }
+  }, []);
 
   return (
     <>
-      {adminLoggedIn ? (
+      {adminKeyAvailable ? (
         <div className="admin">
           <AppBar showBackButton={false} title="Admin Panel" page="admin" />
           <AdminBody />

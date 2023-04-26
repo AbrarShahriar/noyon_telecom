@@ -1,21 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.scss";
 import { RxAvatar, RxSun, RxMagnifyingGlass } from "react-icons/rx";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { BiBell } from "react-icons/bi";
 import { useStateValue } from "./StateProvider";
+import { useQuery } from "react-query";
+import { getWeatherData } from "../../api/queries/home";
+import { getLocation } from "../../uitls";
 
 const Header = () => {
   const p = useLocation();
+
+  const [weatherData, setweatherData] = useState(null);
+
+  useEffect(() => {
+    getLocation(async (pos) => {
+      let res = await getWeatherData({
+        lat: pos.coords.latitude,
+        long: pos.coords.longitude,
+      });
+      setweatherData({
+        // @ts-ignore
+        msg: res.data.current.condition.text,
+        temp: res.data.current.temp_c,
+      });
+    });
+  }, []);
+
   // @ts-ignore
-  const [{ loggedIn }] = useStateValue();
+  const [{ loggedIn, user }] = useStateValue();
   const [showHeader, setShowHeader] = React.useState(
     !(
       p.pathname.includes("/login") ||
-      p.pathname.includes("/buy") ||
+      p.pathname.includes("/offer-buy") ||
+      p.pathname.includes("/recharge") ||
       p.pathname.includes("/topup") ||
       p.pathname.includes("/membership") ||
+      p.pathname.includes("/vip-offers") ||
       p.pathname.includes("/admin") ||
+      p.pathname.includes("/moderator") ||
       p.pathname.includes("/notifications")
     )
   );
@@ -25,10 +48,13 @@ const Header = () => {
     setShowHeader(
       !(
         p.pathname.includes("/login") ||
-        p.pathname.includes("/buy") ||
+        p.pathname.includes("/recharge") ||
+        p.pathname.includes("/offer-buy") ||
         p.pathname.includes("/topup") ||
         p.pathname.includes("/admin") ||
+        p.pathname.includes("/moderator") ||
         p.pathname.includes("/membership") ||
+        p.pathname.includes("/vip-offers") ||
         p.pathname.includes("/notifications")
       )
     );
@@ -59,8 +85,8 @@ const Header = () => {
               <span className="greeting">Good Morning</span>
               {loggedIn ? (
                 <>
-                  <span className="name">NoyoN</span>
-                  <span className="phone">01841210657</span>
+                  <span className="name">{user.name}</span>
+                  <span className="phone">{user.phone}</span>
                 </>
               ) : (
                 <h3>Not Logged In</h3>
@@ -68,8 +94,23 @@ const Header = () => {
             </div>
           </div>
           <div className="weather">
-            <RxSun />
-            <span>20* C | Weather comment!</span>
+            {weatherData && (
+              <>
+                <RxSun />
+                <span>
+                  {
+                    // @ts-ignore
+                    weatherData.temp
+                  }
+                  * C |{" "}
+                  {
+                    // @ts-ignore
+                    weatherData.msg
+                  }
+                  !
+                </span>
+              </>
+            )}
           </div>
         </div>
       )}

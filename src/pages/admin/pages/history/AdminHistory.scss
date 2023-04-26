@@ -1,0 +1,104 @@
+@import "../../../../styles/shared/mixins";
+@import "../../../../styles/shared/variables";
+
+.admin__history {
+  &__item {
+    @include add-shadow-lighter;
+    padding: 15px 10px 5px 10px;
+    border-radius: 5px;
+    background-color: white;
+    margin-bottom: 20px;
+
+    .data {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      .label {
+        margin-right: 5px;
+      }
+      .value {
+        font-weight: 600;
+      }
+    }
+
+    .type {
+      margin-bottom: 10px;
+      background-color: $primary;
+      color: white;
+      width: fit-content;
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 20px;
+    }
+
+    .title {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    hr {
+      opacity: 0.3;
+      margin-bottom: 10px;
+    }
+
+    h4 {
+      margin-bottom: 10px;
+    }
+
+    .user-username-phone {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      & > *:first-child {
+        margin-right: 5px;
+      }
+      & > *:last-child {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .react-tabs {
+    -webkit-tap-highlight-color: transparent;
+    background-color: $bg;
+
+    &__tab-list {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
+    }
+
+    &__tab {
+      width: 50%;
+      text-align: center;
+      font-size: 16px;
+      display: inline-block;
+      position: relative;
+      list-style: none;
+      padding: 15px 12px;
+      cursor: pointer;
+      transition: all 100ms ease-in;
+
+      &--selected {
+        background-color: $pink900;
+        color: white;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &__tab-panel {
+      display: none;
+      padding: 15px;
+
+      &--selected {
+        display: block;
+      }
+    }
+  }
+}

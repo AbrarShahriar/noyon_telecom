@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const NoyonAxios = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://ill-plum-pants.cyclic.app",
   timeout: 10000,
   withCredentials: true,
 });

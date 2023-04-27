@@ -15,7 +15,7 @@ import { ACTION_TYPES } from "../../../../reducer";
 const Card_Main_Balance = () => {
   const navigate = useNavigate();
   // @ts-ignore
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, loggedIn }, dispatch] = useStateValue();
 
   const { isLoading, data: res } = useQuery(
     ["user", "info", "stat"],
@@ -35,7 +35,7 @@ const Card_Main_Balance = () => {
     }
   );
 
-  return user ? (
+  return user && loggedIn ? (
     <div className="card__main__balance shadow">
       <span className="title">Main Balance</span>
       <div className="balance__actions">

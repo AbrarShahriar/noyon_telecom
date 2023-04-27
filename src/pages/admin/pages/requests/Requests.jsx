@@ -38,19 +38,23 @@ const Requests = ({ type }) => {
       <AppBar title={parseAppBarTitle(type)} />
 
       <div className="admin__requests__container">
-        {res?.data.map((req, i) => (
-          <Req
-            key={i}
-            type={type}
-            id={req.id}
-            phone={req.phone}
-            paymentMethod={req.paymentMethod}
-            paymentPhone={req.paymentPhone}
-            amount={req.amount}
-            transactionId={req.transactionId}
-            title={req.title}
-          />
-        ))}
+        {res?.data.length >= 1 ? (
+          res?.data.map((req, i) => (
+            <Req
+              key={i}
+              type={type}
+              id={req.id}
+              phone={req.phone}
+              paymentMethod={req.paymentMethod}
+              paymentPhone={req.paymentPhone}
+              amount={req.amount}
+              transactionId={req.transactionId}
+              title={req.title}
+            />
+          ))
+        ) : (
+          <h3>No Pending Requests</h3>
+        )}
       </div>
     </div>
   );

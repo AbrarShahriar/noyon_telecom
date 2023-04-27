@@ -56,7 +56,7 @@ const Stats = ({ isModerator }) => {
           <p className="value">
             {
               // @ts-ignore
-              data.inVal - data.outVal
+              `${data.inVal - data.outVal || 0}`
             }
           </p>
         </div>

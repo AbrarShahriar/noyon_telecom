@@ -15,13 +15,15 @@ const ModeratorList = () => {
     getAllModerators
   );
 
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
   return (
     <div className="admin__moderator-list">
       <AppBar title="Moderator List" />
 
-      {isLoading && <PageLoader />}
-
-      {res?.data && (
+      {res?.data && res.data.length >= 1 ? (
         <div className="moderators">
           {res.data.map((moderator) => (
             <Moderator
@@ -34,6 +36,8 @@ const ModeratorList = () => {
             />
           ))}
         </div>
+      ) : (
+        <h3>No Moderators</h3>
       )}
     </div>
   );

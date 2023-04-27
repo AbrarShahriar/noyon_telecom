@@ -20,13 +20,17 @@ export const formatLabel = (str) => {
   return `${str[0].toUpperCase()}${str.substring(1, str.length)}`;
 };
 
-export const truncateText = (str, length = 5) => {
-  let strArr = str.split(" ");
-  let truncatedText = "";
-  for (let i = 0; i < length; i++) {
-    truncatedText += strArr[i] + " ";
+export const truncateText = (str = "", length = 5) => {
+  if (str) {
+    console.log("inside str", str);
+    let strArr = str.split(" ");
+    let truncatedText = "";
+    for (let i = 0; i < length; i++) {
+      truncatedText += strArr[i] + " ";
+    }
+    return truncatedText + "...";
   }
-  return truncatedText + "...";
+  return "";
 };
 
 export const MySwal = withReactContent(Swal);

@@ -93,7 +93,7 @@ const TodayHistory = ({ isModerator = false }) => {
 
   return (
     <>
-      {data &&
+      {data && data.length >= 1 ? (
         data
           .sort(
             (a, b) =>
@@ -118,7 +118,10 @@ const TodayHistory = ({ isModerator = false }) => {
               // @ts-ignore
               type={history.type}
             />
-          ))}
+          ))
+      ) : (
+        <h3>No Transactions Today</h3>
+      )}
     </>
   );
 };
@@ -157,7 +160,7 @@ const TotalHistory = ({ isModerator = false }) => {
 
   return (
     <>
-      {data &&
+      {data && data.length >= 1 ? (
         data
           .sort(
             (a, b) =>
@@ -182,7 +185,10 @@ const TotalHistory = ({ isModerator = false }) => {
               // @ts-ignore
               type={history.type}
             />
-          ))}
+          ))
+      ) : (
+        <h3>No Transactions</h3>
+      )}
     </>
   );
 };

@@ -8,7 +8,6 @@ const Reqs = ({ isModerator }) => {
   const [data, setdata] = useState([]);
   const { isLoading } = useQuery(["admin", "count"], getReqCount, {
     retry: false,
-    staleTime: 1000 * 60 * 1,
     onSuccess: (res) => {
       let counts = res.data;
 

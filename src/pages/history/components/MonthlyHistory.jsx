@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import { useQuery } from "react-query";
 import { getMonthlyHistory } from "../../../api/queries/history";
 import { PageLoader } from "../../shared/SuspenseWrapper";
+import Nothing from "../../shared/Nothing";
 
 let d = new Date();
 
@@ -70,17 +71,21 @@ const MonthlyHistory = ({ setinVal, setoutVal, setselectedMonth }) => {
         customInput={<DatePickerWrapper />}
         onChange={handleDateClick}
       />
-      {res?.data.map((el, i) => (
-        <HistoryCard
-          key={i}
-          className={i == 0 ? "first-el" : ""}
-          type={el.historyType}
-          amount={el.amount}
-          date={el.historyDate}
-          transactionId={el.transactionId}
-          desc={el.desc}
-        />
-      ))}
+      {res?.data.length >= 1 ? (
+        res?.data.map((el, i) => (
+          <HistoryCard
+            key={i}
+            className={i == 0 ? "first-el" : ""}
+            type={el.historyType}
+            amount={el.amount}
+            date={el.historyDate}
+            transactionId={el.transactionId}
+            desc={el.desc}
+          />
+        ))
+      ) : (
+        <Nothing title="No Transaction This Month!" />
+      )}
     </>
   );
 };

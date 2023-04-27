@@ -4,6 +4,7 @@ import { getTotalHistory } from "../../../api/queries/history";
 import { useQuery } from "react-query";
 import { useStateValue } from "../../shared/StateProvider";
 import { PageLoader } from "../../shared/SuspenseWrapper";
+import Nothing from "../../shared/Nothing";
 
 const TotalHistory = ({ setinVal, setoutVal }) => {
   // @ts-ignore
@@ -36,16 +37,20 @@ const TotalHistory = ({ setinVal, setoutVal }) => {
   }
   return (
     <>
-      {res?.data.map((el, i) => (
-        <HistoryCard
-          key={i}
-          type={el.historyType}
-          amount={el.amount}
-          date={el.historyDate}
-          transactionId={el.transactionId}
-          desc={el.desc}
-        />
-      ))}
+      {res?.data.length >= 1 ? (
+        res?.data.map((el, i) => (
+          <HistoryCard
+            key={i}
+            type={el.historyType}
+            amount={el.amount}
+            date={el.historyDate}
+            transactionId={el.transactionId}
+            desc={el.desc}
+          />
+        ))
+      ) : (
+        <Nothing title="No Transactions" />
+      )}
     </>
   );
 };

@@ -3,6 +3,7 @@ import Deal from "./Deal";
 import { getHotDeals } from "../../../../api/queries/home";
 import { useQuery } from "react-query";
 import { PageLoader } from "../../../shared/SuspenseWrapper";
+import Nothing from "../../../shared/Nothing";
 
 const HotDeals = () => {
   const { isLoading, data: res } = useQuery(["offers", "hot"], getHotDeals);
@@ -13,7 +14,7 @@ const HotDeals = () => {
 
   return (
     <div className="deals__list">
-      {res?.data &&
+      {res?.data && res.data.length >= 1 ? (
         res?.data.map((offer) => (
           <Deal
             key={offer.id}
@@ -25,7 +26,10 @@ const HotDeals = () => {
             regularPrice={offer.regularPrice}
             discountPrice={offer.discountPrice}
           />
-        ))}
+        ))
+      ) : (
+        <Nothing title="No Offers Available!" />
+      )}
     </div>
   );
 };

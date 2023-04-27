@@ -8,6 +8,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getAllModerators } from "../../../../api/queries/admin";
 import { deleteModerator } from "../../../../api/mutations/admin";
 import { PageLoader } from "../../../shared/SuspenseWrapper";
+import Nothing from "../../../shared/Nothing";
 
 const ModeratorList = () => {
   const { isLoading, data: res } = useQuery(
@@ -37,7 +38,7 @@ const ModeratorList = () => {
           ))}
         </div>
       ) : (
-        <h3>No Moderators</h3>
+        <Nothing title="No Moderators." />
       )}
     </div>
   );

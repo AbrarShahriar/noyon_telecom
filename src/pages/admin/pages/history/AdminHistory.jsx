@@ -16,6 +16,7 @@ import {
   getTodayModeratorHistory,
   getTotalModeratorHistory,
 } from "../../../../api/queries/moderator";
+import Nothing from "../../../shared/Nothing";
 
 const AdminHistory = ({ isModerator = false }) => {
   const [selectedTabIndex, setselectedTabIndex] = React.useState(0);
@@ -120,7 +121,7 @@ const TodayHistory = ({ isModerator = false }) => {
             />
           ))
       ) : (
-        <h3>No Transactions Today</h3>
+        <Nothing title="No Transactions Today!" />
       )}
     </>
   );
@@ -187,7 +188,7 @@ const TotalHistory = ({ isModerator = false }) => {
             />
           ))
       ) : (
-        <h3>No Transactions</h3>
+        <Nothing title="No Transactions" />
       )}
     </>
   );

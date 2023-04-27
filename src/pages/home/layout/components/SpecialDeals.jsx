@@ -3,6 +3,7 @@ import Deal from "./Deal";
 import { PageLoader } from "../../../shared/SuspenseWrapper";
 import { getSpecialDeals } from "../../../../api/queries/home";
 import { useQuery } from "react-query";
+import Nothing from "../../../shared/Nothing";
 
 const SpecialDeals = () => {
   const { isLoading, data: res } = useQuery(
@@ -15,7 +16,7 @@ const SpecialDeals = () => {
   }
   return (
     <div>
-      {res?.data &&
+      {res?.data && res.data.lenght >= 1 ? (
         res?.data.map((offer) => (
           <Deal
             key={offer.id}
@@ -27,7 +28,10 @@ const SpecialDeals = () => {
             regularPrice={offer.regularPrice}
             discountPrice={offer.discountPrice}
           />
-        ))}
+        ))
+      ) : (
+        <Nothing title="No Offers Available!" />
+      )}
     </div>
   );
 };

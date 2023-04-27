@@ -5,6 +5,7 @@ import Req from "./components/Req";
 import { useQuery } from "react-query";
 import { getReqsBasedOnType } from "../../../../api/queries/admin";
 import { PageLoader } from "../../../shared/SuspenseWrapper";
+import Nothing from "../../../shared/Nothing";
 
 const parseAppBarTitle = (type) => {
   switch (type) {
@@ -53,7 +54,7 @@ const Requests = ({ type }) => {
             />
           ))
         ) : (
-          <h3>No Pending Requests</h3>
+          <Nothing title="No Pending Request" />
         )}
       </div>
     </div>

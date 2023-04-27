@@ -19,16 +19,8 @@ const expiries = [
     format: "all",
   },
   {
-    value: 1,
-    format: "day",
-  },
-  {
     value: 3,
     format: "day",
-  },
-  {
-    value: 2,
-    format: "hour",
   },
   {
     value: 7,
@@ -37,10 +29,6 @@ const expiries = [
   {
     value: 15,
     format: "day",
-  },
-  {
-    value: 3,
-    format: "hour",
   },
   {
     value: 30,

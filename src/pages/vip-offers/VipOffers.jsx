@@ -5,6 +5,7 @@ import Deal from "../home/layout/components/Deal";
 import { PageLoader } from "../shared/SuspenseWrapper";
 import { useQuery } from "react-query";
 import { getAllVipOffers } from "../../api/queries/vip-offers";
+import Nothing from "../shared/Nothing";
 
 const VipOffers = () => {
   const { isLoading, data: res } = useQuery(
@@ -23,7 +24,7 @@ const VipOffers = () => {
       <AppBar title="VIP Offers" />
 
       <div className={`vip-offers__list`}>
-        {res?.data &&
+        {res?.data && res.data.length >= 1 ? (
           res?.data.map((offer) => (
             <Deal
               isVipOnly
@@ -37,7 +38,10 @@ const VipOffers = () => {
               key={offer.id}
               type={offer.type}
             />
-          ))}
+          ))
+        ) : (
+          <Nothing title="No VIP Offers Available!" />
+        )}
       </div>
     </div>
   );

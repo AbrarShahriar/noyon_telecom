@@ -37,6 +37,8 @@
 
     .actions {
       .btn__add-balance {
+        display: flex;
+        align-items: center;
         @include add-shadow-light;
         border: none;
         background: linear-gradient(90deg, $pink900 0%, $pink700 100%);
@@ -46,6 +48,10 @@
         font-weight: bolder;
         border-radius: 20px;
         cursor: pointer;
+
+        & > *:first-child {
+          margin-right: 5px;
+        }
       }
     }
   }
@@ -58,32 +64,62 @@
 
   .statistics {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
     font-size: 16px;
     margin-bottom: 25px;
+    gap: 10px;
+    color: white;
 
-    .stat {
+    .earning {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      font-weight: 600;
+      justify-content: center;
+      background-color: $blue500;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 14px;
 
       .value {
         display: flex;
         align-items: center;
-        margin-top: 10px;
 
         & > *:first-child {
           margin-right: -2px;
+          margin-left: 5px;
+        }
+      }
+    }
+
+    .stat-in-out {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .in,
+      .out {
+        padding: 5px;
+        width: 100%;
+        border-radius: 5px;
+        .label {
+          font-size: 14px;
+          opacity: 0.9;
+          margin-bottom: 5px;
+        }
+        .value {
+          display: flex;
+          align-items: center;
+
+          & > *:first-child {
+            margin-right: -2px;
+          }
         }
       }
 
-      .label {
-        font-size: 12px;
-        opacity: 0.8;
-        font-weight: 400;
+      .in {
+        background-color: $green600;
+      }
+
+      .out {
+        background-color: $red500;
       }
     }
   }

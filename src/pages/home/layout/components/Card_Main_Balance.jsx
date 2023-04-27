@@ -1,10 +1,8 @@
 import React from "react";
 import "./Card_Main_Balance.scss";
 import { TbCashBanknote, TbPigMoney, TbCurrencyTaka } from "react-icons/tb";
-import {
-  MdKeyboardArrowDown,
-  MdOutlineConfirmationNumber,
-} from "react-icons/md";
+import { AiOutlinePlus } from "react-icons/ai";
+import { MdOutlineConfirmationNumber } from "react-icons/md";
 import { IoCaretUpSharp, IoCaretDownSharp } from "react-icons/io5";
 import ViewMore from "./ViewMore";
 import { useNavigate } from "react-router-dom";
@@ -50,41 +48,34 @@ const Card_Main_Balance = () => {
             onClick={() => navigate("/topup")}
             className="btn__add-balance"
           >
-            Add Balance
+            <AiOutlinePlus size={16} /> Add Balance
           </button>
         </div>
       </div>
       <hr />
       <div className="statistics">
-        <div className="stat total-offer">
-          <MdOutlineConfirmationNumber size={20} />
-          <span className="value">{res?.data.totalBought}</span>
-          <span className="label">Bought</span>
-        </div>
-
-        <div className="stat saved">
-          <div className="icons">
-            <TbPigMoney size={20} />
-            <IoCaretUpSharp color="green" />
+        <div className="stat-in-out">
+          <div className="in">
+            <p className="label">Total Saved</p>
+            <p className="value">
+              <TbCurrencyTaka size={18} strokeWidth={2} />{" "}
+              {res?.data.totalSaved}
+            </p>
           </div>
-          <span className="value">
-            <TbCurrencyTaka strokeWidth={3} size={17} />
-            {res?.data.totalSaved}
-          </span>
-          <span className="label">Saved</span>
-        </div>
-
-        <div className="stat spent">
-          <div className="icons">
-            <TbCashBanknote size={20} />
-            <IoCaretDownSharp color="red" />
+          <div className="out">
+            <p className="label">Total Spent</p>
+            <p className="value">
+              <TbCurrencyTaka size={18} strokeWidth={2} />{" "}
+              {res?.data.totalSpent}
+            </p>
           </div>
-
-          <span className="value">
-            <TbCurrencyTaka strokeWidth={3} size={17} />
-            {res?.data.totalSpent}
-          </span>
-          <span className="label">Spent</span>
+        </div>
+        <div className="earning">
+          <p className="label">Earning</p>
+          <p className="value">
+            <TbCurrencyTaka size={18} strokeWidth={2} />
+            {`${res?.data.totalSaved - res?.data.totalSpent || 0}`}
+          </p>
         </div>
       </div>
       <ViewMore styles={{ right: "15px" }} />

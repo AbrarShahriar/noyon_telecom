@@ -6,6 +6,7 @@ import Deal from "../home/layout/components/Deal";
 import { useQuery } from "react-query";
 import { PageLoader } from "../shared/SuspenseWrapper";
 import { getOffersBasedOnFilter } from "../../api/queries/offers";
+import Nothing from "../shared/Nothing";
 
 const Offers = () => {
   const [params] = useSearchParams();
@@ -27,7 +28,7 @@ const Offers = () => {
       <Filters />
 
       <div className="offers__deals">
-        {res?.data &&
+        {res?.data && res.data.length >= 1 ? (
           res?.data.map((offer) => (
             <Deal
               desc={offer.desc}
@@ -40,7 +41,10 @@ const Offers = () => {
               key={offer.id}
               type={offer.type}
             />
-          ))}
+          ))
+        ) : (
+          <Nothing title="No Offers Available" />
+        )}
       </div>
     </div>
   );

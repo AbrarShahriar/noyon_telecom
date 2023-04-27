@@ -9,7 +9,29 @@ import { useStateValue } from "../shared/StateProvider";
 
 const ICON_SZIE = 30;
 
-const options = [
+const guestUserOptions = [
+  {
+    path: "/",
+    icon: <BiHomeAlt size={ICON_SZIE} />,
+  },
+  {
+    path: "/offers",
+    icon: <IoTicketOutline size={ICON_SZIE} />,
+  },
+  {
+    path: "/login",
+    icon: <IoIosLogIn size={ICON_SZIE} />,
+  },
+  {
+    path: "/history",
+    icon: <AiOutlineHistory size={ICON_SZIE} />,
+  },
+  {
+    path: "/profile",
+    icon: <AiOutlineUser size={ICON_SZIE} />,
+  },
+];
+const loggedInUserOptions = [
   {
     path: "/",
     icon: <BiHomeAlt size={ICON_SZIE} />,
@@ -102,7 +124,7 @@ const BottomNav = () => {
       {showBottomNav && (
         <div className="bottom-nav">
           <div className="bottom-nav__options">
-            {options.map((opt) =>
+            {guestUserOptions.map((opt) =>
               loggedIn ? (
                 opt.path != "/login" && (
                   <div

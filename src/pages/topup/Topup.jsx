@@ -10,7 +10,7 @@ import nagad from "../../assets/images/nagad.png";
 import userIcon from "../../assets/images/user.png";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { MySwal, formatLabel, formatPhone } from "../../uitls";
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowDown, BsArrowRight } from "react-icons/bs";
 import { IMaskInput } from "react-imask";
 import { useMutation } from "react-query";
 import { insertTopupReq } from "../../api/mutations/topup";
@@ -19,6 +19,7 @@ import { PageLoader } from "../shared/SuspenseWrapper";
 import { useStateValue } from "../shared/StateProvider";
 import NotLoggedIn from "../shared/NotLoggedIn";
 import Swal from "sweetalert2";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const paymentMethods = [
   {
@@ -52,6 +53,7 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
   React.useEffect(() => {
     if (type == "membership") {
       setamount(membershipFee);
+      setpaymentMethod("balance");
     }
   }, []);
 
@@ -121,12 +123,59 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
       <AppBar title={title} />
 
       <div className="container">
+        <div className="box professional">
+          <div className="title">VIP Member</div>
+          <div className="price">
+            <p>
+              <TbCurrencyTaka strokeWidth={3} /> {`${membershipFee}`}
+            </p>
+            <span>- VIP Features -</span>
+          </div>
+          <div className="features">
+            <div>Buy Wholesale Offers</div>
+            <div>Get Cashback Per 1000tk Spend</div>
+            <div>Fillup Target & Get Rewards!</div>
+            <div>Special Opportunities</div>
+          </div>
+          <div className="button">
+            <button>
+              <BsArrowDown /> BE A MEMBER NOW! <BsArrowDown />
+            </button>
+          </div>
+        </div>
+
         <div className="payment__method">
           <p className="payment__method__title">Select Payment Method</p>
           <div className="methods">
-            {showBalanceMethod
-              ? paymentMethods.map((method, i) => (
-                  <>
+            {showBalanceMethod ? (
+              //  paymentMethods.map((method, i) => (
+              <>
+                <div
+                  key={paymentMethods[2].label}
+                  className={`method ${paymentMethods[2].label} ${
+                    paymentMethod == paymentMethods[2].label && "--selected"
+                  }`}
+                  onClick={() =>
+                    handlePaymentMethodClick(paymentMethods[2].label)
+                  }
+                >
+                  <div className={`bg ${paymentMethods[2].label}`}>
+                    <img
+                      src={paymentMethods[2].imgSrc}
+                      alt={paymentMethods[2].label}
+                    />
+                  </div>
+                  <span className="label">
+                    {formatLabel(paymentMethods[2].label)}
+                  </span>
+                  <span className="charge">{charge}% charge</span>
+                </div>
+              </>
+            ) : (
+              // ))
+              paymentMethods.map((method) => (
+                <>
+                  {method.label != "balance" && (
                     <div
                       key={method.label}
                       className={`method ${method.label} ${
@@ -140,29 +189,10 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
                       <span className="label">{formatLabel(method.label)}</span>
                       <span className="charge">{charge}% charge</span>
                     </div>
-                  </>
-                ))
-              : paymentMethods.map((method) => (
-                  <>
-                    {method.label != "balance" && (
-                      <div
-                        key={method.label}
-                        className={`method ${method.label} ${
-                          paymentMethod == method.label && "--selected"
-                        }`}
-                        onClick={() => handlePaymentMethodClick(method.label)}
-                      >
-                        <div className={`bg ${method.label}`}>
-                          <img src={method.imgSrc} alt={method.label} />
-                        </div>
-                        <span className="label">
-                          {formatLabel(method.label)}
-                        </span>
-                        <span className="charge">{charge}% charge</span>
-                      </div>
-                    )}
-                  </>
-                ))}
+                  )}
+                </>
+              ))
+            )}
           </div>
         </div>
 

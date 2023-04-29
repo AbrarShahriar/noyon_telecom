@@ -2,8 +2,7 @@ import React from "react";
 import "./HistoryCard.scss";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { TbCurrencyTaka } from "react-icons/tb";
-import { formatLabel } from "../../../uitls";
-import dayjs from "dayjs";
+import { dayjsLocal, formatLabel, parseDate } from "../../../uitls";
 
 const parseHistorytype = (type) => {
   switch (type) {
@@ -47,7 +46,7 @@ const HistoryCard = ({
       <div className="right">
         <div className="header">
           <span className="type">{formatLabel(type)}</span>
-          <span className="date">{dayjs(date).format("DD/MM/YY")}</span>
+          <span className="date">{parseDate(date)}</span>
         </div>
         {desc && parseHistorytype(type).showDesc && (
           <p className="desc">{desc}</p>

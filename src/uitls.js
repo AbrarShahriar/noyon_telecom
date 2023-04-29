@@ -1,5 +1,21 @@
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(relativeTime);
+
+dayjs.tz.setDefault("Asia/Dhaka");
+
+export const dayjsLocal = dayjs;
+
+export const parseDate = (date, fromNow = false) =>
+  fromNow
+    ? dayjsLocal(date).add(6, "hour").fromNow()
+    : dayjsLocal.tz(date, "Asia/Dhaka").format("DD/MM/YY (h:mm a)");
 
 export const onWheel = (apiObj, ev) => {
   const isThouchpad = Math.abs(ev.deltaX) !== 0 || Math.abs(ev.deltaY) < 15;

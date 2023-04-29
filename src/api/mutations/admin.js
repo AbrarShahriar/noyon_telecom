@@ -62,3 +62,12 @@ export const rejectTopupAddReq = (body) =>
   NoyonAxios.post(`/topup-req/reject`, body, {
     headers: getAuthorizationHeader(),
   });
+
+export const createNoti = (body) =>
+  NoyonAxios.post(`/notification`, body, {
+    headers: getAuthorizationHeader(),
+  });
+export const deleteNoti = (id) =>
+  NoyonAxios.delete(`/notification/${id}`, {
+    headers: getAuthorizationHeader(),
+  });

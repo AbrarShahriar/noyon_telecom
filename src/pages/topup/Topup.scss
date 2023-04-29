@@ -4,6 +4,90 @@
   .container {
     margin-top: 25px;
     margin-bottom: 40px;
+
+    .box {
+      width: 90%;
+      border: 1px solid #eee;
+      text-align: center;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.05);
+      margin: 20px auto;
+    }
+    .box .title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #555;
+    }
+    .box .price {
+      margin-bottom: 20px;
+
+      p {
+        text-align: center;
+        width: fit-content;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        font-size: 42px;
+        font-weight: 700;
+
+        & > *:first-child {
+          margin-right: -2px;
+        }
+      }
+    }
+    .box .price b {
+      display: block;
+      font-size: 40px;
+      margin-bottom: -5px;
+    }
+    .box .features > * {
+      color: #555;
+      padding: 8px 0px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    .box .button button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 25px 0px 0px;
+      padding: 10px;
+      background: linear-gradient(to bottom, #3a7bd5, #3a6073);
+      color: #fff;
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .box.professional {
+      transform: scale(1.1);
+      background: linear-gradient(to bottom, #3a7bd5, #3a6073);
+    }
+    .box.professional .title {
+      color: #eee;
+    }
+    .box.professional .price {
+      color: #fff;
+    }
+    .box.professional .features > * {
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .box.professional .button button {
+      background: #fff;
+      color: #3a6073;
+    }
+
+    @media (max-width: 804px) {
+      .box.professional {
+        transform: scale(1);
+      }
+    }
+
     .payment__method {
       margin-bottom: 30px;
       &__title {

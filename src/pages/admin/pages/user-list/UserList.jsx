@@ -1,42 +1,96 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./UserList.scss";
 import AppBar from "../../../shared/AppBar";
 import Swal from "sweetalert2";
 import { TbCurrencyTaka } from "react-icons/tb";
+import { AiOutlineSearch } from "react-icons/ai";
 import dayjs from "dayjs";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { PageLoader } from "../../../shared/SuspenseWrapper";
 import { getAllUsers } from "../../../../api/queries/admin";
 import { deleteUser } from "../../../../api/mutations/admin";
+// @ts-ignore
+import ReactInputMask from "react-input-mask";
 
 const UserList = () => {
-  const { isLoading, data: res } = useQuery(["user", "list"], getAllUsers);
-  return (
-    <>
-      {isLoading && <PageLoader />}
-      <div className="admin__user-list">
-        <AppBar title="User List" />
+  const { isLoading, refetch } = useQuery(["user", "list"], getAllUsers, {
+    enabled: false,
+    onSuccess: (res) => {
+      setdata(res.data);
+      setinitData(res.data);
+    },
+    staleTime: 1000 * 60 * 2,
+  });
 
-        {res?.data && (
-          <div className="users">
-            {res.data.map((user) => (
-              <User
-                username={user.name}
-                phone={user.phone}
-                balance={user.balance}
-                userId={user.id}
-                createdAt={user.createdAt}
-                key={user.id}
-              />
-            ))}
-          </div>
-        )}
+  // @ts-ignore
+  const [data, setdata] = useState([]);
+  const [initData, setinitData] = useState([]);
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  const [phone, setphone] = useState("");
+  const handleSearchByPhone = () => {
+    // @ts-ignore
+    let filteredData = data.filter((d) => d.phone.includes(phone));
+
+    console.log(filteredData);
+    // @ts-ignore
+    setdata(filteredData);
+  };
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
+  return (
+    <div className="admin__user-list">
+      <AppBar title="User List" />
+
+      <div className="search">
+        <input
+          type="tel"
+          value={phone}
+          onChange={(e) => setphone(e.target.value)}
+          placeholder="Search By User Phone"
+          className="search__by__phone"
+        />
+        <button onClick={handleSearchByPhone}>
+          <AiOutlineSearch strokeWidth={10} size={18} />
+        </button>
       </div>
-    </>
+
+      <p className="reset" onClick={() => setdata(initData)}>
+        Reset
+      </p>
+
+      {data && (
+        <div className="users">
+          {data.map((user) => (
+            <User
+              // @ts-ignore
+              username={user.name}
+              // @ts-ignore
+              phone={user.phone}
+              // @ts-ignore
+              balance={user.balance}
+              // @ts-ignore
+              userId={user.id}
+              // @ts-ignore
+              createdAt={user.createdAt}
+              // @ts-ignore
+              key={user.id}
+            />
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 
 const User = ({ username, balance, userId, createdAt, phone }) => {
+  // @ts-ignore
   const { isLoading, mutate } = useMutation(deleteUser);
   const queryClient = useQueryClient();
 

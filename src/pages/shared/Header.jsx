@@ -82,7 +82,7 @@ const Header = () => {
           <div className="user">
             <RxAvatar size={64} />
             <div className="info">
-              <span className="greeting">Good Morning</span>
+              {/* <span className="greeting">Good Morning</span> */}
               {loggedIn ? (
                 <>
                   <span className="name">{user.name}</span>

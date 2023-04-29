@@ -15,6 +15,7 @@ import AuthProvider from "./pages/auth/AuthProvider";
 import BottomNav from "./pages/shared/BottomNav";
 import Header from "./pages/shared/Header";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Noti from "./pages/admin/pages/notis/Noti";
 
 const Login = React.lazy(() => import("./pages/auth/Login"));
 const Offers = React.lazy(() => import("./pages/offers/Offers"));
@@ -146,6 +147,10 @@ const router = createBrowserRouter(
         <Route
           path="/admin/user-list"
           element={<SuspenseWrapper element={<UserList />} />}
+        />
+        <Route
+          path="/admin/notification-list"
+          element={<SuspenseWrapper element={<Noti />} />}
         />
         <Route
           path="/admin/create-offer"

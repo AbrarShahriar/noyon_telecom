@@ -33,8 +33,19 @@ const Deal = ({
     if (isVipOnly && user.subscription == "regular") {
       return Swal.fire({
         title: "VIP ONLY!",
-        text: "Only VIP Members Can Buy These Offers.",
+        text: "Only VIP Members Can Buy These Offers. Do You Want To Be A  VIP Member?",
         icon: "question",
+        showCancelButton: true,
+        cancelButtonColor: "red",
+        cancelButtonText: "No",
+        showConfirmButton: true,
+        confirmButtonText: "Yes",
+        confirmButtonColor: "green",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/membership");
+        } else if (result.isDenied) {
+        }
       });
     } else if (!isVipOnly) {
       navigate(`/offer-buy/${id}`);

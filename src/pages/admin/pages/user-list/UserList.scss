@@ -1,0 +1,36 @@
+@import "../../../../styles//shared//variables";
+
+.search {
+  margin: 15px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+
+  .search__by__phone {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    display: grid;
+    place-items: center;
+    padding: 15px;
+    border: none;
+    background-color: $red700;
+    color: white;
+    border-radius: 5px;
+  }
+}
+
+.reset {
+  width: fit-content;
+  margin-left: 15px;
+}

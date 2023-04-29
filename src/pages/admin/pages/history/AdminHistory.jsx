@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "./AdminHistory.scss";
 import AppBar from "../../../shared/AppBar";
-import { formatLabel } from "../../../../uitls";
+import { formatLabel, parseDate } from "../../../../uitls";
 import dayjs from "dayjs";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
@@ -227,9 +227,7 @@ const AdminHistoryItem = ({
       </div>
       <div className="data">
         <p className="label">Approved At:</p>
-        <p className="value">
-          {dayjs(approvedAt).format("D MMM, YY (h:mm a)")}
-        </p>
+        <p className="value">{parseDate(approvedAt)}</p>
       </div>
     </div>
   );

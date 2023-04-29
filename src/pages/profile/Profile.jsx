@@ -15,6 +15,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { logout } from "../../api/auth/logout";
 import { userData } from "../../api/queries/profile";
 import { PageLoader } from "../shared/SuspenseWrapper";
+import ReactWhatsapp from "react-whatsapp";
 // account type
 // name,edit
 // number
@@ -135,7 +136,20 @@ const Profile = () => {
         <div className="profile__card__customer-logout__options">
           <div className="customer-service">
             <RiServiceLine size={ICON_SIZE} className="icon" />
-            <span>Customer Service</span>
+            <ReactWhatsapp
+              number="+880-1810-479196"
+              message={`
+        Your Name: ${user?.name || ""} \nYour Phone Number: ${
+                user?.phone || ""
+              } \nYour Opinion: \n\n(Send A Screenshot Of Th Error You Received)
+      `
+                .trimStart()
+                .trimEnd()}
+              element={"span"}
+            >
+              Customer Service
+            </ReactWhatsapp>
+
             <AiOutlineRight size={16} />
           </div>
           <hr />

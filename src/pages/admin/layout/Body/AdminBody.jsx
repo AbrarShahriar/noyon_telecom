@@ -5,6 +5,7 @@ import Actions from "./components/Actions";
 import Settings from "./components/Settings";
 import Users from "./components/Users";
 import { useNavigate } from "react-router-dom";
+import NotiAction from "./components/NotiAction";
 
 const AdminBody = ({ isModerator = false }) => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const AdminBody = ({ isModerator = false }) => {
       <Reqs isModerator={isModerator} />
       {!isModerator && <Actions />}
       {!isModerator && <Users />}
+      {!isModerator && <NotiAction />}
       {!isModerator && <Settings />}
 
       {!isModerator && (

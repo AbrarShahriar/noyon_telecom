@@ -4,6 +4,7 @@ import Body from "./layout/Body";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import { useStateValue } from "../shared/StateProvider";
+
 const MySwal = withReactContent(Swal);
 
 const LS = {

@@ -15,7 +15,7 @@ export const dayjsLocal = dayjs;
 export const parseDate = (date, fromNow = false) =>
   fromNow
     ? dayjsLocal(date).add(6, "hour").fromNow()
-    : dayjsLocal.tz(date, "Asia/Dhaka").format("DD/MM/YY (h:mm a)");
+    : dayjsLocal(date).format("DD/MM/YY (h:mm a)");
 
 export const onWheel = (apiObj, ev) => {
   const isThouchpad = Math.abs(ev.deltaX) !== 0 || Math.abs(ev.deltaY) < 15;

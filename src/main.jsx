@@ -171,23 +171,22 @@ const router = createBrowserRouter(
 
       <Route path="/moderator">
         <Route index element={<SuspenseWrapper element={<Moderator />} />} />
+
         <Route
-          path="/moderator/membership-requests"
+          path="/moderator/offer-buy-requests"
           element={
-            <SuspenseWrapper element={<Requests type={"membership"} />} />
+            <SuspenseWrapper
+              element={<Requests type={"offer"} isModerator />}
+            />
           }
         />
         <Route
-          path="/moderator/offer-buy-requests"
-          element={<SuspenseWrapper element={<Requests type={"offer"} />} />}
-        />
-        <Route
           path="/moderator/recharge-requests"
-          element={<SuspenseWrapper element={<Requests type={"recharge"} />} />}
-        />
-        <Route
-          path="/moderator/topup-requests"
-          element={<SuspenseWrapper element={<Requests type={"topup"} />} />}
+          element={
+            <SuspenseWrapper
+              element={<Requests type={"recharge"} isModerator />}
+            />
+          }
         />
 
         <Route

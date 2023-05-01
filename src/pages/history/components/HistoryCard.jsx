@@ -2,7 +2,7 @@ import React from "react";
 import "./HistoryCard.scss";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { TbCurrencyTaka } from "react-icons/tb";
-import { dayjsLocal, formatLabel, parseDate } from "../../../uitls";
+import { formatLabel, parseDate } from "../../../uitls";
 
 const parseHistorytype = (type) => {
   switch (type) {
@@ -35,6 +35,7 @@ const HistoryCard = ({
   date = "",
   transactionId,
   desc,
+  historyStatus = "pending",
 }) => {
   return (
     <div
@@ -50,6 +51,11 @@ const HistoryCard = ({
         </div>
         {desc && parseHistorytype(type).showDesc && (
           <p className="desc">{desc}</p>
+        )}
+        {historyStatus && (
+          <p className={`status ${historyStatus}`}>
+            {formatLabel(historyStatus)}
+          </p>
         )}
         <div className="content">
           <span className="transaction-id">

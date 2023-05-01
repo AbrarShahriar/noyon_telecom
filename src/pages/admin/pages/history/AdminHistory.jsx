@@ -99,20 +99,22 @@ const TodayHistory = ({ isModerator = false }) => {
           .sort(
             (a, b) =>
               // @ts-ignore
-              new Date(b.approvedAt).getTime() -
+              new Date(b.actionAt).getTime() -
               // @ts-ignore
-              new Date(a.approvedAt).getTime()
+              new Date(a.actionAt).getTime()
           )
           .map((history, i) => (
             <AdminHistoryItem
               // @ts-ignore
               amount={history.amount}
               // @ts-ignore
-              approvedAt={history.approvedAt}
+              approvedAt={history.actionAt}
               // @ts-ignore
-              approvedBy={history.approvedBy}
+              approvedBy={history.actionBy}
               // @ts-ignore
               title={history.title}
+              // @ts-ignore
+              reqStatus={history.reqStatus}
               // @ts-ignore
               userPhone={history.userPhone}
               key={i}
@@ -166,22 +168,24 @@ const TotalHistory = ({ isModerator = false }) => {
           .sort(
             (a, b) =>
               // @ts-ignore
-              new Date(b.approvedAt).getTime() -
+              new Date(b.actionAt).getTime() -
               // @ts-ignore
-              new Date(a.approvedAt).getTime()
+              new Date(a.actionAt).getTime()
           )
           .map((history, i) => (
             <AdminHistoryItem
               // @ts-ignore
               amount={history.amount}
               // @ts-ignore
-              approvedAt={history.approvedAt}
+              approvedAt={history.actionAt}
               // @ts-ignore
-              approvedBy={history.approvedBy}
+              approvedBy={history.actionBy}
               // @ts-ignore
               title={history.title}
               // @ts-ignore
               userPhone={history.userPhone}
+              // @ts-ignore
+              reqStatus={history.reqStatus}
               key={i}
               // @ts-ignore
               type={history.type}
@@ -201,6 +205,7 @@ const AdminHistoryItem = ({
   amount,
   approvedBy,
   approvedAt,
+  reqStatus,
 }) => {
   return (
     <div className="admin__history__item">
@@ -222,11 +227,15 @@ const AdminHistoryItem = ({
       <hr />
       <h4>Moderator</h4>
       <div className="data">
-        <p className="label">Approved By: </p>
+        <p className="label">
+          {`${reqStatus == "approved" ? "Approved" : "Rejected"}`} By:{" "}
+        </p>
         <p className="value">{approvedBy}</p>
       </div>
       <div className="data">
-        <p className="label">Approved At:</p>
+        <p className="label">
+          {`${reqStatus == "approved" ? "Approved" : "Rejected"}`} At:
+        </p>
         <p className="value">{parseDate(approvedAt)}</p>
       </div>
     </div>

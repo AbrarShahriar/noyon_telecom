@@ -23,7 +23,7 @@ const parseAppBarTitle = (type) => {
   }
 };
 
-const Requests = ({ type }) => {
+const Requests = ({ type, isModerator = false }) => {
   const { isLoading, data: res } = useQuery(
     ["requests", type],
     () => getReqsBasedOnType(type),
@@ -40,19 +40,37 @@ const Requests = ({ type }) => {
 
       <div className="admin__requests__container">
         {res?.data.length >= 1 ? (
-          res?.data.map((req, i) => (
-            <Req
-              key={i}
-              type={type}
-              id={req.id}
-              phone={req.phone}
-              paymentMethod={req.paymentMethod}
-              paymentPhone={req.paymentPhone}
-              amount={req.amount}
-              transactionId={req.transactionId}
-              title={req.title}
-            />
-          ))
+          res?.data.map((req, i) =>
+            isModerator ? (
+              <Req
+                isModerator={isModerator}
+                key={i}
+                type={type}
+                id={req.id}
+                phone={req.phone}
+                paymentMethod={req.paymentMethod}
+                paymentPhone={req.paymentPhone}
+                amount={req.amount || req.adminPrice}
+                transactionId={req.transactionId}
+                title={req.title}
+              />
+            ) : (
+              <Req
+                key={i}
+                type={type}
+                id={req.id}
+                phone={req.phone}
+                paymentMethod={req.paymentMethod}
+                paymentPhone={req.paymentPhone}
+                amount={req.amount}
+                regularPrice={req.regularPrice}
+                discountPrice={req.discountPrice}
+                adminPrice={req.adminPrice}
+                transactionId={req.transactionId}
+                title={req.title}
+              />
+            )
+          )
         ) : (
           <Nothing title="No Pending Request" />
         )}

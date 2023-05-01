@@ -41,6 +41,11 @@ const Req = ({
   id,
   transactionId = "",
   paymentMethod = "",
+  isModerator = false,
+
+  regularPrice = 0,
+  discountPrice = 0,
+  adminPrice = 0,
 }) => {
   const queryClient = useQueryClient();
 
@@ -85,8 +90,6 @@ const Req = ({
         case "topup":
           approveTopupReq({
             id,
-            approved: true,
-            approvedBy: "admin",
             userPhone: phone,
           });
           break;
@@ -94,24 +97,20 @@ const Req = ({
         case "membership":
           approveMembershipReq({
             membershipBuyReqId: id,
-            approved: true,
-            approvedBy: "admin",
           });
           break;
 
         case "recharge":
           approveRechargeReq({
             rechargeBuyReqId: id,
-            approved: true,
-            approvedBy: "admin",
+            actionByAdmin: true,
           });
           break;
 
         case "offer":
           approveOfferReq({
             offerBuyReqId: id,
-            approved: true,
-            approvedBy: "admin",
+            actionByAdmin: true,
           });
           break;
 
@@ -123,7 +122,6 @@ const Req = ({
         case "recharge":
           approveRechargeReq({
             rechargeBuyReqId: id,
-            approved: true,
             moderatorId: getModeratorId(),
           });
           break;
@@ -131,7 +129,6 @@ const Req = ({
         case "offer":
           approveOfferReq({
             offerBuyReqId: id,
-            approved: true,
             moderatorId: getModeratorId(),
           });
           break;
@@ -196,12 +193,14 @@ const Req = ({
         case "recharge":
           rejectRechargeReq({
             rechargeBuyReqId: id,
+            actionByAdmin: true,
           });
           break;
 
         case "offer":
           rejectOfferReq({
             offerBuyReqId: id,
+            actionByAdmin: true,
           });
           break;
 
@@ -213,12 +212,14 @@ const Req = ({
         case "recharge":
           rejectRechargeReq({
             rechargeBuyReqId: id,
+            moderatorId: getModeratorId(),
           });
           break;
 
         case "offer":
           rejectOfferReq({
             offerBuyReqId: id,
+            moderatorId: getModeratorId(),
           });
           break;
 
@@ -246,10 +247,29 @@ const Req = ({
       <div className="content">
         {type == "offer" && title && <p className="title">{title}</p>}
 
-        <p className="amount">
-          <TbCurrencyTaka size={18} strokeWidth={3} />
-          {amount}
-        </p>
+        {(isModerator || amount) && (
+          <p className="amount">
+            <TbCurrencyTaka size={18} strokeWidth={3} />
+            {amount}
+          </p>
+        )}
+
+        {!isModerator && !amount && (
+          <>
+            <div className="data ">
+              <p className="label">Regular Price: </p>
+              <p className="value">{regularPrice}</p>
+            </div>
+            <div className="data ">
+              <p className="label">Discount Price: </p>
+              <p className="value">{discountPrice}</p>
+            </div>
+            <div className="data ">
+              <p className="label">Discount Price: </p>
+              <p className="value">{adminPrice}</p>
+            </div>
+          </>
+        )}
 
         <div className="data account-phone">
           <p className="label">Account Phone: </p>

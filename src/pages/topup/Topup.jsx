@@ -123,7 +123,7 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
       <AppBar title={title} />
 
       <div className="container">
-        <div className="box professional">
+        {type == 'membership' && <div className="box professional">
           <div className="title">VIP Member</div>
           <div className="price">
             <p>
@@ -142,7 +142,7 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
               <BsArrowDown /> BE A MEMBER NOW! <BsArrowDown />
             </button>
           </div>
-        </div>
+        </div>}
 
         <div className="payment__method">
           <p className="payment__method__title">Select Payment Method</p>

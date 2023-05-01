@@ -72,17 +72,26 @@ const MonthlyHistory = ({ setinVal, setoutVal, setselectedMonth }) => {
         onChange={handleDateClick}
       />
       {res?.data.length >= 1 ? (
-        res?.data.map((el, i) => (
-          <HistoryCard
-            key={i}
-            className={i == 0 ? "first-el" : ""}
-            type={el.historyType}
-            amount={el.amount}
-            date={el.historyDate}
-            transactionId={el.transactionId}
-            desc={el.desc}
-          />
-        ))
+        res?.data
+          .sort(
+            (a, b) =>
+              // @ts-ignore
+              new Date(b.historyDate).getTime() -
+              // @ts-ignore
+              new Date(a.historyDate).getTime()
+          )
+          .map((el, i) => (
+            <HistoryCard
+              key={i}
+              historyStatus={el.historyStatus}
+              className={i == 0 ? "first-el" : ""}
+              type={el.historyType}
+              amount={el.amount}
+              date={el.historyDate}
+              transactionId={el.transactionId}
+              desc={el.desc}
+            />
+          ))
       ) : (
         <Nothing title="No Transaction This Month!" />
       )}

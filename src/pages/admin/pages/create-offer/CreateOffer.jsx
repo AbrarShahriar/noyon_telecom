@@ -52,6 +52,7 @@ const CreateOffer = () => {
   const [desc, setdesc] = useState("");
   const [regularPrice, setregularPrice] = useState(0);
   const [discountPrice, setdiscountPrice] = useState(0);
+  const [adminPrice, setadminPrice] = useState(0);
   const [rechargePrice, setrechargePrice] = useState(0);
   const [simcard, setsimcard] = useState("");
   const [expiration, setexpiration] = useState(1);
@@ -79,6 +80,7 @@ const CreateOffer = () => {
           title: title,
           regularPrice: regularPrice,
           discountPrice: discountPrice,
+          adminPrice: adminPrice,
           simcard: simcard,
           type: banner,
           isPremium: isVip,
@@ -169,6 +171,16 @@ const CreateOffer = () => {
                   defaultValue={vipOfferOptions[0]}
                   // @ts-ignore
                   onChange={(option) => setisVip(option?.value)}
+                />
+              </div>
+              <div className="input__container">
+                <p className="label">Admin Price: </p>
+                <IMaskInput
+                  type="number"
+                  mask={Number}
+                  signed={false}
+                  max={10000}
+                  onAccept={(value) => setadminPrice(parseInt(value))}
                 />
               </div>
               <div className="input__container">

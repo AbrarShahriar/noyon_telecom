@@ -3,7 +3,9 @@ export const initState = {
   user: null,
   membershipFee: 150,
   topupFee: 2.5,
-  noticeText: "iejtgi etj wiet ew twie tjwje ttoejt ejjetjqwt",
+  noticeText: "Notice Text",
+  adminPaymentPhone: "01887764008",
+  moderatorBalance: 0,
 };
 
 export const ACTION_TYPES = {
@@ -13,6 +15,8 @@ export const ACTION_TYPES = {
   UPDATE_MEMBERSHIPFEE: "updateMembershipFee",
   UPDATE_TOPUPFEE: "updateTopupFee",
   UPDATE_NOITCETEXT: "updateNoticeText",
+  UPDATE_PAYMENT_PHONE: "updatePaymentPhone",
+  UPDATE_MODERATOR_BALANCE: "updateModeratorBalance",
 };
 
 export const reducer = (state = initState, action) => {
@@ -55,6 +59,18 @@ export const reducer = (state = initState, action) => {
       return {
         ...state,
         noticeText: payload.noticeText,
+      };
+
+    case ACTION_TYPES.UPDATE_PAYMENT_PHONE:
+      return {
+        ...state,
+        adminPaymentPhone: payload.adminPaymentPhone,
+      };
+
+    case ACTION_TYPES.UPDATE_MODERATOR_BALANCE:
+      return {
+        ...state,
+        moderatorBalance: payload.moderatorBalance,
       };
 
     default:

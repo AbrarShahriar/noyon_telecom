@@ -1,6 +1,15 @@
 import React from "react";
 import "./Req.scss";
-import { TbCurrencyTaka } from "react-icons/tb";
+import {
+  TbClipboardCheck,
+  TbClipboardText,
+  TbClipboardTypography,
+  TbCurrencyTaka,
+} from "react-icons/tb";
+import {
+  HiOutlineClipboardCheck,
+  HiOutlineClipboardCopy,
+} from "react-icons/hi";
 import { useMutation, useQueryClient } from "react-query";
 import {
   rejectMembershipBuyReq,
@@ -11,14 +20,17 @@ import {
   updateOfferReq,
   updateRechargeReq,
   updateTopupReq,
+  updateWithdrawReq,
 } from "../../../../../api/mutations/admin";
 import Swal from "sweetalert2";
 import { PageLoader } from "../../../../shared/SuspenseWrapper";
 import {
+  formatLabel,
   getAdminKey,
   getModeratorId,
   getModeratorKey,
 } from "../../../../../uitls";
+import useClipboard from "react-use-clipboard";
 
 const fireSuccessAlert = () =>
   Swal.fire({
@@ -46,8 +58,13 @@ const Req = ({
   regularPrice = 0,
   discountPrice = 0,
   adminPrice = 0,
+
+  sendTo,
+  moderator,
+  simcard = "",
 }) => {
   const queryClient = useQueryClient();
+  const [isCopied, setCopied] = useClipboard(sendTo, { successDuration: 1000 });
 
   // --------------------- APPROVE -------------------------- //
   const { isLoading: isTopupReqApproveLoading, mutate: approveTopupReq } =
@@ -80,6 +97,10 @@ const Req = ({
       },
     }
   );
+  const {
+    isLoading: isWithdrawApproveLoading,
+    mutate: updateWithdrawReqStatus,
+  } = useMutation(updateWithdrawReq);
 
   const handleApproveClick = () => {
     let adminLoggedIn = getAdminKey();
@@ -112,6 +133,21 @@ const Req = ({
             offerBuyReqId: id,
             actionByAdmin: true,
           });
+          break;
+
+        case "withdraw":
+          updateWithdrawReqStatus(
+            {
+              reqId: id,
+              reqStatus: "approved",
+            },
+            {
+              onSuccess: () => {
+                fireSuccessAlert();
+                queryClient.invalidateQueries(["requests", "withdraw"]);
+              },
+            }
+          );
           break;
 
         default:
@@ -204,6 +240,21 @@ const Req = ({
           });
           break;
 
+        case "withdraw":
+          updateWithdrawReqStatus(
+            {
+              reqId: id,
+              reqStatus: "rejected",
+            },
+            {
+              onSuccess: () => {
+                fireRejectedAlert();
+                queryClient.invalidateQueries(["requests", "withdraw"]);
+              },
+            }
+          );
+          break;
+
         default:
           break;
       }
@@ -247,11 +298,18 @@ const Req = ({
       <div className="content">
         {type == "offer" && title && <p className="title">{title}</p>}
 
+        {type == "offer" && (
+          <div className="data ">
+            <p className="label">Sim Card</p>
+            <p className="value">{formatLabel(simcard)}</p>
+          </div>
+        )}
+
         {(isModerator || amount) && (
-          <p className="amount">
-            <TbCurrencyTaka size={18} strokeWidth={3} />
-            {amount}
-          </p>
+          <div className="data ">
+            <p className="label">Price: </p>
+            <p className="value">{amount}</p>
+          </div>
         )}
 
         {!isModerator && !amount && (
@@ -265,16 +323,37 @@ const Req = ({
               <p className="value">{discountPrice}</p>
             </div>
             <div className="data ">
-              <p className="label">Discount Price: </p>
+              <p className="label">Admin Price: </p>
               <p className="value">{adminPrice}</p>
             </div>
           </>
         )}
 
-        <div className="data account-phone">
-          <p className="label">Account Phone: </p>
-          <p className="value">{phone}</p>
-        </div>
+        {phone && (
+          <div className="data account-phone">
+            <p className="label">Account Phone: </p>
+            <p className="value">{phone}</p>
+          </div>
+        )}
+        {moderator && (
+          <div className="data account-phone">
+            <p className="label">Moderator Name: </p>
+            <p className="value">{moderator}</p>
+          </div>
+        )}
+        {!(type == "topup" || type == "withdraw" || type == "membership") && (
+          <div className="data receiver-phone">
+            <p className="label">Receiver:</p>
+            <button onClick={setCopied} className="value">
+              {sendTo}
+              {isCopied ? (
+                <TbClipboardCheck size={20} />
+              ) : (
+                <TbClipboardText size={20} />
+              )}
+            </button>
+          </div>
+        )}
 
         <hr />
 
@@ -288,10 +367,12 @@ const Req = ({
               <p className="label">Payment Method: </p>
               <p className="value">{paymentMethod}</p>
             </div>
-            <div className="data payment-method">
-              <p className="label">TranscationId: </p>
-              <p className="value">{transactionId}</p>
-            </div>
+            {transactionId && (
+              <div className="data payment-method">
+                <p className="label">TranscationId: </p>
+                <p className="value">{transactionId}</p>
+              </div>
+            )}
           </>
         )}
       </div>

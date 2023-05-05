@@ -3,6 +3,21 @@
 
 .buy {
   padding: 15px;
+
+  input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 18px;
+    border: 1px solid $pink700;
+    background-color: whitesmoke;
+    margin-bottom: 20px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
   .offer__data {
     @include add-shadow-lighter;
     padding: 10px;

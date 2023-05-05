@@ -17,6 +17,8 @@ const parseAppBarTitle = (type) => {
       return "Recharge Requests";
     case "topup":
       return "Topup Requests";
+    case "withdraw":
+      return "Withdraw Requests";
 
     default:
       break;
@@ -43,6 +45,9 @@ const Requests = ({ type, isModerator = false }) => {
           res?.data.map((req, i) =>
             isModerator ? (
               <Req
+                simcard={req.simcard}
+                moderator={req.moderator}
+                sendTo={req.sendTo}
                 isModerator={isModerator}
                 key={i}
                 type={type}
@@ -56,6 +61,9 @@ const Requests = ({ type, isModerator = false }) => {
               />
             ) : (
               <Req
+                moderator={req.moderator}
+                sendTo={req.sendTo}
+                simcard={req.simcard}
                 key={i}
                 type={type}
                 id={req.id}

@@ -89,7 +89,7 @@ const Filters = () => {
   const handleUpdateClick = () => {
     console.log(params.toString());
     setfilterUpdated(false);
-    navigate(`/offers?${params.toString()}`);
+    navigate(`/vip-offers?${params.toString()}`);
   };
 
   return (

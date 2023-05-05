@@ -17,6 +17,7 @@ const HotDeals = () => {
       {res?.data && res.data.length >= 1 ? (
         res?.data.map((offer) => (
           <Deal
+            simcard={offer.simcard}
             key={offer.id}
             type={offer.type}
             id={offer.id}

@@ -14,7 +14,7 @@ export const dayjsLocal = dayjs;
 
 export const parseDate = (date, fromNow = false) =>
   fromNow
-    ? dayjsLocal(date).add(6, "hour").fromNow()
+    ? dayjsLocal(date).fromNow()
     : dayjsLocal(date).format("DD/MM/YY (h:mm a)");
 
 export const onWheel = (apiObj, ev) => {
@@ -33,7 +33,7 @@ export const onWheel = (apiObj, ev) => {
 };
 
 export const formatLabel = (str) => {
-  return `${str[0].toUpperCase()}${str.substring(1, str.length)}`;
+  return str ? `${str[0].toUpperCase()}${str.substring(1, str.length)}` : "";
 };
 
 export const truncateText = (str = "", length = 5) => {

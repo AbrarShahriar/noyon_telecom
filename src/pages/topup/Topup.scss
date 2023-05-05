@@ -34,7 +34,8 @@
         font-weight: 700;
 
         & > *:first-child {
-          margin-right: -2px;
+          margin-right: -3px;
+          margin-left: -5px;
         }
       }
     }
@@ -46,6 +47,7 @@
     .box .features > * {
       color: #555;
       padding: 8px 0px;
+      margin-bottom: 15px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     }
     .box .button button {
@@ -60,7 +62,7 @@
       border-radius: 5px;
       outline: none;
       border: none;
-      font-weight: 600;
+      font-weight: bolder;
       cursor: pointer;
     }
     .box.professional {
@@ -202,6 +204,32 @@
         font-size: 12px;
         font-weight: 600;
         margin-left: 10px;
+      }
+    }
+
+    .receiver-phone {
+      width: 90%;
+      margin: 30px auto 0 auto;
+
+      h4 {
+        margin-bottom: 10px;
+      }
+      button {
+        width: 100%;
+        margin: 0 auto;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 10px;
+        border: 1px solid $red700;
+        border-radius: 5px;
+        background-color: transparent;
+        font-size: 16px;
+
+        & > *:last-child {
+          margin-left: 5px;
+        }
       }
     }
 

@@ -16,6 +16,7 @@ import BottomNav from "./pages/shared/BottomNav";
 import Header from "./pages/shared/Header";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Noti from "./pages/admin/pages/notis/Noti";
+import MakeWithdraw from "./pages/admin/pages/make-withdraw-req/MakeWithdraw";
 
 const Login = React.lazy(() => import("./pages/auth/Login"));
 const Offers = React.lazy(() => import("./pages/offers/Offers"));
@@ -88,7 +89,11 @@ const router = createBrowserRouter(
       />
       <Route
         path="/offer-buy/:offerId"
-        element={<SuspenseWrapper element={<Buy />} />}
+        element={<SuspenseWrapper element={<Buy page="offer" />} />}
+      />
+      <Route
+        path="/recharge-buy/:amount"
+        element={<SuspenseWrapper element={<Buy page="recharge" />} />}
       />
       <Route
         path="/recharge/:id"
@@ -139,6 +144,10 @@ const router = createBrowserRouter(
         <Route
           path="/admin/topup-requests"
           element={<SuspenseWrapper element={<Requests type={"topup"} />} />}
+        />
+        <Route
+          path="/admin/withdraw-requests"
+          element={<SuspenseWrapper element={<Requests type={"withdraw"} />} />}
         />
         <Route
           path="/admin/moderator-list"
@@ -192,6 +201,10 @@ const router = createBrowserRouter(
         <Route
           path="/moderator/moderator-history"
           element={<SuspenseWrapper element={<AdminHistory isModerator />} />}
+        />
+        <Route
+          path="/moderator/withdraw"
+          element={<SuspenseWrapper element={<MakeWithdraw />} />}
         />
       </Route>
     </Route>

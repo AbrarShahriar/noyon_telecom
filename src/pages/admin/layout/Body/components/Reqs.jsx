@@ -54,6 +54,12 @@ const Reqs = ({ isModerator }) => {
             type: "topup",
             count: counts.topupReqCount,
           },
+          {
+            title: "Withdraw",
+            path: "/withdraw-requests",
+            type: "withdraw",
+            count: counts.withdrawReqCount,
+          },
         ];
       }
 

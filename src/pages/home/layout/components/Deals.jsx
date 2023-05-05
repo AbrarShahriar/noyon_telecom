@@ -2,6 +2,7 @@ import React from "react";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import "./Deals.scss";
 import HotDeals from "./HotDeals";
+import { PageLoader } from "../../../shared/SuspenseWrapper";
 
 const SpecialDeals = React.lazy(() => import("./SpecialDeals"));
 
@@ -18,7 +19,7 @@ const Deals = () => {
           <HotDeals />
         </TabPanel>
         <TabPanel>
-          <React.Suspense fallback={<span>load</span>}>
+          <React.Suspense fallback={<PageLoader />}>
             <SpecialDeals />
           </React.Suspense>
         </TabPanel>

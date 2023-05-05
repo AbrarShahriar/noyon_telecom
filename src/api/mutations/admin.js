@@ -40,6 +40,10 @@ export const updateOfferReq = (body) =>
   NoyonAxios.patch(`/offer-buy-req`, body, {
     headers: getAuthorizationHeader(),
   });
+export const updateWithdrawReq = (body) =>
+  NoyonAxios.patch(`/withdraw-req`, body, {
+    headers: getAuthorizationHeader(),
+  });
 
 export const updateAdminSettings = (body) =>
   NoyonAxios.patch(`/admin-settings`, body, {

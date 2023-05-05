@@ -1,0 +1,52 @@
+@import "../../../../styles/shared/variables";
+
+.moderator__withdraw {
+  .container {
+    padding: 15px;
+
+    .card {
+      padding: 10px;
+      background-color: white;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      h4 {
+        margin-bottom: 20px;
+      }
+    }
+
+    .payment__method {
+      *:first-child {
+        margin-bottom: 10px;
+      }
+    }
+
+    .phone,
+    .amount {
+      input {
+        width: 100%;
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 18px;
+        border: 1px solid $pink700;
+        background-color: whitesmoke;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    button {
+      width: 100%;
+      cursor: pointer;
+      background-color: $pink700;
+      border: none;
+      padding: 15px;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      font-weight: bolder;
+      margin-bottom: 20px;
+    }
+  }
+}

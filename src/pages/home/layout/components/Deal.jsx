@@ -1,10 +1,11 @@
 import React from "react";
-import { MdDateRange } from "react-icons/md";
+import { MdDateRange, MdOutlineSimCard } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
 import "./Deal.scss";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useStateValue } from "../../../shared/StateProvider";
+import { formatLabel } from "../../../../uitls.js";
 
 const Deal = ({
   type = "regular",
@@ -16,6 +17,7 @@ const Deal = ({
   discountPrice,
   regularPrice,
   isVipOnly = false,
+  simcard = "",
 }) => {
   const navigate = useNavigate();
 
@@ -59,9 +61,14 @@ const Deal = ({
       <span className="title">{title}</span>
       <span className="description">{desc}</span>
 
-      <div className="expiry">
+      <div className="less-priority expiry">
         <MdDateRange />
-        <span className="expiry__value">{expiry}</span>
+        <span className="value">{expiry}</span>
+      </div>
+
+      <div className="less-priority sim">
+        <MdOutlineSimCard />
+        <span className="value">{formatLabel(simcard)}</span>
       </div>
 
       <hr />

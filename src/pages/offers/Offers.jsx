@@ -13,7 +13,7 @@ const Offers = () => {
 
   const { isLoading, data: res } = useQuery(
     ["offers", "query", "list", params.toString()],
-    () => getOffersBasedOnFilter(params.toString()),
+    () => getOffersBasedOnFilter(`${params.toString()}`),
     {
       staleTime: 1000 * 60 * 5,
     }
@@ -31,6 +31,7 @@ const Offers = () => {
         {res?.data && res.data.length >= 1 ? (
           res?.data.map((offer) => (
             <Deal
+              simcard={offer.simcard}
               desc={offer.desc}
               discountPrice={offer.discountPrice}
               expiry={offer.expiration}

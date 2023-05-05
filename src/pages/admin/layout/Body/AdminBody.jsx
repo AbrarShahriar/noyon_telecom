@@ -38,6 +38,13 @@ const AdminBody = ({ isModerator = false }) => {
           Transaction History
         </button>
       </div>
+      {isModerator && (
+        <div className="withdraw">
+          <button onClick={() => navigate(`/moderator/withdraw`)}>
+            Withdraw
+          </button>
+        </div>
+      )}
     </div>
   );
 };

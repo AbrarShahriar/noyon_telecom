@@ -10,27 +10,17 @@ import { ACTION_TYPES } from "../../../../../reducer";
 import { useMutation, useQuery } from "react-query";
 import { updateAdminSettings } from "../../../../../api/mutations/admin";
 
-const settings = {
-  topupFeeRate: 2.5,
-  membershipFee: 150,
-  cashbackRate: 2.5,
-  noticeText: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure ut
-  saepe sunt molestias officia laborum porro beatae iste doloremque`,
-};
-
 const ICON_SIZE = 22;
 
 const Settings = () => {
   // @ts-ignore
-  const [{ membershipFee, topupFee, noticeText }, dispatch] = useStateValue();
+  const [{ membershipFee, topupFee, noticeText, adminPaymentPhone }, dispatch] =
+    useStateValue();
 
-  const { isLoading, mutate: updateSetting } = useMutation(
-    updateAdminSettings,
-    {
-      onSuccess: (res) =>
-        MySwal.fire({ title: "Successfully Updated!", icon: "success" }),
-    }
-  );
+  const { mutate: updateSetting } = useMutation(updateAdminSettings, {
+    onSuccess: () =>
+      MySwal.fire({ title: "Successfully Updated!", icon: "success" }),
+  });
 
   const handleSettingOptionClick = async (label) => {
     let modalTitle = "";
@@ -50,6 +40,11 @@ const Settings = () => {
         modalInputType = "text";
         modalTitle = "Set Notice Text";
         modalInputValue = noticeText;
+        break;
+      case "payment":
+        modalInputType = "text";
+        modalTitle = "Set Payment Number";
+        modalInputValue = adminPaymentPhone;
         break;
 
       default:
@@ -104,6 +99,17 @@ const Settings = () => {
             });
             break;
 
+          case "payment":
+            updateSetting({
+              label: "adminPaymentPhone",
+              value: value,
+            });
+            dispatch({
+              type: ACTION_TYPES.UPDATE_PAYMENT_PHONE,
+              payload: { adminPaymentPhone: value },
+            });
+            break;
+
           default:
             break;
         }
@@ -137,15 +143,15 @@ const Settings = () => {
             onClick={() => handleSettingOptionClick("membership")}
           />
         </div>
-        {/* <div className="settings__option">
-          <p className="label">Cashback Rate</p>
-          <p className="value">{settings.cashbackRate}%</p>
+        <div className="settings__option">
+          <p className="label">Payment Phone</p>
+          <p className="value">{adminPaymentPhone}</p>
           <FiEdit3
             className="icon"
             size={ICON_SIZE}
-            onClick={() => handleSettingOptionClick("cashback")}
+            onClick={() => handleSettingOptionClick("payment")}
           />
-        </div> */}
+        </div>
         <div className="settings__option">
           <p className="label">Notice Text</p>
           <p className="value">{truncateText(noticeText, 2)}</p>

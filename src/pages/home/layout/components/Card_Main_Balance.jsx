@@ -56,10 +56,10 @@ const Card_Main_Balance = () => {
       <div className="statistics">
         <div className="stat-in-out">
           <div className="in">
-            <p className="label">Total Saved</p>
+            <p className="label">Total Bought</p>
             <p className="value">
               <TbCurrencyTaka size={18} strokeWidth={2} />{" "}
-              {res?.data.totalSaved}
+              {res?.data.totalBought}
             </p>
           </div>
           <div className="out">
@@ -74,7 +74,7 @@ const Card_Main_Balance = () => {
           <p className="label">Earning</p>
           <p className="value">
             <TbCurrencyTaka size={18} strokeWidth={2} />
-            {`${res?.data.totalSaved - res?.data.totalSpent || 0}`}
+            {`${res?.data.totalBought - res?.data.totalSpent || 0}`}
           </p>
         </div>
       </div>

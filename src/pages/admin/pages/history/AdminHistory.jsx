@@ -1,9 +1,8 @@
 // @ts-ignore
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./AdminHistory.scss";
 import AppBar from "../../../shared/AppBar";
 import { formatLabel, parseDate } from "../../../../uitls";
-import dayjs from "dayjs";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { useQuery } from "react-query";
@@ -106,6 +105,8 @@ const TodayHistory = ({ isModerator = false }) => {
           .map((history, i) => (
             <AdminHistoryItem
               // @ts-ignore
+              moderator={history.moderator}
+              // @ts-ignore
               amount={history.amount}
               // @ts-ignore
               approvedAt={history.actionAt}
@@ -177,6 +178,8 @@ const TotalHistory = ({ isModerator = false }) => {
               // @ts-ignore
               amount={history.amount}
               // @ts-ignore
+              moderator={history.moderator}
+              // @ts-ignore
               approvedAt={history.actionAt}
               // @ts-ignore
               approvedBy={history.actionBy}
@@ -201,6 +204,7 @@ const TotalHistory = ({ isModerator = false }) => {
 const AdminHistoryItem = ({
   type,
   title,
+  moderator,
   userPhone,
   amount,
   approvedBy,
@@ -212,11 +216,19 @@ const AdminHistoryItem = ({
       <p className="type">{formatLabel(type)}</p>
       {type == "offer" && title && <p className="title">{title}</p>}
       <hr />
-      <h4>User</h4>
-      <div className="data">
-        <p className="label">User Phone</p>
-        <p className="value">{userPhone}</p>
-      </div>
+      <h4>{moderator ? "Moderator" : "User"}</h4>
+      {userPhone && (
+        <div className="data">
+          <p className="label">Phone</p>
+          <p className="value">{userPhone}</p>
+        </div>
+      )}
+      {moderator && (
+        <div className="data">
+          <p className="label">Name:</p>
+          <p className="value">{moderator}</p>
+        </div>
+      )}
       <div className="data">
         <p className="label">Amount:</p>
         <p className="value" style={{ display: "flex", alignItems: "center" }}>
@@ -225,7 +237,7 @@ const AdminHistoryItem = ({
         </p>
       </div>
       <hr />
-      <h4>Moderator</h4>
+      <h4>Action By</h4>
       <div className="data">
         <p className="label">
           {`${reqStatus == "approved" ? "Approved" : "Rejected"}`} By:{" "}

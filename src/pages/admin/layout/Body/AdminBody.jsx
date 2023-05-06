@@ -52,6 +52,18 @@ const AdminBody = ({ isModerator = false }) => {
           </button>
         </div>
       )}
+
+      <div className="withdraw">
+        <button
+          onClick={() =>
+            navigate(
+              `${isModerator ? "/moderator" : "/admin"}/withdraw-history`
+            )
+          }
+        >
+          Withdraw History
+        </button>
+      </div>
     </div>
   );
 };

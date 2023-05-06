@@ -16,6 +16,9 @@ import BottomNav from "./pages/shared/BottomNav";
 import Header from "./pages/shared/Header";
 import { QueryClient, QueryClientProvider } from "react-query";
 
+const WithdrawHistory = React.lazy(() =>
+  import("./pages/admin/pages/withdraw-history/WithdrawHistory")
+);
 const MakeWithdraw = React.lazy(() =>
   import("./pages/admin/pages/make-withdraw-req/MakeWithdraw")
 );
@@ -178,6 +181,10 @@ const router = createBrowserRouter(
           path="/admin/admin-history"
           element={<SuspenseWrapper element={<AdminHistory />} />}
         />
+        <Route
+          path="/admin/withdraw-history"
+          element={<SuspenseWrapper element={<WithdrawHistory />} />}
+        />
       </Route>
 
       {/* ------------MODERATOR ROUTES---------------- */}
@@ -214,6 +221,12 @@ const router = createBrowserRouter(
         <Route
           path="/moderator/withdraw"
           element={<SuspenseWrapper element={<MakeWithdraw />} />}
+        />
+        <Route
+          path="/moderator/withdraw-history"
+          element={
+            <SuspenseWrapper element={<WithdrawHistory isModerator />} />
+          }
         />
       </Route>
     </Route>

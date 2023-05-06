@@ -1,8 +1,12 @@
 import React from "react";
 import "./Profile.scss";
 import { MdOutlineWorkspacePremium } from "react-icons/md";
-import { AiOutlineUser, AiOutlineRight } from "react-icons/ai";
-import { FiEdit3 } from "react-icons/fi";
+import {
+  AiOutlineUser,
+  AiOutlineRight,
+  AiOutlineCloudDownload,
+} from "react-icons/ai";
+import { BiCloudDownload } from "react-icons/bi";
 import { RiPhoneLine, RiServiceLine, RiVipCrown2Line } from "react-icons/ri";
 import { IoIosLogOut } from "react-icons/io";
 import { formatLabel } from "../../uitls";
@@ -33,7 +37,7 @@ const member = type == "premium";
 
 const Profile = () => {
   // @ts-ignore
-  const [{ loggedIn, user }, dispatch] = useStateValue();
+  const [{ loggedIn, user, appLink }, dispatch] = useStateValue();
 
   const queryClient = useQueryClient();
   const { isLoading, data: res } = useQuery(["profile", "info"], userData);
@@ -151,6 +155,16 @@ const Profile = () => {
             </ReactWhatsapp>
 
             <AiOutlineRight size={16} />
+          </div>
+          <hr />
+          <div className="download">
+            <a href={appLink}>
+              Download App
+              <AiOutlineCloudDownload
+                size={ICON_SIZE}
+                className="icon__download"
+              />
+            </a>
           </div>
           <hr />
           <div className="logout">

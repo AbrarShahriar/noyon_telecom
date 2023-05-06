@@ -61,7 +61,7 @@ const Stats = ({ isModerator }) => {
           outValue={data.outVal}
         />
         <div className="profit stat-card">
-          <p>{isModerator ? "Savings:" : "Profit:"}</p>
+          <p>{isModerator ? "Balance:" : "Profit:"}</p>
           <TbCurrencyTaka size={18} strokeWidth={3} />
           <p className="value">
             {

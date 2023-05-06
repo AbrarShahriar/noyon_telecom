@@ -178,10 +178,12 @@
         cursor: pointer;
       }
 
-      .logout {
+      .logout,
+      .download {
         margin-bottom: 0;
 
-        button {
+        button,
+        a {
           border: none;
           padding: 10px 15px;
           width: 100%;
@@ -193,10 +195,18 @@
           align-items: center;
           border-radius: 10px;
           cursor: pointer;
+          text-decoration: none;
 
-          .icon__logout {
+          .icon__logout,
+          .icon__download {
             margin-left: auto;
           }
+        }
+      }
+
+      .download {
+        a {
+          background-color: $green600;
         }
       }
     }

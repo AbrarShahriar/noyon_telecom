@@ -4,7 +4,11 @@ import { FiEdit3 } from "react-icons/fi";
 import { TbCurrencyTaka } from "react-icons/tb";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { MySwal, truncateText } from "../../../../../uitls";
+import {
+  MySwal,
+  truncateText,
+  truncateTextWithoutSpace,
+} from "../../../../../uitls";
 import { useStateValue } from "../../../../shared/StateProvider";
 import { ACTION_TYPES } from "../../../../../reducer";
 import { useMutation, useQuery } from "react-query";
@@ -14,8 +18,10 @@ const ICON_SIZE = 22;
 
 const Settings = () => {
   // @ts-ignore
-  const [{ membershipFee, topupFee, noticeText, adminPaymentPhone }, dispatch] =
-    useStateValue();
+  const [
+    { membershipFee, topupFee, noticeText, adminPaymentPhone, appLink },
+    dispatch,
+  ] = useStateValue();
 
   const { mutate: updateSetting } = useMutation(updateAdminSettings, {
     onSuccess: () =>
@@ -45,6 +51,11 @@ const Settings = () => {
         modalInputType = "text";
         modalTitle = "Set Payment Number";
         modalInputValue = adminPaymentPhone;
+        break;
+      case "appLink":
+        modalInputType = "url";
+        modalTitle = "Set App Link";
+        modalInputValue = appLink;
         break;
 
       default:
@@ -110,6 +121,17 @@ const Settings = () => {
             });
             break;
 
+          case "appLink":
+            updateSetting({
+              label: "appLink",
+              value: value,
+            });
+            dispatch({
+              type: ACTION_TYPES.UPDATE_APP_LINK,
+              payload: { appLink: value },
+            });
+            break;
+
           default:
             break;
         }
@@ -159,6 +181,20 @@ const Settings = () => {
             className="icon"
             size={ICON_SIZE}
             onClick={() => handleSettingOptionClick("notice")}
+          />
+        </div>
+        <div className="settings__option">
+          <p className="label">App Link</p>
+          <p className="value">
+            {truncateTextWithoutSpace(
+              `http://localhost:3000/api#/default/WithdrawReqController_updateReqStatus`,
+              16
+            )}
+          </p>
+          <FiEdit3
+            className="icon"
+            size={ICON_SIZE}
+            onClick={() => handleSettingOptionClick("appLink")}
           />
         </div>
       </div>

@@ -38,7 +38,6 @@ export const formatLabel = (str) => {
 
 export const truncateText = (str = "", length = 5) => {
   if (str) {
-    console.log("inside str", str);
     let strArr = str.split(" ");
     let truncatedText = "";
     for (let i = 0; i < length; i++) {
@@ -48,6 +47,9 @@ export const truncateText = (str = "", length = 5) => {
   }
   return "";
 };
+
+export const truncateTextWithoutSpace = (str, len = 8) =>
+  str.substring(0, len) + "...";
 
 export const MySwal = withReactContent(Swal);
 

@@ -19,3 +19,11 @@ export const getAllModeratorInAndOut = () =>
   NoyonAxios.get(`/moderator/all/in-out`, {
     headers: getAuthorizationHeader(),
   });
+export const getModeratorWithdrawHistory = () =>
+  NoyonAxios.get(`/withdraw-req/all/${getModeratorId()}`, {
+    headers: getAuthorizationHeader(),
+  });
+export const getAllModeratorWithdrawHistory = () =>
+  NoyonAxios.get(`/withdraw-req/all`, {
+    headers: getAuthorizationHeader(),
+  });

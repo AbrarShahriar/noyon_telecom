@@ -4,6 +4,7 @@ export const initState = {
   offerBuyCount: 0,
   membershipFee: 150,
   topupFee: 2.5,
+  appLink: "",
   noticeText: "Notice Text",
   adminPaymentPhone: "01887764008",
   moderatorBalance: 0,
@@ -17,6 +18,7 @@ export const ACTION_TYPES = {
   UPDATE_TOPUPFEE: "updateTopupFee",
   UPDATE_NOITCETEXT: "updateNoticeText",
   UPDATE_PAYMENT_PHONE: "updatePaymentPhone",
+  UPDATE_APP_LINK: "updateAppLink",
   UPDATE_MODERATOR_BALANCE: "updateModeratorBalance",
   INCREMENT_OFFER_BUY_COUNT: "incrOfferBuyCount",
 };
@@ -67,6 +69,12 @@ export const reducer = (state = initState, action) => {
       return {
         ...state,
         adminPaymentPhone: payload.adminPaymentPhone,
+      };
+
+    case ACTION_TYPES.UPDATE_APP_LINK:
+      return {
+        ...state,
+        appLink: payload.appLink,
       };
 
     case ACTION_TYPES.UPDATE_MODERATOR_BALANCE:

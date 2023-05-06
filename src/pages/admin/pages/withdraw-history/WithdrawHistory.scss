@@ -1,0 +1,56 @@
+@import "../../../../styles/shared/mixins";
+
+@import "../../../../styles/shared/variables";
+
+.admin__withdraw__history {
+  .history__list {
+    padding: 20px 0;
+  }
+  .history {
+    @include add-shadow-dark;
+    margin: 15px;
+    padding: 10px;
+    background-color: white;
+  }
+  .data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    .label {
+      margin-right: 5px;
+    }
+    .value {
+      font-weight: 600;
+    }
+  }
+
+  .actions {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+
+    button {
+      width: 100%;
+      border: none;
+      padding: 15px;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      font-weight: bolder;
+    }
+
+    .btn__approve {
+      // border-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border-top-left-radius: 5px;
+      background-color: $green600;
+    }
+
+    .btn__reject {
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
+      background-color: $pink900;
+    }
+  }
+}

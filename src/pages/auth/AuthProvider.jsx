@@ -57,6 +57,11 @@ const AuthProvider = ({ children }) => {
           type: ACTION_TYPES.UPDATE_NOITCETEXT,
           payload: { noticeText: res?.data.noticeText },
         });
+        console.log(res.data.appLink);
+        dispatch({
+          type: ACTION_TYPES.UPDATE_APP_LINK,
+          payload: { appLink: res?.data.appLink },
+        });
       },
     }
   );

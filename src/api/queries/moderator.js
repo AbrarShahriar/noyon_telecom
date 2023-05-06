@@ -15,3 +15,7 @@ export const getModeratorInAndOut = () =>
   NoyonAxios.get(`/moderator/total-in-out/${getModeratorId()}`, {
     headers: getAuthorizationHeader(),
   });
+export const getAllModeratorInAndOut = () =>
+  NoyonAxios.get(`/moderator/all/in-out`, {
+    headers: getAuthorizationHeader(),
+  });

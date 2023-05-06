@@ -75,3 +75,7 @@ export const deleteNoti = (id) =>
   NoyonAxios.delete(`/notification/${id}`, {
     headers: getAuthorizationHeader(),
   });
+export const udpateOffer = (body) =>
+  NoyonAxios.patch(`/offer/update`, body, {
+    headers: getAuthorizationHeader(),
+  });

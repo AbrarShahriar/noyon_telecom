@@ -17,7 +17,8 @@ const Deal = ({
   discountPrice,
   regularPrice,
   isVipOnly = false,
-  simcard = "",
+  simcard,
+  showBuy = true,
 }) => {
   const navigate = useNavigate();
 
@@ -82,9 +83,11 @@ const Deal = ({
           <TbCurrencyTaka size={20} className="icon" />
           {discountPrice}
         </span>
-        <button onClick={handleBuyNowClick} className="btn__buy">
-          BUY NOW
-        </button>
+        {showBuy && (
+          <button onClick={handleBuyNowClick} className="btn__buy">
+            BUY NOW
+          </button>
+        )}
       </div>
     </div>
   );

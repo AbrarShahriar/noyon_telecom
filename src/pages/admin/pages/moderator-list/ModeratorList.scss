@@ -3,6 +3,17 @@
 .admin__moderator-list {
   @include data-div-style;
 
+  .total {
+    background-color: rgb(51, 51, 51);
+    padding: 10px;
+    margin: 10px 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $green600;
+  }
+
   .moderators {
     padding: 15px;
 

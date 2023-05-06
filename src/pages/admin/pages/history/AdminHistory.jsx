@@ -16,6 +16,7 @@ import {
   getTotalModeratorHistory,
 } from "../../../../api/queries/moderator";
 import Nothing from "../../../shared/Nothing";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const AdminHistory = ({ isModerator = false }) => {
   const [selectedTabIndex, setselectedTabIndex] = React.useState(0);
@@ -48,7 +49,10 @@ const AdminHistory = ({ isModerator = false }) => {
 const TodayHistory = ({ isModerator = false }) => {
   const d = new Date();
 
+  // @ts-ignore
   const [data, setdata] = useState([]);
+  const [initData, setinitData] = useState([]);
+  const [phone, setphone] = useState("");
 
   // @ts-ignore
   const { isLoading: isAdminHistoryLoading, refetch: getAdminHistory } =
@@ -60,8 +64,11 @@ const TodayHistory = ({ isModerator = false }) => {
         ),
       {
         enabled: false,
-        staleTime: 1000 * 60 * 5,
-        onSuccess: (res) => setdata(res.data),
+        staleTime: 1000 * 60 * 2,
+        onSuccess: (res) => {
+          setdata(res.data);
+          setinitData(res.data);
+        },
       }
     );
 
@@ -74,8 +81,11 @@ const TodayHistory = ({ isModerator = false }) => {
         ),
       {
         enabled: false,
-        staleTime: 1000 * 60 * 5,
-        onSuccess: (res) => setdata(res.data),
+        staleTime: 1000 * 60 * 2,
+        onSuccess: (res) => {
+          setdata(res.data);
+          setinitData(res.data);
+        },
       }
     );
 
@@ -87,12 +97,36 @@ const TodayHistory = ({ isModerator = false }) => {
     }
   }, []);
 
+  const handleSearchByPhone = () => {
+    // @ts-ignore
+    let filteredData = data.filter((d) => d.userPhone.includes(phone));
+
+    console.log(filteredData);
+    // @ts-ignore
+    setdata(filteredData);
+  };
+
   if (isAdminHistoryLoading || isModeratorHistoryLoading) {
     return <PageLoader />;
   }
 
   return (
     <>
+      <div className="search">
+        <input
+          type="tel"
+          value={phone}
+          onChange={(e) => setphone(e.target.value)}
+          placeholder="Search By User Phone"
+          className="search__by__phone"
+        />
+        <button onClick={handleSearchByPhone}>
+          <AiOutlineSearch strokeWidth={10} size={18} />
+        </button>
+      </div>
+      <p className="reset" onClick={() => setdata(initData)}>
+        Reset
+      </p>
       {data && data.length >= 1 ? (
         data
           .sort(
@@ -132,22 +166,31 @@ const TodayHistory = ({ isModerator = false }) => {
 
 // @ts-ignore
 const TotalHistory = ({ isModerator = false }) => {
+  // @ts-ignore
   const [data, setdata] = useState([]);
+  const [initData, setinitData] = useState([]);
+  const [phone, setphone] = useState("");
 
   const { isLoading: isAdminHistoryLoading, refetch: fetchAdminHistory } =
     useQuery(["admin", "history", "all"], getAllTransactionHistory, {
-      staleTime: 1000 * 60 * 5,
+      staleTime: 1000 * 60 * 2,
       enabled: false,
-      onSuccess: (res) => setdata(res.data),
+      onSuccess: (res) => {
+        setdata(res.data);
+        setinitData(res.data);
+      },
     });
 
   const {
     isLoading: isModeratorHistoryLoading,
     refetch: fetchModeratorHistory,
   } = useQuery(["admin", "history", "all"], getTotalModeratorHistory, {
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 2,
     enabled: false,
-    onSuccess: (res) => setdata(res.data),
+    onSuccess: (res) => {
+      setdata(res.data);
+      setinitData(res.data);
+    },
   });
 
   React.useEffect(() => {
@@ -158,12 +201,39 @@ const TotalHistory = ({ isModerator = false }) => {
     }
   }, []);
 
+  const handleSearchByPhone = () => {
+    // @ts-ignore
+    let filteredData = data.filter(
+      // @ts-ignore
+      (d) => d.userPhone && d.userPhone.includes(phone)
+    );
+
+    console.log(filteredData);
+    // @ts-ignore
+    setdata(filteredData);
+  };
+
   if (isAdminHistoryLoading || isModeratorHistoryLoading) {
     return <PageLoader />;
   }
 
   return (
     <>
+      <div className="search">
+        <input
+          type="tel"
+          value={phone}
+          onChange={(e) => setphone(e.target.value)}
+          placeholder="Search By User Phone"
+          className="search__by__phone"
+        />
+        <button onClick={handleSearchByPhone}>
+          <AiOutlineSearch strokeWidth={10} size={18} />
+        </button>
+      </div>
+      <p className="reset" onClick={() => setdata(initData)}>
+        Reset
+      </p>
       {data && data.length >= 1 ? (
         data
           .sort(

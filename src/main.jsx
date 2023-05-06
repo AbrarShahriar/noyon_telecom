@@ -15,9 +15,14 @@ import AuthProvider from "./pages/auth/AuthProvider";
 import BottomNav from "./pages/shared/BottomNav";
 import Header from "./pages/shared/Header";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Noti from "./pages/admin/pages/notis/Noti";
-import MakeWithdraw from "./pages/admin/pages/make-withdraw-req/MakeWithdraw";
 
+const MakeWithdraw = React.lazy(() =>
+  import("./pages/admin/pages/make-withdraw-req/MakeWithdraw")
+);
+const OfferList = React.lazy(() =>
+  import("./pages/admin/pages/offer-list/OfferList")
+);
+const Noti = React.lazy(() => import("./pages/admin/pages/notis/Noti"));
 const Login = React.lazy(() => import("./pages/auth/Login"));
 const Offers = React.lazy(() => import("./pages/offers/Offers"));
 const Recharge = React.lazy(() => import("./pages/recharge/Recharge"));
@@ -164,6 +169,10 @@ const router = createBrowserRouter(
         <Route
           path="/admin/create-offer"
           element={<SuspenseWrapper element={<CreateOffer />} />}
+        />
+        <Route
+          path="/admin/offer-list"
+          element={<SuspenseWrapper element={<OfferList />} />}
         />
         <Route
           path="/admin/admin-history"

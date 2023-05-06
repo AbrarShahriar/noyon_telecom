@@ -1,6 +1,7 @@
 export const initState = {
   loggedIn: false,
   user: null,
+  offerBuyCount: 0,
   membershipFee: 150,
   topupFee: 2.5,
   noticeText: "Notice Text",
@@ -17,6 +18,7 @@ export const ACTION_TYPES = {
   UPDATE_NOITCETEXT: "updateNoticeText",
   UPDATE_PAYMENT_PHONE: "updatePaymentPhone",
   UPDATE_MODERATOR_BALANCE: "updateModeratorBalance",
+  INCREMENT_OFFER_BUY_COUNT: "incrOfferBuyCount",
 };
 
 export const reducer = (state = initState, action) => {
@@ -71,6 +73,14 @@ export const reducer = (state = initState, action) => {
       return {
         ...state,
         moderatorBalance: payload.moderatorBalance,
+      };
+
+    case ACTION_TYPES.INCREMENT_OFFER_BUY_COUNT:
+      let newCount = state.offerBuyCount;
+      newCount++;
+      return {
+        ...state,
+        offerBuyCount: newCount,
       };
 
     default:

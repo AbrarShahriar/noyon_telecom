@@ -100,7 +100,10 @@ const MakeWithdraw = () => {
         <div className="card phone">
           <h4>Enter Payment Phone</h4>
           <IMaskInput
-            mask="+{88\0} 0000 000000"
+            mask="+{88\0} #000 000000"
+            definitions={{
+              "#": /[1-9]/,
+            }}
             signed={false}
             placeholder="Enter Number"
             lazy={true}

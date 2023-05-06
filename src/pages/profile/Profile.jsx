@@ -138,11 +138,11 @@ const Profile = () => {
             <RiServiceLine size={ICON_SIZE} className="icon" />
             <ReactWhatsapp
               number="+880-1810-479196"
-              message={`
-        Your Name: ${user?.name || ""} \nYour Phone Number: ${
+              message={`Your Opinion:  \nPhone Number: ${
                 user?.phone || ""
-              } \nYour Opinion: \n\n(Send A Screenshot Of Th Error You Received)
-      `
+              } \nName: ${
+                user?.name || ""
+              } \n\n(Send A Screenshot Of Your Problem)`
                 .trimStart()
                 .trimEnd()}
               element={"span"}

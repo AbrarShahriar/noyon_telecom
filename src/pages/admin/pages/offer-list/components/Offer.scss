@@ -1,0 +1,53 @@
+@import "../../../../../styles/shared//variables";
+
+.offer {
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 20px;
+
+  .title {
+    font-size: 18px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+  }
+
+  .other {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  hr {
+    opacity: 0.4;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .offer__data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+    .value {
+      display: flex;
+      align-items: center;
+
+      & > *:last-child {
+        cursor: pointer;
+        margin-left: 5px;
+      }
+    }
+  }
+
+  button {
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: $red500;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    color: white;
+    font-weight: bolder;
+    padding: 10px;
+  }
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ModeratorList.scss";
 import AppBar from "../../../shared/AppBar";
 import Swal from "sweetalert2";
@@ -9,11 +9,24 @@ import { getAllModerators } from "../../../../api/queries/admin";
 import { deleteModerator } from "../../../../api/mutations/admin";
 import { PageLoader } from "../../../shared/SuspenseWrapper";
 import Nothing from "../../../shared/Nothing";
+import { getAllModeratorInAndOut } from "../../../../api/queries/moderator";
 
 const ModeratorList = () => {
+  const [total, settotal] = useState(0);
+
   const { isLoading, data: res } = useQuery(
     ["moderator", "list"],
-    getAllModerators
+    getAllModeratorInAndOut,
+    {
+      staleTime: 1000 * 60 * 2,
+      onSuccess: (res) => {
+        let sum = 0;
+        res.data.forEach((mod) => {
+          sum += mod.inVal - mod.outVal;
+        });
+        settotal(sum);
+      },
+    }
   );
 
   if (isLoading) {
@@ -24,16 +37,21 @@ const ModeratorList = () => {
     <div className="admin__moderator-list">
       <AppBar title="Moderator List" />
 
+      <div className="total">
+        <p className="label">Total</p>
+        <p className="value">{total}</p>
+      </div>
+
       {res?.data && res.data.length >= 1 ? (
         <div className="moderators">
           {res.data.map((moderator) => (
             <Moderator
               key={moderator.id}
               moderatorId={moderator.id}
-              approvedOfferReqsCount={moderator.approvedOfferReqs.length}
-              approvedRechargeReqsCount={moderator.approvedRechargeReqs.length}
               username={moderator.username}
               createdAt={moderator.createdAt}
+              inVal={moderator.inVal}
+              outVal={moderator.outVal}
             />
           ))}
         </div>
@@ -44,13 +62,7 @@ const ModeratorList = () => {
   );
 };
 
-const Moderator = ({
-  username,
-  createdAt,
-  moderatorId,
-  approvedOfferReqsCount,
-  approvedRechargeReqsCount,
-}) => {
+const Moderator = ({ username, createdAt, moderatorId, inVal, outVal }) => {
   const { isLoading, mutate } = useMutation(deleteModerator);
   const queryClient = useQueryClient();
 
@@ -86,25 +98,17 @@ const Moderator = ({
             <p className="value">{dayjs(createdAt).format("D MMM, YYYY")}</p>
           </div>
           <div className="data">
-            <p className="label">Approved:</p>
-            <p className="value">
-              {approvedOfferReqsCount + approvedRechargeReqsCount}
-            </p>
+            <p className="label">Total IN:</p>
+            <p className="value">{inVal}</p>
           </div>
-          {/* <div className="data">
-            <p className="label">Rejected:</p>
-            <p className="value">{3}</p>
-          </div> */}
-          {/* <div className="data">
-            <p className="label">Total:</p>
-            <p
-              className="value"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <TbCurrencyTaka strokeWidth={3} style={{ marginRight: -2 }} />
-              {3}
-            </p>
-          </div> */}
+          <div className="data">
+            <p className="label">Total OUT:</p>
+            <p className="value">{outVal}</p>
+          </div>
+          <div className="data">
+            <p className="label">Balance:</p>
+            <p className="value">{inVal - outVal}</p>
+          </div>
         </div>
         <div className="actions">
           <button

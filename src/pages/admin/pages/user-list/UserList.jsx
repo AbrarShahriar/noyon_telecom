@@ -9,8 +9,6 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { PageLoader } from "../../../shared/SuspenseWrapper";
 import { getAllUsers } from "../../../../api/queries/admin";
 import { deleteUser } from "../../../../api/mutations/admin";
-// @ts-ignore
-import ReactInputMask from "react-input-mask";
 
 const UserList = () => {
   const { isLoading, refetch } = useQuery(["user", "list"], getAllUsers, {

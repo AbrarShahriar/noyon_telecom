@@ -26,6 +26,7 @@ const HotDeals = () => {
             expiry={offer.expiration}
             regularPrice={offer.regularPrice}
             discountPrice={offer.discountPrice}
+            isVipOnly={offer.isPremium}
           />
         ))
       ) : (

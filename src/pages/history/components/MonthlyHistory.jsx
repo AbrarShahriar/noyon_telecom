@@ -46,12 +46,12 @@ const MonthlyHistory = ({ setinVal, setoutVal, setselectedMonth }) => {
       let filteredOut = res?.data.filter((el) => el.historyType != "topup");
 
       let inInit = 0;
-      filteredIn.forEach((el) => (inInit += el.amount));
+      filteredIn.forEach((el) => (inInit += Number(el.amount)));
 
       setinVal(inInit);
 
       let outInit = 0;
-      filteredOut.forEach((el) => (outInit += el.amount));
+      filteredOut.forEach((el) => (outInit += Number(el.amount)));
       setoutVal(outInit);
     }
   }, [res]);

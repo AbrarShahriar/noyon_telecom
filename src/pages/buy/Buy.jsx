@@ -15,14 +15,16 @@ import { ACTION_TYPES } from "../../reducer";
 import Swal from "sweetalert2";
 import { rechargeReq } from "../../api/mutations/recharge";
 import { IMaskInput } from "react-imask";
+import Deal from "../home/layout/components/Deal";
 
 const Buy = ({ page }) => {
   // @ts-ignore
-  const [{ loggedIn, user }, dispatch] = useStateValue();
+  const [{ loggedIn, user, offerBuyCount }, dispatch] = useStateValue();
 
   let { offerId, amount } = useParams();
 
   const [offerRes, setofferRes] = useState({});
+  // @ts-ignore
   const [sendTo, setsendTo] = useState("");
 
   const { isLoading: isOfferBuyLoading, refetch: fetchOfferDetails } = useQuery(
@@ -42,6 +44,7 @@ const Buy = ({ page }) => {
   const { isLoading: offerBuyLoadingInProgress, mutate: sendOfferBuyReq } =
     useMutation(buyOffer);
   // @ts-ignore
+  // @ts-ignore
   const { isLoading: isRechargeBuyLoading, mutate: sendRechargeBuyReq } =
     useMutation(rechargeReq, {
       onSuccess: () => {
@@ -53,7 +56,7 @@ const Buy = ({ page }) => {
       },
     });
 
-  const handleBuyClick = () => {
+  const buyOfferMutationRun = () => {
     const formattedPhone = formatPhone(sendTo);
 
     if (!formattedPhone) {
@@ -97,6 +100,9 @@ const Buy = ({ page }) => {
               // @ts-ignore
               payload: { balance: user.balance - offerRes?.data.discountPrice },
             });
+            dispatch({
+              type: ACTION_TYPES.INCREMENT_OFFER_BUY_COUNT,
+            });
           },
         }
       );
@@ -118,9 +124,40 @@ const Buy = ({ page }) => {
               type: ACTION_TYPES.UPDATE_USER,
               payload: { balance: user.balance - Number(amount) },
             });
+            dispatch({
+              type: ACTION_TYPES.INCREMENT_OFFER_BUY_COUNT,
+            });
           },
         }
       );
+    }
+  };
+
+  const handleBuyClick = () => {
+    if (offerBuyCount >= 1 && offerBuyCount <= 3) {
+      MySwal.fire({
+        title: "Warning!",
+        icon: "warning",
+        text: `You Already Bought ${offerBuyCount} offers. Do You Want To Buy Again?`,
+        showCancelButton: true,
+        cancelButtonText: "No",
+        cancelButtonColor: "red",
+        showConfirmButton: true,
+        confirmButtonText: "Yes",
+        confirmButtonColor: "green",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          buyOfferMutationRun();
+        }
+      });
+    } else if (offerBuyCount > 2) {
+      MySwal.fire({
+        title: "Oops!",
+        icon: "error",
+        text: `Try Again After Some Time`,
+      });
+    } else {
+      buyOfferMutationRun();
     }
   };
 
@@ -137,48 +174,54 @@ const Buy = ({ page }) => {
       <AppBar title="Buy" />
       <div className="buy">
         <IMaskInput
-          mask="+{88\0} 0000 000000"
+          mask="+{88\0} #000 000000"
+          definitions={{
+            "#": /[1-9]/,
+          }}
           signed={false}
           lazy={true}
           placeholder="Enter Receiver Number"
           onAccept={(value) => setsendTo(value)}
         />
-        {
+
+        {page == "offer" &&
+          offerRes &&
           // @ts-ignore
           offerRes?.data && (
+            <Deal
+              bgColor="white"
+              showBuy={false}
+              title={
+                // @ts-ignore
+                offerRes.data.title
+              }
+              // @ts-ignore
+              id={offerRes.data.id}
+              // @ts-ignore
+              desc={offerRes.data.desc}
+              // @ts-ignore
+              expiry={offerRes.data.expiration}
+              // @ts-ignore
+              discountPrice={offerRes.data.discountPrice}
+              // @ts-ignore
+              regularPrice={offerRes.data.regularPrice}
+              // @ts-ignore
+              simcard={offerRes.data.simcard}
+            />
+          )}
+        {
+          // @ts-ignore
+          page == "recharge" && offerRes.data && (
             <div className="offer__data">
-              <p className="offer__title">
-                {
-                  // @ts-ignore
-                  offerRes?.data.title || "Recharge"
-                }
-              </p>
+              <p className="offer__title">Recharge</p>
 
               <div className="expiry__amount">
-                {page == "offer" && (
-                  <p className="offer__expiry">
-                    <MdDateRange size={16} />
-                    {
-                      // @ts-ignore
-                      offerRes?.data.expiration
-                    }
-                  </p>
-                )}
                 <div className="prices">
-                  {page == "offer" && (
-                    <p className="offer__amount regular">
-                      <TbCurrencyTaka size={18} strokeWidth={3} />
-                      {
-                        // @ts-ignore
-                        offerRes?.data.regularPrice
-                      }
-                    </p>
-                  )}
                   <p className="offer__amount discount">
                     <TbCurrencyTaka size={18} strokeWidth={3} />
                     {
                       // @ts-ignore
-                      offerRes?.data.discountPrice || offerRes.data.amount
+                      offerRes?.data.amount
                     }
                   </p>
                 </div>

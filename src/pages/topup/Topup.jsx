@@ -82,7 +82,7 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
 
   React.useEffect(() => {
     if (type == "membership") {
-      setamount(membershipFee);
+      setamount(parseInt(membershipFee));
       setpaymentMethod("balance");
     }
   }, []);
@@ -90,9 +90,7 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
   const handlePaymentMethodClick = (label) => setpaymentMethod(label);
 
   const handleMembershipBuyClick = () => {
-    const formattedPhone = formatPhone(phone);
-
-    if (paymentMethod == "balance" && user.balance < amount) {
+    if (user.balance < amount) {
       return Swal.fire({
         title: "Insufficient Balance",
         icon: "error",
@@ -103,8 +101,8 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
         amount,
         userPhone: user.phone,
         paymentMethod: paymentMethod,
-        paymentPhone: paymentMethod == "balance" ? user.phone : formattedPhone,
-        transactionId: paymentMethod == "balance" ? "N/A" : transactionId,
+        paymentPhone: user.phone,
+        transactionId: "N/A",
       },
       {
         onSuccess: () => {
@@ -218,10 +216,14 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
         {type == "topup" && (
           <div className="info">
             <AiOutlineInfoCircle size={32} />
-            <span>
-              {charge}% gateway charge will be deducted from your inputted
-              balance
-            </span>
+            {charge > 0 ? (
+              <span>You Will Get {charge}% Bonus!</span>
+            ) : (
+              <span>
+                {charge}% gateway charge will be deducted from your inputted
+                balance
+              </span>
+            )}
           </div>
         )}
 
@@ -248,10 +250,11 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
               </div>
 
               <IMaskInput
-                mask="+{88\0} 0000 000000"
+                mask="+{88\0} #000 000000"
+                definitions={{
+                  "#": /[1-9]/,
+                }}
                 signed={false}
-                min={10}
-                max={10000}
                 lazy={true}
                 onAccept={(value) => setphone(value)}
               />

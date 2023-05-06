@@ -13,6 +13,7 @@ import { login } from "../../api/auth/login";
 import { PageLoader } from "../shared/SuspenseWrapper";
 import Swal from "sweetalert2";
 import { MySwal, formatPhone } from "../../uitls";
+import { IMaskInput } from "react-imask";
 
 const ICON_SIZE = 32;
 
@@ -156,11 +157,12 @@ const Login = () => {
             <span>PHONE</span>
             <div className="input__icon">
               <RiPhoneLine size={ICON_SIZE} />
-              <InputMask
-                mask="+88\0 9999 999999"
-                maskPlaceholder=""
-                value={phone}
-                onChange={(e) => setphone(e.target.value)}
+              <IMaskInput
+                mask="+{88\0} #000 000000"
+                definitions={{
+                  "#": /[1-9]/,
+                }}
+                onAccept={(value) => setphone(value)}
               />
             </div>
           </div>

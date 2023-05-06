@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FadeLoader from "react-spinners/FadeLoader";
 import "./PageLoader.scss";
 import ScrollToTop from "./ScrollToTop";

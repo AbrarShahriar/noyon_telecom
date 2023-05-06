@@ -25,6 +25,13 @@ const AdminBody = ({ isModerator = false }) => {
           </button>
         </div>
       )}
+      {!isModerator && (
+        <div className="create">
+          <button onClick={() => navigate(`/admin/offer-list`)}>
+            View All Offers
+          </button>
+        </div>
+      )}
       <div className="history">
         <button
           onClick={() =>

@@ -109,30 +109,62 @@ const Req = ({
     if (adminLoggedIn) {
       switch (type) {
         case "topup":
-          approveTopupReq({
-            id,
-            userPhone: phone,
-          });
+          approveTopupReq(
+            {
+              id,
+              userPhone: phone,
+            },
+            {
+              onSuccess: () => {
+                fireSuccessAlert();
+                queryClient.invalidateQueries(["requests", type]);
+              },
+            }
+          );
           break;
 
         case "membership":
-          approveMembershipReq({
-            membershipBuyReqId: id,
-          });
+          approveMembershipReq(
+            {
+              membershipBuyReqId: id,
+            },
+            {
+              onSuccess: () => {
+                fireSuccessAlert();
+                queryClient.invalidateQueries(["requests", type]);
+              },
+            }
+          );
           break;
 
         case "recharge":
-          approveRechargeReq({
-            rechargeBuyReqId: id,
-            actionByAdmin: true,
-          });
+          approveRechargeReq(
+            {
+              rechargeBuyReqId: id,
+              actionByAdmin: true,
+            },
+            {
+              onSuccess: () => {
+                fireSuccessAlert();
+                queryClient.invalidateQueries(["requests", type]);
+              },
+            }
+          );
           break;
 
         case "offer":
-          approveOfferReq({
-            offerBuyReqId: id,
-            actionByAdmin: true,
-          });
+          approveOfferReq(
+            {
+              offerBuyReqId: id,
+              actionByAdmin: true,
+            },
+            {
+              onSuccess: () => {
+                fireSuccessAlert();
+                queryClient.invalidateQueries(["requests", type]);
+              },
+            }
+          );
           break;
 
         case "withdraw":
@@ -144,7 +176,7 @@ const Req = ({
             {
               onSuccess: () => {
                 fireSuccessAlert();
-                queryClient.invalidateQueries(["requests", "withdraw"]);
+                queryClient.invalidateQueries(["requests", type]);
               },
             }
           );
@@ -156,17 +188,33 @@ const Req = ({
     } else if (moderatorLoggedIn) {
       switch (type) {
         case "recharge":
-          approveRechargeReq({
-            rechargeBuyReqId: id,
-            moderatorId: getModeratorId(),
-          });
+          approveRechargeReq(
+            {
+              rechargeBuyReqId: id,
+              moderatorId: getModeratorId(),
+            },
+            {
+              onSuccess: () => {
+                fireSuccessAlert();
+                queryClient.invalidateQueries(["requests", type]);
+              },
+            }
+          );
           break;
 
         case "offer":
-          approveOfferReq({
-            offerBuyReqId: id,
-            moderatorId: getModeratorId(),
-          });
+          approveOfferReq(
+            {
+              offerBuyReqId: id,
+              moderatorId: getModeratorId(),
+            },
+            {
+              onSuccess: () => {
+                fireSuccessAlert();
+                queryClient.invalidateQueries(["requests", type]);
+              },
+            }
+          );
           break;
 
         default:
@@ -215,29 +263,61 @@ const Req = ({
     if (adminLoggedIn) {
       switch (type) {
         case "topup":
-          rejectTopupReq({
-            topupReqId: id,
-          });
+          rejectTopupReq(
+            {
+              topupReqId: id,
+            },
+            {
+              onSuccess: () => {
+                fireRejectedAlert();
+                queryClient.invalidateQueries(["requests", type]);
+              },
+            }
+          );
           break;
 
         case "membership":
-          rejectMembershipReq({
-            membershipBuyReqId: id,
-          });
+          rejectMembershipReq(
+            {
+              membershipBuyReqId: id,
+            },
+            {
+              onSuccess: () => {
+                fireRejectedAlert();
+                queryClient.invalidateQueries(["requests", type]);
+              },
+            }
+          );
           break;
 
         case "recharge":
-          rejectRechargeReq({
-            rechargeBuyReqId: id,
-            actionByAdmin: true,
-          });
+          rejectRechargeReq(
+            {
+              rechargeBuyReqId: id,
+              actionByAdmin: true,
+            },
+            {
+              onSuccess: () => {
+                fireRejectedAlert();
+                queryClient.invalidateQueries(["requests", type]);
+              },
+            }
+          );
           break;
 
         case "offer":
-          rejectOfferReq({
-            offerBuyReqId: id,
-            actionByAdmin: true,
-          });
+          rejectOfferReq(
+            {
+              offerBuyReqId: id,
+              actionByAdmin: true,
+            },
+            {
+              onSuccess: () => {
+                fireRejectedAlert();
+                queryClient.invalidateQueries(["requests", type]);
+              },
+            }
+          );
           break;
 
         case "withdraw":
@@ -249,7 +329,7 @@ const Req = ({
             {
               onSuccess: () => {
                 fireRejectedAlert();
-                queryClient.invalidateQueries(["requests", "withdraw"]);
+                queryClient.invalidateQueries(["requests", type]);
               },
             }
           );
@@ -288,7 +368,8 @@ const Req = ({
     isOfferReqRejectedLoading ||
     isRechargeReqRejectedLoading ||
     isMembershipReqRejectedLoading ||
-    isTopupReqRejectedLoading
+    isTopupReqRejectedLoading ||
+    isWithdrawApproveLoading
   ) {
     return <PageLoader />;
   }

@@ -172,8 +172,7 @@ const Login = () => {
               <RiLockPasswordLine size={ICON_SIZE} />
               <IMaskInput
                 mask="999999"
-                value={pin}
-                onChange={(value) => setpin(String(value))}
+                onAccept={(value) => setpin(value)}
               />
             </div>
           </div>

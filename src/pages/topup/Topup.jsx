@@ -158,6 +158,11 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
       },
       {
         onSuccess: () => {
+          setamount(0);
+          setpaymentMethod("");
+          setpaymentMethod("");
+          settransactionId("");
+          setphone("");
           MySwal.fire({
             title: <p style={{ fontSize: 24 }}>We Received Your Request!</p>,
             text: "Your request will be processed in a few minutes.",

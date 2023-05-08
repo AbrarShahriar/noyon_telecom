@@ -115,6 +115,7 @@ const Buy = ({ page }) => {
         },
         {
           onSuccess: () => {
+            setsendTo("");
             MySwal.fire({
               title: <p style={{ fontSize: 24 }}>We Received Your Request!</p>,
               text: "Your request will be processed in a few minutes.",

@@ -158,7 +158,6 @@ const Login = () => {
             <div className="input__icon">
               <RiPhoneLine size={ICON_SIZE} />
               <IMaskInput
-                type="number"
                 mask="+{88\0} #000 000000"
                 definitions={{
                   "#": /[1-9]/,
@@ -171,12 +170,10 @@ const Login = () => {
             <span>PIN</span>
             <div className="input__icon">
               <RiLockPasswordLine size={ICON_SIZE} />
-              <InputMask
+              <IMaskInput
                 mask="999999"
-                type="number"
-                maskPlaceholder=""
                 value={pin}
-                onChange={(e) => setpin(e.target.value)}
+                onChange={(value) => setpin(String(value))}
               />
             </div>
           </div>

@@ -96,24 +96,46 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
         icon: "error",
       });
     }
-    sendMembershipReq(
-      {
-        amount,
-        userPhone: user.phone,
-        paymentMethod: paymentMethod,
-        paymentPhone: user.phone,
-        transactionId: "N/A",
-      },
-      {
-        onSuccess: () => {
-          MySwal.fire({
-            title: <p style={{ fontSize: 24 }}>We Received Your Request!</p>,
-            text: "Your request will be processed in a few minutes.",
-            icon: "success",
-          });
-        },
+
+    MySwal.fire({
+      title: "Membership!",
+      icon: "warning",
+      text: `Are You Sure You Want To Buy Membership?`,
+      showCancelButton: true,
+      cancelButtonText: "No",
+      cancelButtonColor: "red",
+      showConfirmButton: true,
+      confirmButtonText: "Yes",
+      confirmButtonColor: "green",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        sendMembershipReq(
+          {
+            amount,
+            userPhone: user.phone,
+            paymentMethod: paymentMethod,
+            paymentPhone: user.phone,
+            transactionId: "N/A",
+          },
+          {
+            onSuccess: (res) => {
+              if (res.data.error) {
+                return MySwal.fire({
+                  title: <p style={{ fontSize: 24 }}>{res.data.message}</p>,
+                  text: "You Already Made A Membership Request. Please Wait Until We Process It.",
+                  icon: "error",
+                });
+              } else {
+                MySwal.fire({
+                  title: <p style={{ fontSize: 24 }}>{res.data.message}</p>,
+                  icon: "success",
+                });
+              }
+            },
+          }
+        );
       }
-    );
+    });
   };
 
   const handleSubmitClick = () => {

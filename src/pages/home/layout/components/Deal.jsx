@@ -46,11 +46,12 @@ const Deal = ({
         confirmButtonColor: "green",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/membership");
-        } else if (result.isDenied) {
+          return navigate("/membership");
         }
       });
     } else if (!isVipOnly) {
+      navigate(`/offer-buy/${id}`);
+    } else if (user.subscription == "premium") {
       navigate(`/offer-buy/${id}`);
     }
   };

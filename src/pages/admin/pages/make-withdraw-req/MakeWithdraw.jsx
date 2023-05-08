@@ -3,9 +3,10 @@ import "./MakeWithdraw.scss";
 import AppBar from "../../../shared/AppBar";
 import { IMaskInput } from "react-imask";
 import { MySwal, formatPhone, getModeratorId } from "../../../../uitls";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { createWithdraw } from "../../../../api/mutations/moderator";
 import { PageLoader } from "../../../shared/SuspenseWrapper";
+import { getModeratorInAndOut } from "../../../../api/queries/moderator";
 
 const MakeWithdraw = () => {
   const [bkashChecked, setbkashChecked] = useState(false);
@@ -15,6 +16,18 @@ const MakeWithdraw = () => {
 
   const { isLoading: withdrawReqLoading, mutate: makeWithdrawReq } =
     useMutation(createWithdraw);
+
+  const [moderatorBalance, setmoderatorBalance] = useState(0);
+
+  const { isLoading: isModeratorLoading } = useQuery(
+    ["moderator", "stat", "in-out"],
+    getModeratorInAndOut,
+    {
+      onSuccess: (res) => {
+        setmoderatorBalance(res.data.inVal - res.data.outVal || 0);
+      },
+    }
+  );
 
   const getPaymentMethod = () => {
     if (bkashChecked) {
@@ -48,6 +61,13 @@ const MakeWithdraw = () => {
       });
     }
 
+    if (amount > moderatorBalance) {
+      return MySwal.fire({
+        title: "Insufficient Balance",
+        icon: "error",
+      });
+    }
+
     makeWithdrawReq(
       {
         moderatorId: getModeratorId(),
@@ -56,17 +76,24 @@ const MakeWithdraw = () => {
         paymentMethod: getPaymentMethod(),
       },
       {
-        onSuccess: () =>
+        onSuccess: () => {
+          setmoderatorBalance((prevBalance) => prevBalance - amount);
+          setamount(0);
+          setphone("");
+          setbkashChecked(false);
+          setnagadChecked(false);
+
           MySwal.fire({
             title: "We Got Your Request",
             icon: "success",
             text: "Your Request Will Be Proccessed Shortly.",
-          }),
+          });
+        },
       }
     );
   };
 
-  if (withdrawReqLoading) {
+  if (isModeratorLoading || withdrawReqLoading) {
     return <PageLoader />;
   }
 

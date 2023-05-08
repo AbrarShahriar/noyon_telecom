@@ -42,8 +42,16 @@ const MonthlyHistory = ({ setinVal, setoutVal, setselectedMonth }) => {
 
   React.useEffect(() => {
     if (res?.data) {
-      let filteredIn = res?.data.filter((el) => el.historyType == "topup");
-      let filteredOut = res?.data.filter((el) => el.historyType != "topup");
+      let filteredIn = res?.data.filter(
+        (el) =>
+          el.historyType == "topup" &&
+          (el.historyStatus == "pending" || el.historyStatus == "approved")
+      );
+      let filteredOut = res?.data.filter(
+        (el) =>
+          el.historyType != "topup" &&
+          (el.historyStatus == "pending" || el.historyStatus == "approved")
+      );
 
       let inInit = 0;
       filteredIn.forEach((el) => (inInit += Number(el.amount)));

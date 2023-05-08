@@ -18,7 +18,7 @@ const VipOffers = () => {
 
   return (
     <div className="vip__offers">
-      {res && res.data.length > 1 ? (
+      {res && res.data.length >= 1 ? (
         res.data.map((offer) => (
           <Offer
             key={offer.id}

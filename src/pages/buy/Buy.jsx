@@ -230,7 +230,7 @@ const Buy = ({ page }) => {
           )
         }
         <button onClick={handleBuyClick} className="btn__buy">
-          Buy
+          {page == "recharge" ? "Recharge Now" : "Buy"}
         </button>
       </div>
     </>

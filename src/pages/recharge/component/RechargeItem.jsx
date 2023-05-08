@@ -28,7 +28,7 @@ const RechargeItem = ({ amount, id }) => {
       </p>
 
       <button onClick={handleBuyClick} className="btn__buy">
-        Buy
+        Recharge
       </button>
     </div>
   );

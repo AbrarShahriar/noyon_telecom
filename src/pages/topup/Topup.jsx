@@ -294,13 +294,15 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
 
               <IMaskInput
                 type="number"
-                mask={Number}
+                mask="#0000"
+                definitions={{
+                  "#": /[1-9]/,
+                }}
                 signed={false}
                 min={10}
                 max={10000}
-                radix="."
                 // @ts-ignore
-                onAccept={(value) => setamount(parseInt(value))}
+                onAccept={(value) => setamount(Number(value))}
               />
             </div>
           )}

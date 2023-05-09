@@ -277,6 +277,7 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
               </div>
 
               <IMaskInput
+                type="tel"
                 mask="+{88\0} #000 000000"
                 definitions={{
                   "#": /[1-9]/,
@@ -292,6 +293,7 @@ const Topup = ({ type = "topup", title = "", showBalanceMethod = false }) => {
               <p className="label">Amount</p>
 
               <IMaskInput
+                type="number"
                 mask={Number}
                 signed={false}
                 min={10}

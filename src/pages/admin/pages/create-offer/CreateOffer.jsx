@@ -60,6 +60,14 @@ const CreateOffer = () => {
   const [isVip, setisVip] = useState(false);
   const [banner, setbanner] = useState("regular");
 
+  const resetInputs = () => {
+    settitle("");
+    setdesc("");
+    setsimcard("");
+    setisVip(false);
+    setbanner("regular");
+  };
+
   const handleSubmitClick = () => {
     if (category == "recharge") {
       addRecharge(
@@ -88,8 +96,10 @@ const CreateOffer = () => {
           desc: desc || null,
         },
         {
-          onSuccess: (res) =>
-            Swal.fire({ title: res.data.message, icon: "success" }),
+          onSuccess: (res) => {
+            resetInputs();
+            Swal.fire({ title: res.data.message, icon: "success" });
+          },
           onError: (error) =>
             Swal.fire({ title: "Something Went Wrong", icon: "error" }),
         }
@@ -97,147 +107,146 @@ const CreateOffer = () => {
     }
   };
 
+  if (isOfferAddedLoading || isRechargeAddedLoading) {
+    return <PageLoader />;
+  }
+
   return (
     <div className="admin__create">
       <AppBar title="Create Offer" />
-
-      {isOfferAddedLoading || isRechargeAddedLoading ? (
-        <PageLoader />
-      ) : (
-        <div className="admin__create__container">
+      <div className="admin__create__container">
+        <div className="input__container">
+          <p className="label">Category: </p>
+          <Select
+            styles={{ control: (styles) => ({ ...styles, padding: "7px" }) }}
+            options={categoryOptions}
+            defaultValue={categoryOptions[0]}
+            // @ts-ignore
+            onChange={(option) => setcategory(option?.value)}
+          />
+        </div>
+        {category != "recharge" && (
+          <>
+            <div className="input__container">
+              <p className="label">Title: </p>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => settitle(e.target.value)}
+              />
+            </div>
+            <div className="input__container">
+              <p className="label">Description: </p>
+              <input
+                type="text"
+                value={desc}
+                onChange={(e) => setdesc(e.target.value)}
+              />
+            </div>
+          </>
+        )}
+        {category == "recharge" && (
           <div className="input__container">
-            <p className="label">Category: </p>
-            <Select
-              styles={{ control: (styles) => ({ ...styles, padding: "7px" }) }}
-              options={categoryOptions}
-              defaultValue={categoryOptions[0]}
-              // @ts-ignore
-              onChange={(option) => setcategory(option?.value)}
+            <p className="label">Price: </p>
+            <IMaskInput
+              type="number"
+              mask={Number}
+              signed={false}
+              onAccept={(value) => setrechargePrice(parseInt(value))}
             />
           </div>
-          {category != "recharge" && (
-            <>
-              <div className="input__container">
-                <p className="label">Title: </p>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(e) => settitle(e.target.value)}
-                />
-              </div>
-              <div className="input__container">
-                <p className="label">Description: </p>
-                <input
-                  type="text"
-                  value={desc}
-                  onChange={(e) => setdesc(e.target.value)}
-                />
-              </div>
-            </>
-          )}
-          {category == "recharge" && (
+        )}
+
+        {category != "recharge" && (
+          <>
             <div className="input__container">
-              <p className="label">Price: </p>
+              <p className="label">Sim Card: </p>
+              <Select
+                styles={{
+                  control: (styles) => ({ ...styles, padding: "7px" }),
+                }}
+                isClearable
+                options={simOptions}
+                // @ts-ignore
+                onChange={(option) => setsimcard(option?.value)}
+              />
+            </div>
+            <div className="input__container">
+              <p className="label">VIP Offer: </p>
+              <Select
+                styles={{
+                  control: (styles) => ({ ...styles, padding: "7px" }),
+                }}
+                options={vipOfferOptions}
+                defaultValue={vipOfferOptions[0]}
+                // @ts-ignore
+                onChange={(option) => setisVip(option?.value)}
+              />
+            </div>
+            <div className="input__container">
+              <p className="label">Admin Price: </p>
               <IMaskInput
                 type="number"
                 mask={Number}
                 signed={false}
-                onAccept={(value) => setrechargePrice(parseInt(value))}
+                max={10000}
+                onAccept={(value) => setadminPrice(parseInt(value))}
               />
             </div>
-          )}
-
-          {category != "recharge" && (
-            <>
-              <div className="input__container">
-                <p className="label">Sim Card: </p>
-                <Select
-                  styles={{
-                    control: (styles) => ({ ...styles, padding: "7px" }),
-                  }}
-                  isClearable
-                  options={simOptions}
-                  // @ts-ignore
-                  onChange={(option) => setsimcard(option?.value)}
-                />
-              </div>
-              <div className="input__container">
-                <p className="label">VIP Offer: </p>
-                <Select
-                  styles={{
-                    control: (styles) => ({ ...styles, padding: "7px" }),
-                  }}
-                  options={vipOfferOptions}
-                  defaultValue={vipOfferOptions[0]}
-                  // @ts-ignore
-                  onChange={(option) => setisVip(option?.value)}
-                />
-              </div>
-              <div className="input__container">
-                <p className="label">Admin Price: </p>
+            <div className="input__container">
+              <p className="label">Regular Price: </p>
+              <IMaskInput
+                type="number"
+                mask={Number}
+                signed={false}
+                max={10000}
+                onAccept={(value) => setregularPrice(parseInt(value))}
+              />
+            </div>
+            <div className="input__container">
+              <p className="label">Discount Price: </p>
+              <IMaskInput
+                type="number"
+                mask={Number}
+                max={10000}
+                signed={false}
+                onAccept={(value) => setdiscountPrice(parseInt(value))}
+              />
+            </div>
+            <div className="input__container">
+              <p className="label">Expiration: </p>
+              <div className="sibling">
                 <IMaskInput
                   type="number"
                   mask={Number}
                   signed={false}
-                  max={10000}
-                  onAccept={(value) => setadminPrice(parseInt(value))}
+                  min={1}
+                  max={expirationUnit == "day" ? 31 : 24}
+                  onAccept={(value) => setexpiration(parseInt(value))}
                 />
-              </div>
-              <div className="input__container">
-                <p className="label">Regular Price: </p>
-                <IMaskInput
-                  type="number"
-                  mask={Number}
-                  signed={false}
-                  max={10000}
-                  onAccept={(value) => setregularPrice(parseInt(value))}
-                />
-              </div>
-              <div className="input__container">
-                <p className="label">Discount Price: </p>
-                <IMaskInput
-                  type="number"
-                  mask={Number}
-                  max={10000}
-                  signed={false}
-                  onAccept={(value) => setdiscountPrice(parseInt(value))}
-                />
-              </div>
-              <div className="input__container">
-                <p className="label">Expiration: </p>
-                <div className="sibling">
-                  <IMaskInput
-                    type="number"
-                    mask={Number}
-                    signed={false}
-                    min={1}
-                    max={expirationUnit == "day" ? 31 : 24}
-                    onAccept={(value) => setexpiration(parseInt(value))}
-                  />
-                  <Select
-                    options={expiryUnitOptions}
-                    defaultValue={expiryUnitOptions[1]}
-                    // @ts-ignore
-                    onChange={(option) => setexpirationUnit(option?.value)}
-                  />
-                </div>
-              </div>
-              <div className="input__container">
-                <p className="label">Banner: </p>
                 <Select
-                  options={offerBannerOptions}
-                  defaultValue={offerBannerOptions[0]}
+                  options={expiryUnitOptions}
+                  defaultValue={expiryUnitOptions[1]}
                   // @ts-ignore
-                  onChange={(option) => setbanner(option?.value)}
+                  onChange={(option) => setexpirationUnit(option?.value)}
                 />
               </div>
-            </>
-          )}
-          <button onClick={handleSubmitClick} className="btn__submit">
-            Create
-          </button>
-        </div>
-      )}
+            </div>
+            <div className="input__container">
+              <p className="label">Banner: </p>
+              <Select
+                options={offerBannerOptions}
+                defaultValue={offerBannerOptions[0]}
+                // @ts-ignore
+                onChange={(option) => setbanner(option?.value)}
+              />
+            </div>
+          </>
+        )}
+        <button onClick={handleSubmitClick} className="btn__submit">
+          Create
+        </button>
+      </div>
     </div>
   );
 };

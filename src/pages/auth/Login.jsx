@@ -158,6 +158,7 @@ const Login = () => {
             <div className="input__icon">
               <RiPhoneLine size={ICON_SIZE} />
               <IMaskInput
+                type="tel"
                 mask="+{88\0} #000 000000"
                 definitions={{
                   "#": /[1-9]/,
@@ -171,6 +172,7 @@ const Login = () => {
             <div className="input__icon">
               <RiLockPasswordLine size={ICON_SIZE} />
               <IMaskInput
+                type="number"
                 mask="000000"
                 onAccept={(value) => setpin(value)}
               />

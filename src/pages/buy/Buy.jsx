@@ -175,6 +175,7 @@ const Buy = ({ page }) => {
       <AppBar title="Buy" />
       <div className="buy">
         <IMaskInput
+          type="tel"
           mask="+{88\0} #000 000000"
           definitions={{
             "#": /[1-9]/,

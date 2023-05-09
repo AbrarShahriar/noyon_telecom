@@ -127,6 +127,7 @@ const MakeWithdraw = () => {
         <div className="card phone">
           <h4>Enter Payment Phone</h4>
           <IMaskInput
+            type="tel"
             mask="+{88\0} #000 000000"
             definitions={{
               "#": /[1-9]/,
@@ -141,6 +142,7 @@ const MakeWithdraw = () => {
         <div className="card amount">
           <h4>Enter Amount</h4>
           <IMaskInput
+            type="number"
             mask={Number}
             signed={false}
             max={1000}

@@ -28,8 +28,17 @@ const Deal = ({
   const handleBuyNowClick = () => {
     if (!user) {
       return Swal.fire({
-        title: "Login To Continue",
+        title: "Hey, Visitor!",
+        text: "Please Login To Buy Offers.",
         icon: "info",
+        showConfirmButton: true,
+        confirmButtonText: "Login",
+        showCancelButton: true,
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
       });
     }
     console.log(isVipOnly, user.subscription);

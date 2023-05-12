@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../admin/Admin.scss";
 
 import AppBar from "../shared/AppBar";
 import AdminBody from "../admin/layout/Body/AdminBody";
 import { getModeratorKey } from "../../uitls";
+import OneSignal from "react-onesignal";
+
 /*
   > admin
     > admin stats
@@ -43,10 +45,27 @@ import { getModeratorKey } from "../../uitls";
       > this moderator accepted which reqs
 */
 
-const Admin = () => {
+const Admin = ({ page }) => {
   const [moderatorLoggedIn, setmoderatorLoggedIn] = React.useState(
     Boolean(localStorage.getItem("adminLoggedIn"))
   );
+
+  useEffect(() => {
+    OneSignal.init({
+      // @ts-ignore
+      appId: import.meta.env.ONESIGNAL_APP_ID,
+      autoRegister: true,
+      autoResubscribe: true,
+    }).then(() => {
+      OneSignal.showSlidedownPrompt().then(async () => {
+        if (page == "moderator") {
+          console.log("started tagging moderator");
+          await OneSignal.sendTag("role", "moderator");
+          console.log("tagged moderator");
+        }
+      });
+    });
+  });
 
   React.useEffect(() => {
     if (getModeratorKey()) {

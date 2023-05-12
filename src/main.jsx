@@ -134,7 +134,10 @@ const router = createBrowserRouter(
       />
 
       <Route path="/admin">
-        <Route index element={<SuspenseWrapper element={<Admin />} />} />
+        <Route
+          index
+          element={<SuspenseWrapper element={<Admin page={"admin"} />} />}
+        />
         <Route
           path="/admin/membership-requests"
           element={
@@ -195,7 +198,12 @@ const router = createBrowserRouter(
       />
 
       <Route path="/moderator">
-        <Route index element={<SuspenseWrapper element={<Moderator />} />} />
+        <Route
+          index
+          element={
+            <SuspenseWrapper element={<Moderator page={"moderator"} />} />
+          }
+        />
 
         <Route
           path="/moderator/offer-buy-requests"

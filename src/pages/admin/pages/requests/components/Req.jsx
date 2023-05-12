@@ -29,6 +29,7 @@ import {
   getAdminKey,
   getModeratorId,
   getModeratorKey,
+  parseDate,
 } from "../../../../../uitls";
 import useClipboard from "react-use-clipboard";
 
@@ -62,6 +63,9 @@ const Req = ({
   sendTo,
   moderator,
   simcard = "",
+
+  isPremium,
+  actionAt,
 }) => {
   const queryClient = useQueryClient();
   const [isCopied, setCopied] = useClipboard(sendTo, { successDuration: 1000 });
@@ -438,6 +442,17 @@ const Req = ({
 
         <hr />
 
+        {type == "offer" && (
+          <div className="data date">
+            <p className="label">Offer Type: </p>
+            <p className="value">{formatLabel(String(isPremium))}</p>
+          </div>
+        )}
+
+        <div className="data date">
+          <p className="label">Requested At: </p>
+          <p className="value">{parseDate(actionAt)}</p>
+        </div>
         {!(type == "offer" || type == "recharge") && (
           <>
             <div className="data payment-phone">

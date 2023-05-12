@@ -51,6 +51,10 @@ const Requests = ({ type, isModerator = false }) => {
                 isModerator={isModerator}
                 key={i}
                 type={type}
+                isPremium={
+                  req.hasOwnProperty("isPremium") ? req.isPremium : "N/A"
+                }
+                actionAt={req.actionAt}
                 id={req.id}
                 phone={req.phone}
                 paymentMethod={req.paymentMethod}
@@ -66,6 +70,10 @@ const Requests = ({ type, isModerator = false }) => {
                 simcard={req.simcard}
                 key={i}
                 type={type}
+                isPremium={
+                  req.hasOwnProperty("isPremium") ? req.isPremium : "N/A"
+                }
+                actionAt={req.actionAt}
                 id={req.id}
                 phone={req.phone}
                 paymentMethod={req.paymentMethod}

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Admin.scss";
 
 import AppBar from "../shared/AppBar";
 import AdminBody from "./layout/Body/AdminBody";
 import { getAdminKey } from "../../uitls";
+import OneSignal from "react-onesignal";
+
 /*
   > admin
     > admin stats
@@ -42,15 +44,44 @@ import { getAdminKey } from "../../uitls";
     > history
       > this moderator accepted which reqs
 */
+// async function runOneSignal(setInitialized) {
+//   await OneSignal.init({
+//     appId: "5461ed21-1a14-4f39-8498-5fec641998c1",
+//     notifyButton: {
+//       enable: true,
+//     },
+//     allowLocalhostAsSecureOrigin: true,
+//   });
+//   OneSignal.showSlidedownPrompt();
 
-const Admin = () => {
-  const [adminKeyAvailable, setadminKeyAvailable] = React.useState(false);
+//   setInitialized(true);
+// }
+
+const Admin = ({ page }) => {
+  const [adminKeyAvailable, setadminKeyAvailable] = useState(false);
 
   React.useEffect(() => {
     if (getAdminKey()) {
       setadminKeyAvailable(true);
     }
   }, []);
+
+  useEffect(() => {
+    OneSignal.init({
+      // @ts-ignore
+      appId: import.meta.env.ONESIGNAL_APP_ID,
+      autoRegister: true,
+      autoResubscribe: true,
+    }).then(() => {
+      OneSignal.showSlidedownPrompt().then(async () => {
+        if (page == "admin") {
+          console.log("started tagging admin");
+          await OneSignal.sendTag("role", "admin");
+          console.log("tagged admin");
+        }
+      });
+    });
+  });
 
   return (
     <>

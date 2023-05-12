@@ -5,6 +5,7 @@ import AppBar from "../shared/AppBar";
 import AdminBody from "./layout/Body/AdminBody";
 import { getAdminKey } from "../../uitls";
 import OneSignal from "react-onesignal";
+import { useNavigate } from "react-router-dom";
 
 /*
   > admin
@@ -44,21 +45,10 @@ import OneSignal from "react-onesignal";
     > history
       > this moderator accepted which reqs
 */
-// async function runOneSignal(setInitialized) {
-//   await OneSignal.init({
-//     appId: "5461ed21-1a14-4f39-8498-5fec641998c1",
-//     notifyButton: {
-//       enable: true,
-//     },
-//     allowLocalhostAsSecureOrigin: true,
-//   });
-//   OneSignal.showSlidedownPrompt();
-
-//   setInitialized(true);
-// }
 
 const Admin = ({ page }) => {
   const [adminKeyAvailable, setadminKeyAvailable] = useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     if (getAdminKey()) {
@@ -67,6 +57,7 @@ const Admin = ({ page }) => {
   }, []);
 
   useEffect(() => {
+    OneSignal.setDefaultNotificationUrl("http://localhost:5173/admin");
     OneSignal.init({
       // @ts-ignore
       appId: "35e8edb2-4a6f-469a-8824-9d2b9f09813b",
@@ -91,7 +82,9 @@ const Admin = ({ page }) => {
           <AdminBody />
         </div>
       ) : (
-        <h2>Login To View This Page</h2>
+        <h2 onClick={() => navigate("/admin-login")}>
+          Login To View This Page
+        </h2>
       )}
     </>
   );

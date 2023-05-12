@@ -5,6 +5,7 @@ import AppBar from "../shared/AppBar";
 import AdminBody from "../admin/layout/Body/AdminBody";
 import { getModeratorKey } from "../../uitls";
 import OneSignal from "react-onesignal";
+import { useNavigate } from "react-router-dom";
 
 /*
   > admin
@@ -49,8 +50,11 @@ const Admin = ({ page }) => {
   const [moderatorLoggedIn, setmoderatorLoggedIn] = React.useState(
     Boolean(localStorage.getItem("adminLoggedIn"))
   );
+  const navigate = useNavigate();
 
   useEffect(() => {
+    OneSignal.setDefaultNotificationUrl("http://localhost:5173/moderator");
+
     OneSignal.init({
       // @ts-ignore
       appId: "35e8edb2-4a6f-469a-8824-9d2b9f09813b",
@@ -85,7 +89,9 @@ const Admin = ({ page }) => {
           <AdminBody isModerator />
         </div>
       ) : (
-        <h2>Login To View This Page</h2>
+        <h2 onClick={() => navigate("/moderator-login")}>
+          Login To View This Page
+        </h2>
       )}
     </>
   );

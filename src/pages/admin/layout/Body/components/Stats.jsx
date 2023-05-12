@@ -92,6 +92,16 @@ const Stats = ({ isModerator }) => {
                 }
               </p>
             </div>
+            <div className="total-membership stat-card">
+              <p>Total Membership Buy:</p>
+              <TbCurrencyTaka size={18} strokeWidth={3} />
+              <p className="value">
+                {
+                  // @ts-ignore
+                  `${data.totalMembershipReq || 0}`
+                }
+              </p>
+            </div>
           </>
         )}
       </div>

@@ -53,7 +53,7 @@ const Admin = ({ page }) => {
   useEffect(() => {
     OneSignal.init({
       // @ts-ignore
-      appId: import.meta.env.ONESIGNAL_APP_ID,
+      appId: "df497253-8588-4771-8e59-c6d58d3d8fe2",
       autoRegister: true,
       autoResubscribe: true,
     }).then(() => {

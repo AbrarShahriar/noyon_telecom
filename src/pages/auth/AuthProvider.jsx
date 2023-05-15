@@ -57,6 +57,10 @@ const AuthProvider = ({ children }) => {
           type: ACTION_TYPES.UPDATE_NOITCETEXT,
           payload: { noticeText: res?.data.noticeText },
         });
+        dispatch({
+          type: ACTION_TYPES.UPDATE_PAYMENT_PHONE,
+          payload: { adminPaymentPhone: res?.data.adminPaymentPhone },
+        });
         console.log(res.data.appLink);
         dispatch({
           type: ACTION_TYPES.UPDATE_APP_LINK,

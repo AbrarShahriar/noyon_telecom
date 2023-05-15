@@ -63,6 +63,8 @@ const TotalHistory = ({ setinVal, setoutVal }) => {
               date={el.historyDate}
               transactionId={el.transactionId}
               desc={el.desc}
+              receiverPhone={el.receiverPhone}
+              title={el.title}
             />
           ))
       ) : (

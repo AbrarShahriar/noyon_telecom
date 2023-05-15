@@ -36,6 +36,8 @@ const HistoryCard = ({
   transactionId,
   desc,
   historyStatus = "pending",
+  title,
+  receiverPhone,
 }) => {
   return (
     <div
@@ -56,6 +58,12 @@ const HistoryCard = ({
           <p className={`status ${historyStatus}`}>
             {formatLabel(historyStatus)}
           </p>
+        )}
+        {(receiverPhone || title) && (
+          <div className="receiver-title">
+            {receiverPhone && <p>To: {receiverPhone}</p>}
+            {title && <p className="offer-title">{title}</p>}
+          </div>
         )}
         <div className="content">
           <span className="transaction-id">

@@ -99,6 +99,19 @@
       background-color: $bg;
     }
 
+    .receiver-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 0;
+      .offer-title {
+        font-weight: bold;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+
     .content {
       .transaction-id {
         font-size: 14px;

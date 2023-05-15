@@ -2,8 +2,6 @@ import React from "react";
 import "./Settings.scss";
 import { FiEdit3 } from "react-icons/fi";
 import { TbCurrencyTaka } from "react-icons/tb";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import {
   MySwal,
   truncateText,
@@ -11,7 +9,7 @@ import {
 } from "../../../../../uitls";
 import { useStateValue } from "../../../../shared/StateProvider";
 import { ACTION_TYPES } from "../../../../../reducer";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { updateAdminSettings } from "../../../../../api/mutations/admin";
 
 const ICON_SIZE = 22;
@@ -185,12 +183,7 @@ const Settings = () => {
         </div>
         <div className="settings__option">
           <p className="label">App Link</p>
-          <p className="value">
-            {truncateTextWithoutSpace(
-              `http://localhost:3000/api#/default/WithdrawReqController_updateReqStatus`,
-              16
-            )}
-          </p>
+          <p className="value">{truncateTextWithoutSpace(appLink, 16)}</p>
           <FiEdit3
             className="icon"
             size={ICON_SIZE}

@@ -6,7 +6,7 @@ import {
   AiOutlineRight,
   AiOutlineCloudDownload,
 } from "react-icons/ai";
-import { BiCloudDownload } from "react-icons/bi";
+import { HiOutlineMail } from "react-icons/hi";
 import { RiPhoneLine, RiServiceLine, RiVipCrown2Line } from "react-icons/ri";
 import { IoIosLogOut } from "react-icons/io";
 import { formatLabel } from "../../uitls";
@@ -100,9 +100,6 @@ const Profile = () => {
             <AiOutlineUser className={"icon"} size={ICON_SIZE} />
             <div className="name-edit">
               <span className="name">{res?.data.name}</span>
-              {/* <button className="btn__edit">
-                <FiEdit3 size={ICON_SIZE} />
-              </button> */}
             </div>
           </div>
           <hr />
@@ -157,6 +154,20 @@ const Profile = () => {
             <AiOutlineRight size={16} />
           </div>
           <hr />
+          <div className="customer-service">
+            <HiOutlineMail size={ICON_SIZE + 5} className="icon" />
+            <Mailto
+              email="
+support@enoy-topup.com"
+              subject="Support"
+              body=""
+            >
+              Email Us
+            </Mailto>
+
+            <AiOutlineRight size={16} />
+          </div>
+          <hr />
           <div className="download">
             <a href={appLink}>
               Download App
@@ -166,7 +177,6 @@ const Profile = () => {
               />
             </a>
           </div>
-          <hr />
           <div className="logout">
             <button onClick={handleLogoutClick}>
               Logout
@@ -178,4 +188,13 @@ const Profile = () => {
     </div>
   );
 };
+
+const Mailto = ({ email, subject = "", body = "", children }) => {
+  let params = subject || body ? "?" : "";
+  if (subject) params += `subject=${encodeURIComponent(subject)}`;
+  if (body) params += `${subject ? "&" : ""}body=${encodeURIComponent(body)}`;
+
+  return <a href={`mailto:${email}${params}`}>{children}</a>;
+};
+
 export default Profile;

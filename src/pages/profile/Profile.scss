@@ -170,17 +170,23 @@
         }
 
         .icon {
-          margin-right: 5px;
+          margin-right: 10px;
         }
       }
 
       .customer-service {
         cursor: pointer;
+
+        a {
+          text-decoration: none;
+          color: black;
+          width: 100%;
+        }
       }
 
       .logout,
       .download {
-        margin-bottom: 0;
+        margin-bottom: 15px;
 
         button,
         a {

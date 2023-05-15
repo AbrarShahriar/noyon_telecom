@@ -53,11 +53,9 @@ const Admin = ({ page }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    OneSignal.setDefaultNotificationUrl("http://localhost:5173/moderator");
-
     OneSignal.init({
       // @ts-ignore
-      appId: "35e8edb2-4a6f-469a-8824-9d2b9f09813b",
+      appId: "45955b11-7ce9-42db-a44f-46c5f99a3238",
       autoRegister: true,
       autoResubscribe: true,
     }).then(() => {

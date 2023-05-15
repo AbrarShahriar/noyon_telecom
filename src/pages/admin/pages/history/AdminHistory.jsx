@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-nocheck
 import React, { useState } from "react";
 import "./AdminHistory.scss";
 import AppBar from "../../../shared/AppBar";
@@ -49,12 +49,10 @@ const AdminHistory = ({ isModerator = false }) => {
 const TodayHistory = ({ isModerator = false }) => {
   const d = new Date();
 
-  // @ts-ignore
   const [data, setdata] = useState([]);
   const [initData, setinitData] = useState([]);
   const [phone, setphone] = useState("");
 
-  // @ts-ignore
   const { isLoading: isAdminHistoryLoading, refetch: getAdminHistory } =
     useQuery(
       ["admin", "history", "today"],
@@ -98,11 +96,9 @@ const TodayHistory = ({ isModerator = false }) => {
   }, []);
 
   const handleSearchByPhone = () => {
-    // @ts-ignore
     let filteredData = data.filter((d) => d.userPhone.includes(phone));
 
     console.log(filteredData);
-    // @ts-ignore
     setdata(filteredData);
   };
 
@@ -131,30 +127,21 @@ const TodayHistory = ({ isModerator = false }) => {
         data
           .sort(
             (a, b) =>
-              // @ts-ignore
-              new Date(b.actionAt).getTime() -
-              // @ts-ignore
-              new Date(a.actionAt).getTime()
+              new Date(b.actionAt).getTime() - new Date(a.actionAt).getTime()
           )
           .map((history, i) => (
             <AdminHistoryItem
-              // @ts-ignore
               moderator={history.moderator}
-              // @ts-ignore
               amount={history.amount}
-              // @ts-ignore
               approvedAt={history.actionAt}
-              // @ts-ignore
               approvedBy={history.actionBy}
-              // @ts-ignore
               title={history.title}
-              // @ts-ignore
               reqStatus={history.reqStatus}
-              // @ts-ignore
               userPhone={history.userPhone}
               key={i}
-              // @ts-ignore
               type={history.type}
+              paymentPhone={history.paymentPhone}
+              receiverPhone={history.receiverPhone}
             />
           ))
       ) : (
@@ -164,9 +151,7 @@ const TodayHistory = ({ isModerator = false }) => {
   );
 };
 
-// @ts-ignore
 const TotalHistory = ({ isModerator = false }) => {
-  // @ts-ignore
   const [data, setdata] = useState([]);
   const [initData, setinitData] = useState([]);
   const [phone, setphone] = useState("");
@@ -202,14 +187,11 @@ const TotalHistory = ({ isModerator = false }) => {
   }, []);
 
   const handleSearchByPhone = () => {
-    // @ts-ignore
     let filteredData = data.filter(
-      // @ts-ignore
       (d) => d.userPhone && d.userPhone.includes(phone)
     );
 
     console.log(filteredData);
-    // @ts-ignore
     setdata(filteredData);
   };
 
@@ -245,23 +227,17 @@ const TotalHistory = ({ isModerator = false }) => {
           )
           .map((history, i) => (
             <AdminHistoryItem
-              // @ts-ignore
               amount={history.amount}
-              // @ts-ignore
               moderator={history.moderator}
-              // @ts-ignore
               approvedAt={history.actionAt}
-              // @ts-ignore
               approvedBy={history.actionBy}
-              // @ts-ignore
               title={history.title}
-              // @ts-ignore
               userPhone={history.userPhone}
-              // @ts-ignore
               reqStatus={history.reqStatus}
               key={i}
-              // @ts-ignore
               type={history.type}
+              paymentPhone={history.paymentPhone}
+              receiverPhone={history.receiverPhone}
             />
           ))
       ) : (
@@ -276,6 +252,8 @@ const AdminHistoryItem = ({
   title,
   moderator,
   userPhone,
+  paymentPhone,
+  receiverPhone,
   amount,
   approvedBy,
   approvedAt,
@@ -284,13 +262,25 @@ const AdminHistoryItem = ({
   return (
     <div className="admin__history__item">
       <p className="type">{formatLabel(type)}</p>
-      {type == "offer" && title && <p className="title">{title}</p>}
+      {title && <p className="title">{title}</p>}
       <hr />
       <h4>{moderator ? "Moderator" : "User"}</h4>
       {userPhone && (
         <div className="data">
-          <p className="label">Phone</p>
+          <p className="label">User Phone</p>
           <p className="value">{userPhone}</p>
+        </div>
+      )}
+      {paymentPhone && (
+        <div className="data">
+          <p className="label">Payment Phone</p>
+          <p className="value">{paymentPhone}</p>
+        </div>
+      )}
+      {receiverPhone && (
+        <div className="data">
+          <p className="label">Receiver Phone</p>
+          <p className="value">{receiverPhone}</p>
         </div>
       )}
       {moderator && (

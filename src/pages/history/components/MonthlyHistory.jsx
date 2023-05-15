@@ -98,6 +98,8 @@ const MonthlyHistory = ({ setinVal, setoutVal, setselectedMonth }) => {
               date={el.historyDate}
               transactionId={el.transactionId}
               desc={el.desc}
+              receiverPhone={el.receiverPhone}
+              title={el.title}
             />
           ))
       ) : (

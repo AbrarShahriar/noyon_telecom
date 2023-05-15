@@ -445,7 +445,9 @@ const Req = ({
         {type == "offer" && (
           <div className="data date">
             <p className="label">Offer Type: </p>
-            <p className="value">{formatLabel(String(isPremium))}</p>
+            <p className="value">
+              {formatLabel(isPremium ? "premium" : "regular")}
+            </p>
           </div>
         )}
 
